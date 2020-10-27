@@ -1,0 +1,744 @@
+<Events startTimestamp="1564518598804" logVersion="0.11.0.201504031625" osName="Windows 10" osVersion="10.0" lineSeparator="\r\n" numMonitors="1" monitorBounds="[0, 0, 1920, 1080]">
+  <Command __id="0" _type="ShellBoundsCommand" bounds="[-8, -8, 1936, 1056]" timestamp="5" />
+  <Command __id="1" _type="FileOpenCommand" docASTNodeCount="260" docActiveCodeLength="2374" docExpressionCount="151" docLength="3681" projectName="MineSweeper" timestamp="20">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeper.java]]></filePath>
+    <snapshot><![CDATA[/*
+BUG REPORT #1
+When you start the MineSweeper program, if you click on the New Game button, it will crash.
+*/
+
+package logic;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+
+import presentation.CustomMenu;
+import presentation.MineSweeperGui;
+
+/**
+ * Main launcher class for MineSweeper, containing all the menus and general
+ * prompts
+ *
+ * @author  KnightMiner
+ */
+
+public class MineSweeper {
+    // currently running instance of the game
+    private static MineSweeperGui gui;
+
+    /**
+     * Primary way to boot the game
+     * @param args  Default args (unused)
+     */
+    
+    public static void main(String[] args) {
+        // High DPI stuff
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        // load the help panels
+        // this has a side effect of loading the icons for the pieces
+        Help.load();
+
+        // start the game on easy
+        newGame(Difficulty.EASY);
+    }
+
+    /**
+     * Creates a new MineSweeper game with one of three default sizes or custom
+     * @param difficulty Game difficulty
+     */
+    
+    public static void newGame(Difficulty difficulty) {
+        // difficulty switch
+        MineSweeperBoard board = null;
+        switch(difficulty) {
+            case EASY:
+                board = new MineSweeperBoard(9, 9, 10, 0);
+                break;
+            case NORMAL:
+                board = new MineSweeperBoard(16, 16, 40, 1);
+                break;
+            case HARD:
+                board = new MineSweeperBoard(30, 16, 99, 3);
+                break;
+            case CUSTOM:
+                board = customGame();
+                break;
+        }
+
+        startGame(board);
+    }
+
+    /**
+     * Creates a new game with the custom size
+     * @return  A board of the custom size
+     */
+    
+    public static MineSweeperBoard customGame() {
+        CustomMenu menu = new CustomMenu();
+
+        int result = JOptionPane.showConfirmDialog(null, menu,
+                "Custom", JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.PLAIN_MESSAGE);
+
+        // if they pressed OK
+        if(result == JOptionPane.OK_OPTION) {
+            return menu.createBoard();
+        }
+        else {
+            return null;
+        }
+    }
+
+    /**
+     * Starts a new game with the specified board
+     * @param board  Game board to start
+     */
+    
+    public static void startGame(MineSweeperBoard board) {
+        // must be a valid board
+        if(board != null) {
+            // remove the current gui and define the new one
+            if(gui != null) {
+                gui.dispose();
+            }
+
+            // create a new instance
+            gui = new MineSweeperGui(board);
+        }
+    }
+
+    /**
+     * List of buttons for the GUI
+     */
+    
+    public enum Difficulty {
+        /** Easy game */
+        EASY("Easy"),
+        /** Normal game */
+        NORMAL("Normal"),
+        /** Hard game */
+        HARD("Expert"),
+        /** Custom size and mines from the GUI */
+        CUSTOM("Custom");
+
+        // data
+        private String label;
+
+        /**
+         * Default constructor
+         * @param  Button label
+         */
+        
+        Difficulty(String label) {
+            this.label = label;
+        }
+
+        /**
+         * Gets the label for the difficulty
+         * @return  Difficulty name
+         */
+        
+        public String getLabel() {
+            return label;
+        }
+    }
+}
+]]></snapshot>
+  </Command>
+  <Command __id="2" _type="SelectTextCommand" caretOffset="890" docEnd="1266" docOffset="1266" docStart="1259" end="890" start="883" timestamp="400" />
+  <Command __id="3" _type="RunCommand" kind="Create" projectName="MineSweeper" timestamp="44273" type="Run" />
+  <Command __id="4" _type="FileOpenCommand" docASTNodeCount="1297" docActiveCodeLength="11112" docExpressionCount="863" docLength="13984" projectName="MineSweeper" timestamp="53656">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\presentation\MineSweeperGui.java]]></filePath>
+    <snapshot><![CDATA[package presentation;
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.io.File;
+import java.net.URL;
+import java.util.Queue;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+
+import logic.Help;
+import logic.MineSweeper;
+import logic.MineSweeperBoard;
+import util.Space;
+
+/**
+ * Main GUI object for Minesweeper games. Called when gameplay is ready
+ *
+ * @author  KnightMiner
+ */
+
+public class MineSweeperGui extends JFrame implements ActionListener {
+    // data
+    private MineSweeperBoard board;
+
+    // states
+    private boolean isCheating;
+
+    // buttons and labels
+    private JLabel mines;
+    private MineButton[][] buttons;
+
+    private JButton buttonNewGame;
+    private JButton buttonCheat;
+
+    // menus
+    private JMenuBar bar;
+    private JMenu menuMineSweeper;
+
+    private JMenu menuNewGame;
+    private JMenuItem buttonRestart;
+    private JMenuItem buttonSave;
+    private JMenuItem buttonLoad;
+    private JMenuItem buttonExit;
+
+    private JMenu menuHelp;
+    private JMenuItem buttonRules;
+    private JMenuItem buttonMenu;
+    private JMenuItem buttonDifficulty;
+
+    /**
+     * Makes a new minesweaper window
+     * @param board  Input board, the display will take the size and pieces on the board
+     */
+    
+    public MineSweeperGui(MineSweeperBoard board) {
+        this.setTitle("MineSweeper");
+        this.board = board;
+
+        // construct the top menu
+        bar = new JMenuBar();
+        setJMenuBar(bar);
+
+        // miscelanous actions
+        menuMineSweeper = new JMenu("MineSweeper");
+        bar.add(menuMineSweeper);
+
+        // new game menu
+        menuNewGame = new JMenu("New Game");
+        menuMineSweeper.add(menuNewGame);
+
+        // add all difficulties
+        for(MineSweeper.Difficulty difficulty : MineSweeper.Difficulty.values()) {
+            DifficultyButton button = new DifficultyButton(difficulty);
+            menuNewGame.add(button);
+        }
+
+
+        // restarts the current game
+        buttonRestart = new JMenuItem("Restart");
+        buttonRestart.addActionListener(this);
+        menuMineSweeper.add(buttonRestart);
+
+        // saves the current game
+        buttonSave = new JMenuItem("Save game");
+        buttonSave.addActionListener(this);
+        menuMineSweeper.add(buttonSave);
+
+        // loads a new game from a file
+        buttonLoad = new JMenuItem("Load game");
+        buttonLoad.addActionListener(this);
+        menuMineSweeper.add(buttonLoad);
+
+        // exits the game
+        menuMineSweeper.addSeparator();
+        buttonExit = new JMenuItem("Exit");
+        buttonExit.addActionListener(this);
+        menuMineSweeper.add(buttonExit);
+
+        // help menu
+        menuHelp = new JMenu("Help");
+        bar.add(menuHelp);
+
+        // shows the rules
+        buttonRules = new JMenuItem("Rules");
+        buttonRules.addActionListener(this);
+        menuHelp.add(buttonRules);
+
+        // shows help about the menu
+        buttonMenu = new JMenuItem("Menus");
+        buttonMenu.addActionListener(this);
+        menuHelp.add(buttonMenu);
+
+        // shows available difficulties
+        buttonDifficulty = new JMenuItem("Difficulties");
+        buttonDifficulty.addActionListener(this);
+        menuHelp.add(buttonDifficulty);
+
+
+        // GUI Layout
+
+        // gives use four regions and a center
+        Container pane = getContentPane();
+        pane.setLayout(new BorderLayout());
+
+
+        // new game with same dimensions
+        buttonNewGame = new JButton("New game");
+        buttonNewGame.addActionListener(this);
+
+        // remaining mines display
+        mines = new JLabel("Mines", SwingConstants.CENTER);
+        updateMines();
+
+        // top row of the board
+        Container top = new Container();
+        top.setLayout(new GridLayout(1, 3));
+        top.add(mines);
+        top.add(buttonNewGame);
+
+
+        // cheating, skip if 0 cheats to start
+        if(board.canCheat()) {
+            buttonCheat = new JButton();
+            updateCheat();
+            buttonCheat.addActionListener(this);
+            top.add(buttonCheat);
+        } else {
+            top.add(new JLabel(""));
+        }
+
+        top.setPreferredSize(new Dimension(20, top.getFontMetrics(buttonNewGame.getFont()).getHeight() * 2));
+
+        pane.add(top, BorderLayout.NORTH);
+
+
+        // main button grid
+        Container minesContainer = new Container();
+        int width2 = board.getWidth();
+        int height2 = board.getHeight();
+        minesContainer.setLayout(new GridLayout(height2, width2));
+        buttons = new MineButton[height2][width2];
+
+        // and add them all
+        for(int y = 0; y < height2; y++) {
+            for(int x = 0; x < width2; x++) {
+                // add buttons, and store them
+                buttons[y][x] = new MineButton(this, board, new Space(x, y));
+                minesContainer.add(buttons[y][x]);
+            }
+        }
+
+        pane.add(minesContainer, BorderLayout.CENTER);
+
+
+        // sizes, we need them for the top bar
+        int width = board.getWidth() * 40;
+        int height = board.getHeight() * 40 + 100;
+
+        setSize(width, height);
+        setVisible(true);
+
+        // eventually I will replace this with an event that fires a prompt
+        // basically, allow the user to save their game before quitting
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+
+    /**
+     * Gets a MineButton at the specified location
+     * @param space  Location of the button
+     * @return  the button at the location
+     */
+    
+    public MineButton getButton(Space space) {
+        if(!board.isValid(space)) {
+            return null;
+        }
+        return buttons[space.getY()][space.getX()];
+    }
+
+    /**
+     * Updates all spaces pending update to display their current value
+     */
+    
+    public void updateSpaces() {
+        Queue<Space> queue = board.getUpdates();
+        while(!queue.isEmpty()) {
+            Space space = queue.poll();
+            MineButton update = getButton(space);
+            if(update != null) {
+                update.updatePiece();
+            }
+        }
+
+        updateMines();
+    }
+
+    /**
+     * Updates the mines display
+     */
+    
+    public void updateMines() {
+        mines.setText(String.format("Mines: %d", board.getRemainingMines()));
+    }
+
+    /**
+     * Sets the cheat status
+     * @param cheat  Whether the user is in cheat mode
+     */
+    
+    private void setCheating(boolean cheat) {
+        // and change the button text
+        if(cheat) {
+            buttonCheat.setText("Cancel cheat");
+            isCheating = true;
+        }
+        // otherwise, run general cheating code
+        else {
+            updateCheat();
+        }
+    }
+
+    /**
+     * Sets the cheat button to used
+     */
+    
+    public void updateCheat() {
+        // if we can cheat, set the label
+        if(board.canCheat()) {
+            buttonCheat.setText("Cheats: " + board.getCheats());
+            buttonCheat.setEnabled(true);
+        }
+        // otherwise, set the out of cheats label
+        else {
+            buttonCheat.setText("Out of cheats");
+            buttonCheat.setEnabled(false);
+        }
+        isCheating = false;
+    }
+
+    /**
+     * Sets the cheat button to used
+     */
+    
+    public void resetButtons() {
+        buttonNewGame.setText("New game");
+
+        updateCheat();
+        updateSpaces();
+    }
+
+    /**
+     * Sets the winning text
+     * @param victory  Whether the player won
+     */
+    
+    public void gameOver(boolean victory) {
+        if(victory) {
+            buttonNewGame.setText("You Win!");
+        }
+        else {
+            buttonNewGame.setText("You Lose");
+        }
+    }
+
+    /**
+     * Checks if the cheat button is active
+     * @return  true if the cheat button is active
+     */
+    
+    public boolean isCheating() {
+        return isCheating;
+    }
+
+    /**
+     * Called when the 'X' button is pressed on the window
+     * @param e  Event the button is called with
+     */
+    
+    public void windowClosing(WindowEvent e) {
+        // simply run the menu
+        //this.menu();
+    }
+
+    /**
+     * Handles all single instance buttons
+     * @param e  Calling event
+     */
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object button = e.getSource();
+
+        // restart the current game
+        if(button == buttonNewGame) {
+            // make the board new
+            board.newGame();
+
+            // and clear game data
+            resetButtons();
+            return;
+        }
+
+        // restart the current game
+        if(button == buttonRestart) {
+            // make the board new
+            board.restart();
+
+            // and clear game data
+            resetButtons();
+            return;
+        }
+
+        // saves the game
+        if(button == buttonSave) {
+            String filename = JOptionPane.showInputDialog(this,
+                    "Enter filename to save game",
+                    "MineSweeper - Save game",
+                    JOptionPane.QUESTION_MESSAGE
+                    );
+
+            // user canceled
+            if(filename == null || filename.equals("")) {
+                return;
+            }
+
+            // if it exists, prompt to continue
+            if(new File(filename + ".bin").exists()) {
+                int result = JOptionPane.showConfirmDialog(this,
+                        "Save game " + filename + " already exists, overwrite?",
+                        "MineSweeper - Save game",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.ERROR_MESSAGE
+                        );
+
+                if(result != JOptionPane.YES_OPTION) {
+                    return;
+                }
+            }
+
+            board.saveGame(filename);
+        }
+
+        // loads the game
+        if(button == buttonLoad) {
+            String filename = JOptionPane.showInputDialog(this,
+                    "Enter filename to load game",
+                    "MineSweeper - Load game",
+                    JOptionPane.QUESTION_MESSAGE
+                    );
+
+            // user canceled
+            if(filename == null || filename.equals("")) {
+                return;
+            }
+
+            // if it exists, prompt to continue
+            if(new File(filename + ".bin").exists()) {
+                MineSweeperBoard board = MineSweeperBoard.loadGame(filename);
+                if(board != null) {
+                    MineSweeper.startGame(board);
+                }
+                // did not load right
+                else {
+                    JOptionPane.showMessageDialog(this,
+                            "Error reading save game " + filename,
+                            "MineSweeper - Load game",
+                            JOptionPane.ERROR_MESSAGE
+                            );
+                }
+            }
+            else {
+                // file does not exist
+                JOptionPane.showMessageDialog(this,
+                        "Saved game " + filename + " does not exist",
+                        "MineSweeper - Load game",
+                        JOptionPane.ERROR_MESSAGE
+                        );
+            }
+        }
+
+        // cheat button
+        if(button == buttonCheat) {
+            // no cheating too many times
+            if(!board.canCheat()) {
+                return;
+            }
+
+            // toggle cheating
+            setCheating(!isCheating);
+            return;
+        }
+
+        // cheat button
+        if(button == buttonExit) {
+            this.dispose();
+            return;
+        }
+
+
+        /* Help */
+
+        // rules
+        if(button == buttonRules) {
+            Help.showRules(this);
+        }
+
+        // menus
+        if(button == buttonMenu) {
+            Help.menuHelp(this);
+        }
+
+        // rules
+        if(button == buttonDifficulty) {
+            Help.difficultyHelp(this);
+        }
+    }
+
+    /**
+     * Returns an ImageIcon, or null if the path was invalid.
+     * @author  Larry Vail
+     * @param  path  Icon path
+     * @param  description  Basic description of the icon
+     * @return  Returns the icon at the path, or null if the path is invalid
+     */
+    
+    protected ImageIcon createImageIcon(String path, String description) {
+        URL imgURL = getClass().getResource(path);
+        if (imgURL != null) {
+            return new ImageIcon(imgURL, description);
+        } else {
+            System.err.println("Couldn't find file: " + path);
+            return null;
+        }
+    }
+
+    /**
+     * Common code for difficulty buttons
+     */
+    
+    private class DifficultyButton extends JMenuItem implements ActionListener {
+        // data
+        private MineSweeper.Difficulty difficulty;
+
+        public DifficultyButton(MineSweeper.Difficulty difficulty) {
+            super(difficulty.getLabel());
+
+            this.difficulty = difficulty;
+            this.addActionListener(this);
+        }
+
+        /**
+         * Called when the button is clicked
+         */
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            MineSweeper.newGame(difficulty);
+        }
+    }
+}
+]]></snapshot>
+  </Command>
+  <Command __id="5" _type="SelectTextCommand" caretOffset="6319" docEnd="7722" docOffset="7722" docStart="7673" end="6319" start="6270" timestamp="53845" />
+  <Command __id="6" _type="MoveCaretCommand" caretOffset="6363" docOffset="7766" timestamp="55970" />
+  <Command __id="7" _type="MoveCaretCommand" caretOffset="6288" docOffset="7691" timestamp="71290" />
+  <Command __id="8" _type="MoveCaretCommand" caretOffset="6319" docOffset="7722" timestamp="74074" />
+  <Command __id="9" _type="MoveCaretCommand" caretOffset="7314" docOffset="9182" timestamp="79435" />
+  <Command __id="10" _type="MoveCaretCommand" caretOffset="6296" docOffset="7699" timestamp="81701" />
+  <Command __id="11" _type="MoveCaretCommand" caretOffset="6290" docOffset="7693" timestamp="82145" />
+  <Command __id="12" _type="EclipseCommand" commandID="org.eclipse.jdt.ui.edit.text.java.open.editor" timestamp="85100" />
+  <Command __id="13" _type="MoveCaretCommand" caretOffset="466" docOffset="1146" timestamp="86889" />
+  <Command __id="14" _type="MoveCaretCommand" caretOffset="3658" docOffset="4446" timestamp="104585" />
+  <Command __id="15" _type="SelectTextCommand" caretOffset="3640" docEnd="4428" docOffset="4428" docStart="4426" end="3640" start="3638" timestamp="106945" />
+  <Command __id="16" _type="SelectTextCommand" caretOffset="3639" docEnd="4443" docOffset="4427" docStart="4427" end="3655" start="3639" timestamp="109530" />
+  <Command __id="17" _type="CopyCommand" timestamp="109759" />
+  <Command __id="18" _type="MoveCaretCommand" caretOffset="6268" docOffset="7671" timestamp="112970" />
+  <Command __id="19" _type="MoveCaretCommand" caretOffset="6081" docOffset="7484" timestamp="116393" />
+  <Command __id="20" _type="MoveCaretCommand" caretOffset="6268" docOffset="7671" timestamp="120066" />
+  <Command __id="21" _type="MoveCaretCommand" caretOffset="6363" docOffset="7766" timestamp="125396" />
+  <Command __id="22" _type="MoveCaretCommand" caretOffset="3700" docOffset="4488" timestamp="133794" />
+  <Command __id="23" _type="MoveCaretCommand" caretOffset="3869" docOffset="4657" timestamp="135473" />
+  <Command __id="24" _type="MoveCaretCommand" caretOffset="3831" docOffset="4619" timestamp="136274" />
+  <Command __id="25" _type="MoveCaretCommand" caretOffset="3700" docOffset="4488" timestamp="139210" />
+  <Command __id="26" _type="MoveCaretCommand" caretOffset="3831" docOffset="4619" timestamp="141770" />
+  <DocumentChange __id="27" _type="Insert" docASTNodeCount="1297" docActiveCodeLength="11123" docExpressionCount="863" docLength="13995" length="11" offset="4619" timestamp="143994">
+    <text><![CDATA[
+        	]]></text>
+  </DocumentChange>
+  <Command __id="28" _type="InsertStringCommand" timestamp="144002">
+    <data><![CDATA[]]></data>
+  </Command>
+  <DocumentChange __id="29" _type="Insert" docASTNodeCount="1299" docActiveCodeLength="11137" docExpressionCount="865" docLength="14009" length="14" offset="4630" repeat="14" timestamp="144652" timestamp2="146159">
+    <text><![CDATA[buttonCheqat =]]></text>
+  </DocumentChange>
+  <Command __id="30" _type="InsertStringCommand" repeat="14" timestamp="144655" timestamp2="146162">
+    <data><![CDATA[buttonCheqat =]]></data>
+  </Command>
+  <DocumentChange __id="57" _type="Delete" docASTNodeCount="1301" docActiveCodeLength="11132" docExpressionCount="864" docLength="14004" endLine="160" length="5" offset="4639" repeat="5" startLine="160" timestamp="146469" timestamp2="147100">
+    <text><![CDATA[qat =]]></text>
+  </DocumentChange>
+  <Command __id="58" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="5" timestamp="146471" timestamp2="147102" />
+  <DocumentChange __id="67" _type="Insert" docASTNodeCount="1303" docActiveCodeLength="11151" docExpressionCount="867" docLength="14023" length="19" offset="4639" repeat="18" timestamp="147313" timestamp2="150197">
+    <text><![CDATA[at = new JButton();]]></text>
+  </DocumentChange>
+  <Command __id="68" _type="InsertStringCommand" repeat="19" timestamp="147324" timestamp2="150199">
+    <data><![CDATA[at = new JButton();]]></data>
+  </Command>
+  <DocumentChange __id="104" _type="Insert" docASTNodeCount="1303" docActiveCodeLength="11162" docExpressionCount="867" docLength="14034" length="11" offset="4658" timestamp="151132">
+    <text><![CDATA[
+        	]]></text>
+  </DocumentChange>
+  <Command __id="105" _type="InsertStringCommand" timestamp="151138">
+    <data><![CDATA[]]></data>
+  </Command>
+  <DocumentChange __id="106" _type="Insert" docASTNodeCount="1306" docActiveCodeLength="11176" docExpressionCount="869" docLength="14048" length="14" offset="4669" repeat="13" timestamp="155062" timestamp2="157787">
+    <text><![CDATA[updateCheat();]]></text>
+  </DocumentChange>
+  <Command __id="107" _type="InsertStringCommand" repeat="14" timestamp="155064" timestamp2="157790">
+    <data><![CDATA[updateCheat();]]></data>
+  </Command>
+  <Command __id="133" _type="MoveCaretCommand" caretOffset="3909" docOffset="4697" timestamp="159842" />
+  <DocumentChange __id="134" _type="Insert" docASTNodeCount="1298" docActiveCodeLength="11152" docExpressionCount="863" docLength="14050" length="2" offset="4697" repeat="2" timestamp="160900" timestamp2="161044">
+    <text><![CDATA[//]]></text>
+  </DocumentChange>
+  <Command __id="135" _type="InsertStringCommand" repeat="2" timestamp="160903" timestamp2="161048">
+    <data><![CDATA[//]]></data>
+  </Command>
+  <Command __id="138" _type="MoveCaretCommand" caretOffset="3895" docOffset="4683" timestamp="162962" />
+  <Command __id="139" _type="MoveCaretCommand" caretOffset="3946" docOffset="4734" timestamp="163610" />
+  <Command __id="140" _type="SelectTextCommand" caretOffset="3870" docEnd="4683" docOffset="4658" docStart="4658" end="3895" start="3870" timestamp="166090" />
+  <DocumentChange __id="141" _type="Delete" docASTNodeCount="1295" docActiveCodeLength="11127" docExpressionCount="861" docLength="14025" endLine="161" length="25" offset="4658" startLine="160" timestamp="166699">
+    <text><![CDATA[
+        	updateCheat();]]></text>
+  </DocumentChange>
+  <Command __id="142" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="166706" />
+  <Command __id="143" _type="MoveCaretCommand" caretOffset="3886" docOffset="4674" timestamp="170058" />
+  <DocumentChange __id="144" _type="Delete" docASTNodeCount="1303" docActiveCodeLength="11151" docExpressionCount="867" docLength="14023" endLine="161" length="2" offset="4672" repeat="2" startLine="161" timestamp="170644" timestamp2="170771">
+    <text><![CDATA[//]]></text>
+  </DocumentChange>
+  <Command __id="145" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="2" timestamp="170647" timestamp2="170774" />
+  <Command __id="148" _type="EclipseCommand" commandID="org.eclipse.ui.file.save" timestamp="171167" />
+  <Command __id="149" _type="RunCommand" kind="Create" projectName="MineSweeper" timestamp="173315" type="Run" />
+  <Command __id="150" _type="RunCommand" exitValue="0" kind="Terminate" projectName="MineSweeper" timestamp="178912" type="Run" />
+  <Command __id="151" _type="MoveCaretCommand" caretOffset="3908" docOffset="4696" timestamp="179425" />
+  <Command __id="152" _type="FileOpenCommand" docASTNodeCount="260" docActiveCodeLength="2374" docExpressionCount="151" docLength="3681" projectName="MineSweeper" timestamp="182556">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeper.java]]></filePath>
+  </Command>
+  <Command __id="153" _type="SelectTextCommand" caretOffset="991" docEnd="1266" docOffset="1266" docStart="1259" end="991" start="984" timestamp="182590" />
+  <Command __id="154" _type="MoveCaretCommand" caretOffset="114" docOffset="114" timestamp="185058" />
+  <Command __id="155" _type="MoveCaretCommand" caretOffset="110" docOffset="110" timestamp="185993" />
+  <Command __id="156" _type="MoveCaretCommand" caretOffset="17" docOffset="17" timestamp="187170" />
+  <Command __id="157" _type="MoveCaretCommand" caretOffset="110" docOffset="110" timestamp="188633" />
+  <Command __id="158" _type="ShellBoundsCommand" bounds="[753, 248, 1024, 255]" repeat="36" timestamp="213376" timestamp2="213817" />
+  <Command __id="194" _type="ShellBoundsCommand" bounds="[753, 248, 1024, 255]" timestamp="217223" />
+</Events>

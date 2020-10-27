@@ -1,0 +1,686 @@
+,fix_time,fix_col,fix_line,fix_dur,pixel_x,pixel_y,left_pupil,right_pupil,which_file,AOI,function,entity,phase_number
+0,1574805884510,8,8,335575400,329,215,-0.02151125,0.26431125,MineSweeper.java,10,MineSweeper.Imports,NONE,1
+1,1574805885111,26,9,208452100,469,235,-0.8,-0.401462,MineSweeper.java,10,MineSweeper.Imports,NONE,1
+2,1574805887144,28,4,157623700,478,147,0.101805,-0.5,MineSweeper.java,1,MineSweeper.BugReport,Bug_Report,1
+3,1574805887844,13,9,200040500,374,224,-0.218972941176,-0.07920176470589999,MineSweeper.java,10,MineSweeper.Imports,NONE,1
+5,1574805889011,28,4,80676400,478,153,-0.50146,0.022005,MineSweeper.java,1,MineSweeper.BugReport,Bug_Report,1
+6,1574805889309,10,2,111155000,351,129,-0.5,1.252745,MineSweeper.java,1,MineSweeper.BugReport,Bug_Report,1
+8,1574805893235,21,4,91446100,430,156,-1.0,-0.333333333333,MineSweeper.java,1,MineSweeper.BugReport,Bug_Report,1
+9,1574805893610,30,4,74956600,491,160,-0.357138,0.0,MineSweeper.java,1,MineSweeper.BugReport,Bug_Report,1
+12,1574805895685,6,3,66342300,320,144,-0.8571428571430001,-0.262398571429,MineSweeper.java,1,MineSweeper.BugReport,Bug_Report,1
+13,1574805895884,27,4,66271100,472,161,-1.0,-0.666666666667,MineSweeper.java,1,MineSweeper.BugReport,Bug_Report,1
+15,1574805896285,6,4,200282500,325,148,-0.394354210526,-0.531028421053,MineSweeper.java,1,MineSweeper.BugReport,Bug_Report,1
+19,1574805899636,6,4,66225400,320,168,-0.75,-0.2530325,MineSweeper.java,1,MineSweeper.BugReport,Bug_Report,1
+23,1574805901517,30,9,241614700,493,231,-0.6887177777779999,-0.777777777778,MineSweeper.java,10,MineSweeper.Imports,NONE,1
+25,1574805902551,17,22,840880300,405,345,-0.8181818181820001,-0.269070909091,MineSweeper.java,7,MineSweeper.ClassHeader,Comment,1
+27,1574805903952,25,28,114779400,458,401,-0.8571428571430001,-0.17028571428599998,MineSweeper.java,2,MineSweeper.main:Comment,Comment,1
+28,1574805904158,27,28,116481100,467,392,-0.875,-0.65767625,MineSweeper.java,2,MineSweeper.main:Comment,Comment,1
+29,1574805904300,34,28,166603800,518,396,-0.909090909091,-0.711677272727,MineSweeper.java,2,MineSweeper.main:Comment,Comment,1
+30,1574805904592,20,31,191232100,421,414,-0.916666666667,-0.5173425,MineSweeper.java,3,MineSweeper.main,Comment,1
+31,1574805904909,12,31,75083400,364,409,-1.0,-1.0,MineSweeper.java,3,MineSweeper.main,Comment,1
+32,1574805905750,18,28,129401700,409,364,-0.533736153846,-0.619121538462,MineSweeper.java,2,MineSweeper.main:Comment,Comment,1
+33,1574805906138,14,34,152230300,382,423,-0.769230769231,-0.200403076923,MineSweeper.java,13,MineSweeper.main,Method_Body,1
+34,1574805906367,20,36,491262200,426,451,-0.820512820513,-0.4458071794870001,MineSweeper.java,13,MineSweeper.main,Method_Body,1
+38,1574805908583,21,41,137969700,427,498,-1.0,-1.0,MineSweeper.java,11,MineSweeper.main,Method_Body,1
+40,1574805909800,19,57,991283500,427,539,-0.92649097561,-0.916731707317,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+41,1574805911299,18,57,1199931000,405,496,-0.931105882353,-0.919200352941,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+42,1574805912932,50,60,119730400,630,515,-1.0,-1.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+44,1574805913732,23,76,95821100,443,628,-1.0,-1.0,MineSweeper.java,8,MineSweeper.customGame:Comment,Comment,1
+45,1574805913937,15,75,240459100,393,594,-1.0,-1.0,MineSweeper.java,8,MineSweeper.customGame:Comment,Comment,1
+46,1574805914209,13,82,139862500,376,658,-0.585016,-0.9,MineSweeper.java,9,MineSweeper.customGame,Method_Body,1
+48,1574805914979,24,82,245434300,451,481,-1.0,-1.0,MineSweeper.java,9,MineSweeper.customGame,Method_Body,1
+51,1574805915898,27,82,275074800,468,489,-0.832708333333,-0.958333333333,MineSweeper.java,9,MineSweeper.customGame,Method_Body,1
+52,1574805916248,14,96,233325100,374,699,-0.509742142857,-0.8571428571430001,MineSweeper.java,21,MineSweeper.startGame:Comment,Comment,1
+53,1574805916801,20,102,705486700,407,588,-0.940443928571,-0.982142857143,MineSweeper.java,6,MineSweeper.startGame,Comment,1
+54,1574805918207,15,121,366574900,386,669,-1.0,-1.0,MineSweeper.java,5,MineSweeper.Difficulty:Header,Comment,1
+55,1574805918599,19,124,1149844200,418,579,-1.0,-1.0,MineSweeper.java,5,MineSweeper.Difficulty:Header,Method_Body,1
+60,1574805922247,14,47,258503300,379,124,-1.0,-0.736842105263,MineSweeper.java,4,MineSweeper.newGame:Comment,Comment,1
+61,1574805923548,17,27,583364500,395,113,0.06178533333330001,-0.563686666667,MineSweeper.java,2,MineSweeper.main:Comment,Comment,1
+64,1574805952786,7,32,125054400,333,184,0.915253333333,0.0,MineSweeper.java,3,MineSweeper.main,Method_Body,1
+66,1574805953627,8,35,124981100,337,227,-1.0,0.0,MineSweeper.java,13,MineSweeper.main,Method_Body,1
+67,1574805954002,9,36,75207700,343,243,-1.0,0.0,MineSweeper.java,13,MineSweeper.main,Method_Body,1
+70,1574805964401,7,49,208404600,334,436,-0.780486153846,-0.7113123076919999,MineSweeper.java,4,MineSweeper.newGame:Comment,Comment,1
+71,1574805964634,4,50,99889800,314,463,0.33896,0.90064,MineSweeper.java,4,MineSweeper.newGame:Comment,Comment,1
+72,1574805964926,10,49,100496800,349,442,-0.75,0.22779,MineSweeper.java,4,MineSweeper.newGame:Comment,Comment,1
+73,1574805965103,10,49,75164000,353,444,-1.0,-1.0,MineSweeper.java,4,MineSweeper.newGame:Comment,Comment,1
+74,1574805965503,6,50,124906600,328,446,-1.0,-1.0,MineSweeper.java,4,MineSweeper.newGame:Comment,Comment,1
+75,1574805965781,8,50,95721000,333,455,-1.0,-1.0,MineSweeper.java,4,MineSweeper.newGame:Comment,Comment,1
+76,1574805966374,7,50,152615500,330,449,-0.928571428571,-0.762404285714,MineSweeper.java,4,MineSweeper.newGame:Comment,Comment,1
+81,1574805978633,10,44,100034900,352,371,0.0,2.439485,MineSweeper.java,15,MineSweeper.main,Method_Body,1
+82,1574805979029,7,49,120119400,328,432,-1.0,-0.666666666667,MineSweeper.java,4,MineSweeper.newGame:Comment,Comment,1
+83,1574805979274,9,49,213900500,351,441,-0.933333333333,-0.7430206666670001,MineSweeper.java,4,MineSweeper.newGame:Comment,Comment,1
+84,1574805979699,10,49,98897500,348,436,-1.0,-1.0,MineSweeper.java,4,MineSweeper.newGame:Comment,Comment,1
+85,1574805979924,9,49,174191000,347,438,-1.0,-1.0,MineSweeper.java,4,MineSweeper.newGame:Comment,Comment,1
+86,1574805980149,9,49,166084800,344,437,-1.0,-0.875,MineSweeper.java,4,MineSweeper.newGame:Comment,Comment,1
+87,1574805980438,10,44,69577200,352,373,0.0,2.71213,MineSweeper.java,15,MineSweeper.main,Method_Body,1
+88,1574805980865,11,49,83496000,361,434,-1.0,-1.0,MineSweeper.java,4,MineSweeper.newGame:Comment,Comment,1
+89,1574805981615,8,49,83368600,338,435,-1.0,-1.0,MineSweeper.java,4,MineSweeper.newGame:Comment,Comment,1
+93,1574805989389,12,32,75180500,365,186,0.00729777777778,0.432502222222,MineSweeper.java,3,MineSweeper.main,Method_Body,1
+98,1574805994105,14,50,66419400,386,451,-1.0,-0.25,MineSweeper.java,4,MineSweeper.newGame:Comment,Comment,1
+100,1574805994772,10,44,100033200,348,370,-0.570535,0.024259166666700003,MineSweeper.java,15,MineSweeper.main,Method_Body,1
+103,1574805996630,12,44,107805800,364,365,0.07099,0.212656666667,MineSweeper.java,15,MineSweeper.main,Method_Body,1
+104,1574805997051,8,44,80071300,337,362,-0.25,1.537375,MineSweeper.java,15,MineSweeper.main,Method_Body,1
+106,1574805998130,10,41,99649100,352,322,0.900135555556,0.591117777778,MineSweeper.java,11,MineSweeper.main,Method_Body,1
+107,1574806002638,10,41,100164500,355,320,-1.0,-1.0,MineSweeper.java,11,MineSweeper.main,Method_Body,1
+109,1574806003712,8,36,75164600,333,247,0.309074,0.431946,MineSweeper.java,13,MineSweeper.main,Method_Body,1
+113,1574806006337,9,36,224649600,345,248,-0.41273,0.17424428571400002,MineSweeper.java,13,MineSweeper.main,Method_Body,1
+114,1574806006937,8,41,83211700,342,309,0.440772857143,0.0190171428571,MineSweeper.java,11,MineSweeper.main,Method_Body,1
+116,1574806007420,12,41,170343500,362,324,-0.279213333333,0.397819444444,MineSweeper.java,11,MineSweeper.main,Method_Body,1
+117,1574806007695,11,41,201702800,357,319,-0.0724114285714,0.26756428571400004,MineSweeper.java,11,MineSweeper.main,Method_Body,1
+118,1574806007922,10,41,657167500,348,323,0.218775454545,0.306684675325,MineSweeper.java,11,MineSweeper.main,Method_Body,1
+121,1574806009995,6,32,81270600,326,182,0.440285714286,0.04175,MineSweeper.java,3,MineSweeper.main,Method_Body,1
+122,1574806011078,8,44,291252900,337,362,-0.243620645161,0.08674548387099999,MineSweeper.java,15,MineSweeper.main,Method_Body,1
+127,1574806013834,12,34,123569100,361,208,-1.0,-1.0,MineSweeper.java,13,MineSweeper.main,Method_Body,1
+128,1574806014045,9,32,199845900,347,183,-1.0,-0.8823529411759999,MineSweeper.java,3,MineSweeper.main,Method_Body,1
+129,1574806014511,17,44,108516400,399,369,0.370893333333,0.23677,MineSweeper.java,15,MineSweeper.main,Method_Body,1
+132,1574806020394,12,44,99882800,365,368,-0.5356350000000001,0.0,MineSweeper.java,15,MineSweeper.main,Method_Body,1
+133,1574806021094,9,40,66178100,343,300,-1.0,0.0,MineSweeper.java,11,MineSweeper.main,Comment,1
+134,1574806022319,11,44,99562500,358,356,-1.0,0.0,MineSweeper.java,15,MineSweeper.main,Method_Body,1
+135,1574806024964,7,33,83338500,338,201,-0.669313333333,-0.630136666667,MineSweeper.java,3,MineSweeper.main,Method_Body,1
+141,1574806035484,4,33,99836100,313,200,-1.0,-1.0,MineSweeper.java,3,MineSweeper.main,Method_Body,1
+144,1574806041041,20,53,199927800,418,501,-0.7272727272730001,-0.0270236363636,MineSweeper.java,0,MineSweeper.newGame,Comment,1
+145,1574806042550,16,41,76801800,396,327,-0.75,-0.08347875,MineSweeper.java,11,MineSweeper.main,Method_Body,1
+146,1574806043407,13,16,91955300,374,214,-0.75,-0.1059725,MineSweeper.java,20,MineSweeper.ClassComment,Comment,1
+147,1574806043750,4,4,71725400,306,161,-0.8,-0.111196,MineSweeper.java,1,MineSweeper.BugReport,Bug_Report,1
+148,1574806044033,11,16,62334300,361,276,-1.0,-0.5,MineSweeper.java,20,MineSweeper.ClassComment,Comment,1
+149,1574806046649,29,9,101070700,485,225,0.6802050000000001,0.0,MineSweeper.java,10,MineSweeper.Imports,NONE,1
+151,1574806050067,8,23,131776700,333,379,-0.714285714286,-0.0881957142857,MineSweeper.java,7,MineSweeper.ClassHeader,Member_Variable,1
+152,1574806050263,15,22,152350600,389,370,-1.0,-0.916666666667,MineSweeper.java,7,MineSweeper.ClassHeader,Comment,1
+156,1574806051639,18,43,149961400,408,545,-1.0,-1.0,MineSweeper.java,15,MineSweeper.main,Comment,1
+157,1574806051807,17,43,141918400,393,521,-0.875,-0.5620475,MineSweeper.java,15,MineSweeper.main,Comment,1
+158,1574806052005,19,61,749864000,418,696,-0.933333333333,-0.7848415,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+159,1574806052782,46,64,61780700,602,640,-1.0,-1.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+160,1574806053369,19,65,124675000,414,579,-1.0,-1.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+161,1574806054041,15,81,380509600,388,721,-0.954545454545,-0.8483149999999999,MineSweeper.java,9,MineSweeper.customGame,Method_Body,1
+164,1574806055773,14,83,516385500,380,540,-0.776259354839,-0.502916129032,MineSweeper.java,9,MineSweeper.customGame,Method_Body,1
+165,1574806056464,23,83,162629600,437,505,-0.8,-0.381831333333,MineSweeper.java,9,MineSweeper.customGame,Method_Body,1
+166,1574806056639,17,83,108614900,403,501,-1.0,-1.0,MineSweeper.java,9,MineSweeper.customGame,Method_Body,1
+168,1574806057889,17,100,100018300,400,611,-1.0,-1.0,MineSweeper.java,6,MineSweeper.startGame,Comment,1
+172,1574806058864,14,119,175092600,383,640,-0.928571428571,-0.776626428571,MineSweeper.java,5,MineSweeper.Difficulty:Header,Comment,1
+173,1574806059141,18,130,200119400,404,666,-0.785714285714,-0.328829285714,MineSweeper.java,23,MineSweeper.Difficulty.Difficulty:Comment,Comment,1
+177,1574806063681,7,53,141139800,334,377,-0.7,0.104855,MineSweeper.java,0,MineSweeper.newGame,Comment,1
+179,1574806064579,21,54,176125600,426,448,-0.7,0.188438,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+180,1574806064756,18,54,65973200,410,447,-0.625,0.294696875,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+181,1574806065888,17,55,183308300,404,497,-0.777777777778,-0.309527777778,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+183,1574806066987,18,56,79052200,410,509,-1.0,-1.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+185,1574806068529,26,55,100014800,460,501,-0.8181818181820001,-0.35262272727300004,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+186,1574806069029,47,58,144448300,613,537,0.04601,-0.0267571428571,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+187,1574806069229,29,58,253782500,485,543,-1.0,-1.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+188,1574806069667,21,54,854156700,426,487,-0.7816091954019999,-0.300671034483,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+189,1574806071500,30,49,121263200,494,445,0.0,1.42952428571,MineSweeper.java,4,MineSweeper.newGame:Comment,Comment,1
+191,1574806074762,44,54,164562000,593,655,-1.0,-1.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+192,1574806075270,32,58,199940000,506,665,-0.933333333333,-0.6985279999999999,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+193,1574806075546,22,39,124763100,436,395,-1.0,0.0,MineSweeper.java,11,MineSweeper.main,Comment,1
+194,1574806075738,18,23,148846100,411,315,-1.0,-0.25,MineSweeper.java,7,MineSweeper.ClassHeader,Member_Variable,1
+195,1574806076091,21,23,72346500,429,338,-1.0,0.0,MineSweeper.java,7,MineSweeper.ClassHeader,Member_Variable,1
+197,1574806076595,21,23,166404500,429,385,-0.6842105263160001,0.040597894736800005,MineSweeper.java,7,MineSweeper.ClassHeader,Member_Variable,1
+198,1574806077995,18,22,75423900,410,373,0.0,2.510365,MineSweeper.java,7,MineSweeper.ClassHeader,Comment,1
+199,1574806078487,15,16,67845000,392,278,-1.0,-1.0,MineSweeper.java,20,MineSweeper.ClassComment,Comment,1
+200,1574806082595,13,16,166311200,369,279,-0.444444444444,0.104311111111,MineSweeper.java,20,MineSweeper.ClassComment,Comment,1
+201,1574806083094,19,31,425010900,413,505,-0.733333333333,-0.091301,MineSweeper.java,3,MineSweeper.main,Comment,1
+202,1574806084002,4,25,300092800,313,418,-0.373376,-0.2,MineSweeper.java,2,MineSweeper.main:Comment,Comment,1
+204,1574806089710,15,24,68335300,400,314,-1.0,-1.0,MineSweeperBoard.java,20,MineSweeperBoard.RandomComment,Comment,1
+205,1574806091776,21,48,217297600,456,607,-0.846153846154,-0.487340769231,MineSweeperBoard.java,16,MineSweeperBoard.ClassHeader,Member_Variable,1
+207,1574806092326,13,60,659961100,387,636,-0.909090909091,-0.7114361363639999,MineSweeperBoard.java,2,MineSweeperBoard.MineSweeperBoard(int int int int):Comment,Comment,1
+208,1574806093051,28,71,355655700,517,631,-0.947368421053,-0.8189594736839999,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+209,1574806093436,24,67,164876900,491,566,-1.0,-1.0,MineSweeperBoard.java,17,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+210,1574806093941,46,63,64907900,624,504,-1.0,-1.0,MineSweeperBoard.java,5,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+211,1574806094126,40,63,158402100,585,501,-1.0,-1.0,MineSweeperBoard.java,5,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+212,1574806094459,29,63,75095300,507,502,-1.0,-0.5,MineSweeperBoard.java,5,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+213,1574806094851,37,63,308381700,567,501,-1.0,-1.0,MineSweeperBoard.java,5,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+214,1574806095659,41,63,474936800,593,504,-0.923076923077,-0.7710942307690001,MineSweeperBoard.java,5,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+215,1574806096204,56,63,438810000,696,501,-0.7421913333329999,-0.933333333333,MineSweeperBoard.java,5,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+216,1574806096767,64,63,266446700,751,497,-0.621896,-0.9,MineSweeperBoard.java,5,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+217,1574806098775,21,64,208309300,459,506,-0.846153846154,-0.493239230769,MineSweeperBoard.java,5,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+218,1574806100981,33,70,168850500,559,611,-0.436935,-0.8571428571430001,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+220,1574806101706,24,71,102475000,492,623,-0.647901818182,-0.8181818181820001,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+221,1574806101889,54,63,110738800,683,498,-1.0,-1.0,MineSweeperBoard.java,5,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+222,1574806102339,64,63,427849800,748,495,-1.0,-1.0,MineSweeperBoard.java,5,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+223,1574806105532,15,59,150365100,408,442,-1.0,-0.916666666667,MineSweeperBoard.java,2,MineSweeperBoard.MineSweeperBoard(int int int int):Comment,Comment,1
+224,1574806105990,14,64,166663900,425,520,-0.933333333333,-0.8064486666670001,MineSweeperBoard.java,5,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+225,1574806106309,27,67,183367300,521,556,-1.0,-1.0,MineSweeperBoard.java,17,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+226,1574806106533,33,70,124932800,557,611,-1.0,-1.0,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+228,1574806107675,12,69,154533500,409,492,-0.4,1.105646,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Comment,1
+229,1574806107883,37,70,700227200,574,517,-0.941176470588,-0.8096405882350001,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+230,1574806109208,30,80,125160800,515,617,-1.0,-1.0,MineSweeperBoard.java,0,MineSweeperBoard.MineSweeperBoard(int int int):Comment,Comment,1
+231,1574806109374,29,84,664190300,506,608,-0.916179574468,-0.926251702128,MineSweeperBoard.java,11,MineSweeperBoard.MineSweeperBoard(int int int),Method_Body,1
+232,1574806110212,44,85,74923800,605,603,-1.0,-1.0,MineSweeperBoard.java,11,MineSweeperBoard.MineSweeperBoard(int int int),Method_Body,1
+233,1574806110582,53,85,211906900,673,557,-1.0,-1.0,MineSweeperBoard.java,11,MineSweeperBoard.MineSweeperBoard(int int int),Method_Body,1
+234,1574806110999,14,82,86952700,396,516,-1.0,-1.0,MineSweeperBoard.java,0,MineSweeperBoard.MineSweeperBoard(int int int):Comment,Comment,1
+235,1574806111234,16,91,332799700,416,572,-0.2,1.337988,MineSweeperBoard.java,37,MineSweeperBoard.generateMines(Space):Comment,Comment,1
+237,1574806111932,29,105,832678500,503,641,-0.7014946153849999,-0.846153846154,MineSweeperBoard.java,7,MineSweeperBoard.generateMines(long Space):Comment,Comment,1
+238,1574806113061,39,108,99992000,580,475,-0.888888888889,-0.729741111111,MineSweeperBoard.java,10,MineSweeperBoard.generateMines(long Space),Method_Signature,1
+239,1574806113648,36,126,328811300,615,498,-0.902550384615,-0.961538461538,MineSweeperBoard.java,3,MineSweeperBoard.generateMines(long Space),Method_Body,1
+241,1574806115125,23,152,206807800,487,520,-0.8181818181820001,-0.39584,MineSweeperBoard.java,32,MineSweeperBoard.newGame,Comment,1
+242,1574806115720,22,167,152450700,472,613,0.0,2.2132275000000003,MineSweeperBoard.java,14,MineSweeperBoard.restart,Comment,1
+244,1574806117065,17,196,182779900,466,648,-0.9375,-0.791274375,MineSweeperBoard.java,15,MineSweeperBoard.saveGame,Method_Body,1
+245,1574806117289,19,195,566682600,471,559,-0.906976744186,-0.691847674419,MineSweeperBoard.java,15,MineSweeperBoard.saveGame,Method_Body,1
+247,1574806119448,8,213,133630400,402,493,-0.705882352941,0.193340588235,MineSweeperBoard.java,1,MineSweeperBoard.loadGame,Method_Body,1
+248,1574806120081,35,210,149796100,547,455,-1.0,-1.0,MineSweeperBoard.java,1,MineSweeperBoard.loadGame,Method_Body,1
+249,1574806120273,20,210,275791300,449,455,-0.8666666666670001,-0.481379333333,MineSweeperBoard.java,1,MineSweeperBoard.loadGame,Method_Body,1
+250,1574806120622,53,212,142372600,716,485,-1.0,-1.0,MineSweeperBoard.java,43,MineSweeperBoard.loadGame,Method_Body,1
+251,1574806121215,14,231,190632700,432,406,-0.02177,0.540396666667,MineSweeperBoard.java,25,MineSweeperBoard.resetData,Method_Body,1
+252,1574806121447,15,216,239224300,443,398,-1.0,-0.277777777778,MineSweeperBoard.java,1,MineSweeperBoard.loadGame,Method_Body,1
+253,1574806124264,18,103,100060700,427,478,-0.2,1.963468,MineSweeperBoard.java,7,MineSweeperBoard.generateMines(long Space):Comment,Comment,1
+257,1574806134670,10,4,100757800,350,148,-1.0,-1.0,MineSweeper.java,1,MineSweeper.BugReport,Bug_Report,1
+258,1574806135505,33,23,95866600,515,375,0.0,-1.0,MineSweeper.java,7,MineSweeper.ClassHeader,Member_Variable,1
+259,1574806137370,34,4,69816000,516,149,-0.5,0.786375,MineSweeper.java,1,MineSweeper.BugReport,Bug_Report,1
+261,1574806140345,49,63,174850600,622,691,-0.888888888889,-0.649132222222,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+262,1574806140866,50,58,112778300,634,607,-1.0,-1.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+263,1574806141029,26,58,174773800,460,608,-0.9,-0.6724899999999999,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+264,1574806141428,43,58,93661500,583,603,-1.0,-1.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+265,1574806141595,49,58,1208136900,628,605,-0.928411558442,-0.936127922078,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+266,1574806142920,21,59,233521700,429,621,-0.777777777778,-0.268907222222,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+270,1574806144334,19,56,1152274400,415,576,-0.7244094488189999,-0.053263149606300006,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+271,1574806145775,19,56,86180500,413,583,-0.888888888889,-0.654286666667,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+272,1574806145879,15,56,291317200,386,578,-0.7741935483869999,-0.215708064516,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+273,1574806146302,20,58,466672100,420,597,-0.8636686842110001,-0.807262368421,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+275,1574806149794,20,44,75246500,446,530,-0.481863,0.017454,MineSweeperBoard.java,27,MineSweeperBoard.ClassHeader,Member_Variable,1
+278,1574806153827,17,40,150153500,420,465,-0.6801775,0.026585625,MineSweeperBoard.java,8,MineSweeperBoard.ClassHeader,Member_Variable,1
+280,1574806155077,21,59,91034800,448,597,-1.0,-0.333333333333,MineSweeperBoard.java,2,MineSweeperBoard.MineSweeperBoard(int int int int):Comment,Comment,1
+283,1574806157543,33,71,475008800,554,609,-0.909138,-0.975,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+284,1574806158176,16,66,75053100,435,545,-1.0,-0.5,MineSweeperBoard.java,17,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+285,1574806158298,17,67,69840000,443,563,-1.0,-0.2,MineSweeperBoard.java,17,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+287,1574806158572,19,64,204645500,458,519,-1.0,-0.7272727272730001,MineSweeperBoard.java,5,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+288,1574806158778,38,70,216232700,592,601,-1.0,-1.0,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+291,1574806161818,17,70,200005600,437,600,-0.528081538462,-0.230769230769,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+292,1574806162442,13,70,334083900,418,602,-1.0,-0.272727272727,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+293,1574806163003,20,69,81192700,464,591,-1.0,-0.5,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Comment,1
+294,1574806163476,33,70,429356300,548,600,-1.0,-1.0,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+295,1574806164442,35,71,1416418600,572,612,-0.981818181818,-0.948301727273,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+297,1574806166251,23,73,174568000,484,641,-1.0,-1.0,MineSweeperBoard.java,39,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+298,1574806166469,37,70,406064000,584,611,-0.966666666667,-1.0,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+299,1574806167257,39,70,2696671100,603,605,-0.994252873563,-0.988505747126,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+300,1574806170075,54,70,1466596400,711,600,-1.0,-1.0,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+301,1574806171916,51,70,432970500,675,600,-1.0,-1.0,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+304,1574806175046,38,70,68796100,590,608,-1.0,-0.833333333333,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+306,1574806175720,42,69,178816300,619,603,-1.0,-1.0,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Comment,1
+307,1574806175991,33,69,400117800,545,598,-0.8729959259260001,-0.925925925926,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Comment,1
+308,1574806176783,54,63,65496600,682,505,-1.0,-0.111111111111,MineSweeperBoard.java,5,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+309,1574806177865,21,46,74785700,454,301,-1.0,0.0,MineSweeperBoard.java,16,MineSweeperBoard.ClassHeader,Comment,1
+310,1574806178015,19,43,75042000,436,261,-1.0,0.0,MineSweeperBoard.java,27,MineSweeperBoard.ClassHeader,Comment,1
+311,1574806178673,12,17,108672900,369,172,-1.0,0.0,MineSweeperBoard.java,12,MineSweeperBoard.ClassComment,Comment,1
+312,1574806179423,13,47,191234800,395,624,-1.0,-0.615384615385,MineSweeperBoard.java,16,MineSweeperBoard.ClassHeader,Member_Variable,1
+314,1574806179798,16,33,79327800,414,413,-1.0,-1.0,MineSweeperBoard.java,9,MineSweeperBoard.ClassHeader,Member_Variable,1
+315,1574806185287,15,121,124495000,431,407,-0.833333333333,0.302055,MineSweeperBoard.java,3,MineSweeperBoard.generateMines(long Space),Method_Body,1
+317,1574806186595,17,118,192158300,443,365,-0.7,-0.183821,MineSweeperBoard.java,29,MineSweeperBoard.generateMines(long Space),Method_Body,1
+318,1574806186845,22,122,125049700,477,417,-1.0,-0.3,MineSweeperBoard.java,3,MineSweeperBoard.generateMines(long Space),Comment,1
+319,1574806187087,28,137,955828500,530,646,-0.987012987013,-0.956886233766,MineSweeperBoard.java,4,MineSweeperBoard.generateMines(long Space),Method_Body,1
+320,1574806188285,13,136,784041800,411,621,-0.903276307692,-0.969230769231,MineSweeperBoard.java,4,MineSweeperBoard.generateMines(long Space),Comment,1
+321,1574806189113,32,215,864056100,557,660,-0.867274615385,-0.953846153846,MineSweeperBoard.java,1,MineSweeperBoard.loadGame,Method_Body,1
+322,1574806192385,24,40,83394900,446,336,-0.8,-0.2,MineSweeper.java,11,MineSweeper.main,Comment,1
+323,1574806192644,23,31,141713200,438,203,-0.499491666667,-0.374275,MineSweeper.java,3,MineSweeper.main,Comment,1
+324,1574806193164,21,55,254153800,432,561,-0.664339166667,0.201614166667,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+325,1574806193452,18,58,91318600,409,602,-0.541975454545,0.252817272727,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+326,1574806193732,24,56,102931400,451,577,-1.0,-0.833333333333,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+327,1574806195494,27,49,124956100,473,475,-1.0,-0.5,MineSweeper.java,4,MineSweeper.newGame:Comment,Comment,1
+328,1574806195943,25,44,100125200,458,400,-1.0,-1.0,MineSweeper.java,15,MineSweeper.main,Method_Body,1
+330,1574806196385,26,27,82816700,467,142,-0.714285714286,-1.0,MineSweeper.java,2,MineSweeper.main:Comment,Comment,1
+331,1574806196510,26,27,2074352700,462,142,-0.75,-0.75,MineSweeper.java,2,MineSweeper.main:Comment,Comment,1
+332,1574806199359,16,12,175045300,406,190,-1.0,-0.8,MineGenerator.java,2,MineGenerator.ClassBody,Method_Signature,1
+335,1574806203659,19,60,99734000,418,477,-0.875,-0.875,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+336,1574806204567,25,87,225699300,454,545,-0.666666666667,-0.09053,MineSweeper.java,12,MineSweeper.customGame,Method_Body,1
+337,1574806204793,32,83,165732300,511,471,-0.952380952381,-0.474797619048,MineSweeper.java,9,MineSweeper.customGame,Method_Body,1
+338,1574806204992,29,87,208356500,488,495,-1.0,-0.6,MineSweeper.java,12,MineSweeper.customGame,Method_Body,1
+339,1574806205684,24,103,201007700,452,655,-0.85,-0.493037,MineSweeper.java,6,MineSweeper.startGame,Method_Body,1
+340,1574806206058,19,62,133967600,409,222,-1.0,-0.583333333333,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+341,1574806206242,18,53,95362900,407,198,-1.0,-1.0,MineSweeper.java,0,MineSweeper.newGame,Comment,1
+342,1574806206517,17,50,99769900,401,214,-1.0,-0.111111111111,MineSweeper.java,4,MineSweeper.newGame:Comment,Comment,1
+343,1574806206892,21,64,174757300,424,422,-0.777777777778,0.15294888888900002,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+344,1574806207141,22,64,75012800,443,426,-1.0,-0.333333333333,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+345,1574806207267,23,64,75000200,440,428,-1.0,-0.75,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+346,1574806208125,31,64,416310700,500,420,-0.8,0.265266,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+348,1574806209817,38,64,141156200,545,427,-0.8,0.168258,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+350,1574806216883,22,44,124421700,435,124,0.40477,-0.1,MineSweeper.java,15,MineSweeper.main,Method_Body,1
+351,1574806217181,9,53,85084600,344,260,-1.0,-1.0,MineSweeper.java,0,MineSweeper.newGame,Comment,1
+352,1574806221540,20,64,475136400,419,427,-1.0,-1.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+353,1574806230544,19,75,296073000,415,562,-0.8666666666670001,-0.168058,MineSweeper.java,8,MineSweeper.customGame:Comment,Comment,1
+354,1574806231135,22,75,249694700,438,504,-1.0,-0.428571428571,MineSweeper.java,8,MineSweeper.customGame:Comment,Comment,1
+356,1574806233601,34,54,125313600,519,254,-1.0,-1.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+357,1574806234127,6,74,358665800,327,547,-1.0,-0.777777777778,MineSweeper.java,8,MineSweeper.customGame:Comment,Comment,1
+358,1574806234975,11,76,92475400,361,561,-0.5,1.029615,MineSweeper.java,8,MineSweeper.customGame:Comment,Comment,1
+359,1574806238680,19,56,124875500,414,274,-1.0,-1.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+360,1574806238834,16,56,76745500,391,275,-1.0,-1.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+361,1574806244959,20,58,82731700,427,309,0.0,-1.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+362,1574806246400,23,64,129861600,444,391,-1.0,0.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+364,1574806248563,17,34,111289000,399,341,0.0,-1.0,MineSweeper.java,13,MineSweeper.main,Method_Body,1
+365,1574806249699,23,32,99953400,445,334,-1.0,-0.5714285714289999,MineSweeper.java,3,MineSweeper.main,Method_Body,1
+371,1574806264138,8,22,74911800,340,157,0.7662271428569999,-0.428571428571,MineSweeper.java,7,MineSweeper.ClassHeader,Comment,1
+372,1574806264681,8,50,124580100,335,568,-1.0,0.0,MineSweeper.java,4,MineSweeper.newGame:Comment,Comment,1
+376,1574806266372,20,50,83516300,423,571,-1.0,-0.833333333333,MineSweeper.java,4,MineSweeper.newGame:Comment,Comment,1
+377,1574806266481,18,50,69050600,412,569,-1.0,-0.25,MineSweeper.java,4,MineSweeper.newGame:Comment,Comment,1
+381,1574806268397,9,32,67823200,346,329,-0.465902,-0.8,MineSweeper.java,3,MineSweeper.main,Method_Body,1
+382,1574806270038,11,36,66669600,364,422,-0.166666666667,0.765105,MineSweeper.java,13,MineSweeper.main,Method_Body,1
+385,1574806274946,14,31,64052900,384,355,-1.0,-1.0,MineSweeper.java,3,MineSweeper.main,Comment,1
+386,1574806277745,15,23,74815700,388,224,-1.0,-0.714285714286,MineSweeper.java,7,MineSweeper.ClassHeader,Member_Variable,1
+387,1574806278454,23,23,124975400,450,236,-1.0,-1.0,MineSweeper.java,7,MineSweeper.ClassHeader,Member_Variable,1
+388,1574806279820,12,40,79247700,368,482,0.0,-1.0,MineSweeper.java,11,MineSweeper.main,Comment,1
+389,1574806287227,20,36,176475700,651,426,-0.7,0.0333325,MineSweeper.java,13,MineSweeper.main,Method_Body,1
+390,1574806287428,25,34,66654700,708,400,-0.8,-0.28718,MineSweeper.java,13,MineSweeper.main,Method_Body,1
+391,1574806287702,12,32,116460600,614,361,-1.0,-0.111111111111,MineSweeper.java,3,MineSweeper.main,Method_Body,1
+392,1574806288328,18,27,75051000,661,295,-1.0,-1.0,MineSweeper.java,2,MineSweeper.main:Comment,Comment,1
+398,1574806293118,15,23,100011000,639,220,-1.0,-1.0,MineSweeper.java,7,MineSweeper.ClassHeader,Member_Variable,1
+399,1574806298677,17,36,199405200,648,436,-1.0,-0.222222222222,MineSweeper.java,13,MineSweeper.main,Method_Body,1
+401,1574806300126,16,36,216825400,639,424,-1.0,-0.07142857142860001,MineSweeper.java,13,MineSweeper.main,Method_Body,1
+403,1574806302926,14,43,241217000,633,538,-1.0,-0.111111111111,MineSweeper.java,15,MineSweeper.main,Comment,1
+404,1574806303510,16,44,466612700,645,551,-0.901605,-0.730769230769,MineSweeper.java,15,MineSweeper.main,Method_Body,1
+405,1574806304076,12,44,374952100,619,538,-0.777777777778,-0.888888888889,MineSweeper.java,15,MineSweeper.main,Method_Body,1
+407,1574806306496,18,44,156145800,655,552,-1.0,-0.5,MineSweeper.java,15,MineSweeper.main,Method_Body,1
+408,1574806308300,16,63,174901700,642,430,-1.0,-0.14285714285700002,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+409,1574806308549,19,62,292261100,665,405,-1.0,-0.208333333333,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+410,1574806309576,44,61,102977000,842,397,-0.8,-1.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+412,1574806311016,5,59,133622800,570,366,-0.8,-0.19508466666700006,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+416,1574806316867,18,23,86502300,660,165,-1.0,-1.0,MineSweeper.java,7,MineSweeper.ClassHeader,Member_Variable,1
+417,1574806316999,20,27,104402300,679,230,-1.0,-1.0,MineSweeper.java,2,MineSweeper.main:Comment,Comment,1
+418,1574806317178,19,23,62640700,665,161,-1.0,-1.0,MineSweeper.java,7,MineSweeper.ClassHeader,Member_Variable,1
+419,1574806317391,19,23,362771100,663,169,-1.0,-1.0,MineSweeper.java,7,MineSweeper.ClassHeader,Member_Variable,1
+420,1574806318154,13,22,120357400,623,158,-1.0,-1.0,MineSweeper.java,7,MineSweeper.ClassHeader,Comment,1
+422,1574806322365,24,50,74994600,411,591,-1.0,0.0,MineSweeper.java,4,MineSweeper.newGame:Comment,Comment,1
+425,1574806323715,14,55,79298100,338,648,-1.0,-0.666666666667,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+426,1574806324297,19,60,66480600,378,659,-1.0,-0.333333333333,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+428,1574806325373,25,31,74870100,416,380,-1.0,0.0,MineSweeper.java,3,MineSweeper.main,Comment,1
+430,1574806325964,17,44,74946800,364,578,-1.0,-1.0,MineSweeper.java,15,MineSweeper.main,Method_Body,1
+433,1574806328422,4,45,574702900,272,594,-0.888888888889,-1.0,MineSweeper.java,36,MineSweeper.main,NONE,1
+437,1574806331989,15,59,87306700,351,680,-1.0,-0.875,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+438,1574806332103,20,59,196209500,389,683,-1.0,-1.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+440,1574806332864,20,58,408601200,384,660,-0.966666666667,-0.633333333333,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+443,1574806338086,9,22,60863600,303,125,-1.0,-1.0,MineSweeper.java,7,MineSweeper.ClassHeader,Comment,1
+444,1574806342721,12,40,100467300,328,398,0.0,-1.0,MineSweeper.java,11,MineSweeper.main,Comment,1
+445,1574806342975,17,58,113311600,363,669,-1.0,-0.6,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+446,1574806343113,20,56,238784600,381,638,-1.0,-0.5,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+447,1574806345087,13,58,74902500,335,578,-0.5714285714289999,-0.428571428571,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+449,1574806347795,7,49,100207300,290,218,-0.75,-1.0,MineSweeper.java,4,MineSweeper.newGame:Comment,Comment,1
+450,1574806349062,20,59,111961700,382,367,-1.0,-1.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+451,1574806349516,20,58,78537800,381,347,-1.0,-1.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+454,1574806365641,17,44,73661600,363,490,-1.0,-1.0,MineSweeper.java,15,MineSweeper.main,Method_Body,1
+455,1574806366826,26,75,116096400,435,605,-1.0,-0.5,MineSweeper.java,8,MineSweeper.customGame:Comment,Comment,1
+456,1574806372438,17,43,80306000,363,124,-1.0,-1.0,MineSweeper.java,15,MineSweeper.main,Comment,1
+459,1574806378728,8,60,99446100,305,374,-1.0,0.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+460,1574806382709,13,32,124279400,356,443,-1.0,0.0,MineSweeperBoard.java,9,MineSweeperBoard.ClassHeader,Member_Variable,1
+462,1574806384109,24,33,300165900,439,455,-1.0,0.0,MineSweeperBoard.java,9,MineSweeperBoard.ClassHeader,Member_Variable,1
+463,1574806387023,5,2,110714500,277,138,0.675168571429,-0.14285714285700002,MineSweeperBoard.java,13,MineSweeperBoard.Imports,NONE,1
+464,1574806402170,20,58,106240700,388,355,-0.875,-0.38128625,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+465,1574806405158,27,61,117396900,442,395,-0.666666666667,0.68281,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+466,1574806405409,19,60,116543400,376,378,-0.666666666667,0.419022,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+467,1574806406467,19,44,74689700,379,141,-1.0,-1.0,MineSweeper.java,15,MineSweeper.main,Method_Body,1
+468,1574806407208,9,44,67241200,308,146,0.472205,0.0,MineSweeper.java,15,MineSweeper.main,Method_Body,1
+471,1574806409520,18,32,104352600,393,445,-0.75,0.047905,MineSweeperBoard.java,9,MineSweeperBoard.ClassHeader,Member_Variable,1
+473,1574806411815,29,64,192748500,446,443,-0.555555555556,-1.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+474,1574806412132,18,57,108456800,368,334,-1.0,-1.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+475,1574806412557,25,64,84953600,410,442,-0.5,0.22801375,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+479,1574806414982,20,67,116826700,435,404,-0.666666666667,-0.04868,MineSweeperBoard.java,17,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+480,1574806415791,24,71,179667100,456,469,-0.933333333333,-0.658778666667,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+481,1574806416065,33,70,174909300,518,456,-1.0,-0.923076923077,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+482,1574806416290,20,71,99852100,424,465,-0.75,0.1809675,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+483,1574806417541,12,33,199130700,353,398,-0.8125,-0.19750875,MineSweeperBoard.java,9,MineSweeperBoard.ClassHeader,Member_Variable,1
+485,1574806418040,16,33,68084700,374,401,-1.0,-0.4,MineSweeperBoard.java,9,MineSweeperBoard.ClassHeader,Member_Variable,1
+489,1574806421240,0,14,151576700,247,116,-1.0,0.0,MineSweeperBoard.java,12,MineSweeperBoard.ClassComment,Comment,1
+490,1574806438212,32,61,96313700,464,399,-1.0,-0.5,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+491,1574806440850,28,61,66874100,438,394,-0.6810575,-0.125,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+493,1574806445178,0,16,100074200,245,133,0.0,-1.0,MineSweeperBoard.java,12,MineSweeperBoard.ClassComment,Comment,1
+495,1574806447478,10,49,125184200,314,214,0.0,-1.0,MineSweeper.java,4,MineSweeper.newGame:Comment,Comment,1
+497,1574806449029,27,69,382095500,476,451,-0.965517241379,-0.793103448276,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Comment,1
+499,1574806449702,4,48,483819500,290,122,-0.28571428571400004,-1.0,MineSweeperBoard.java,16,MineSweeperBoard.ClassHeader,Member_Variable,1
+500,1574806450492,13,66,61011100,387,406,-1.0,-0.666666666667,MineSweeperBoard.java,17,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+505,1574806453036,1,15,474791900,253,121,0.00909,-0.875,MineSweeperBoard.java,12,MineSweeperBoard.ClassComment,Comment,1
+506,1574806453832,14,35,274976300,369,416,-1.0,-1.0,MineSweeperBoard.java,45,MineSweeperBoard.ClassHeader,Member_Variable,1
+507,1574806454953,14,51,123177400,352,663,-1.0,-1.0,MineSweeperBoard.java,33,MineSweeperBoard.ClassHeader,Member_Variable,1
+509,1574806455485,20,33,166491900,406,396,-0.909090909091,-0.361800909091,MineSweeperBoard.java,9,MineSweeperBoard.ClassHeader,Member_Variable,1
+510,1574806455677,20,33,67282100,409,403,-0.75,0.29469,MineSweeperBoard.java,9,MineSweeperBoard.ClassHeader,Member_Variable,1
+515,1574806462035,14,10,124908600,351,176,-0.833333333333,-0.452393333333,MineGenerator.java,0,MineGenerator.ClassBody,Member_Variable,1
+519,1574806467343,10,12,74654500,322,192,1.15799666667,1.53569,MineGenerator.java,2,MineGenerator.ClassBody,Method_Signature,1
+522,1574806470650,7,10,83565100,296,176,-0.235292857143,-0.0373814285714,MineGenerator.java,0,MineGenerator.ClassBody,Member_Variable,1
+523,1574806470765,10,10,100370000,305,173,0.01540375,0.32303625,MineGenerator.java,0,MineGenerator.ClassBody,Member_Variable,1
+526,1574806472975,4,10,127653400,282,176,-0.103316923077,0.342867692308,MineGenerator.java,0,MineGenerator.ClassBody,Member_Variable,1
+527,1574806473862,12,10,62946000,326,179,-0.559815,-0.666666666667,MineGenerator.java,0,MineGenerator.ClassBody,Member_Variable,1
+528,1574806475357,33,64,95588100,480,437,-0.6,-0.149564,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+529,1574806476549,14,43,117470800,339,134,-0.5176716666669999,-0.462435,MineSweeper.java,15,MineSweeper.main,Comment,1
+531,1574806479542,13,51,149455400,354,667,-0.5,0.576385,MineSweeperBoard.java,33,MineSweeperBoard.ClassHeader,Member_Variable,1
+532,1574806480456,17,48,300044000,382,624,-1.0,-1.0,MineSweeperBoard.java,16,MineSweeperBoard.ClassHeader,Member_Variable,1
+533,1574806480865,13,51,1032493300,357,670,-1.0,-1.0,MineSweeperBoard.java,33,MineSweeperBoard.ClassHeader,Member_Variable,1
+534,1574806482255,20,17,83881300,389,159,0.522775,0.0,MineSweeperBoard.java,12,MineSweeperBoard.ClassComment,Comment,1
+538,1574806484457,16,64,84224100,393,359,-0.7,0.0099,MineSweeperBoard.java,5,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+543,1574806486175,9,71,65759200,352,464,-0.714285714286,0.115364285714,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+544,1574806486257,13,71,339676100,380,462,-0.9565217391299998,-0.388636521739,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+545,1574806486756,14,71,316529300,386,463,-0.8666666666670001,-0.048712,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+546,1574806487282,35,71,116239300,536,475,-1.0,-0.666666666667,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+547,1574806487555,31,71,175145400,501,465,-0.9375,-0.389444375,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+548,1574806487771,42,71,501462300,578,474,-1.0,-0.642857142857,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+549,1574806489030,34,70,185207100,520,455,-0.533333333333,0.682284,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+550,1574806493481,6,48,475181000,308,120,0.111266666667,-0.666666666667,MineSweeperBoard.java,16,MineSweeperBoard.ClassHeader,Member_Variable,1
+551,1574806494014,26,73,159212100,471,491,-0.8,0.280048,MineSweeperBoard.java,39,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+556,1574806497096,21,55,100357700,389,309,-1.0,0.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+557,1574806499371,9,50,108695800,305,220,0.22339875,-0.37091125,MineSweeper.java,4,MineSweeper.newGame:Comment,Comment,1
+558,1574806500914,7,56,66362200,303,326,0.0,-0.004520000000000001,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+560,1574806502749,17,43,112093900,362,115,-1.0,-1.0,MineSweeper.java,15,MineSweeper.main,Comment,1
+561,1574806504766,24,67,100108000,417,488,-0.5,1.33165,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+562,1574806505376,22,67,74989600,396,481,-0.7,0.26721500000000004,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+564,1574806506321,19,60,65700500,379,369,-0.75,0.15866125,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+565,1574806506476,22,59,96449700,397,363,-0.875,-0.099565,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+568,1574806508980,23,61,287180200,398,400,-0.8235294117649999,-0.240417647059,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+570,1574806510676,30,61,91424700,451,391,-1.0,-1.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+571,1574806511466,27,58,109505400,432,349,-1.0,-1.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+572,1574806511600,20,58,151045300,384,358,-1.0,-0.846153846154,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+573,1574806511991,20,59,133319200,385,362,-1.0,-1.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+574,1574806512633,20,62,68824400,379,412,-0.75,-0.31515,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+575,1574806512750,23,61,117193900,409,390,-1.0,-0.5,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+576,1574806513000,24,58,166363000,413,353,-1.0,-0.8,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+577,1574806513475,41,58,125095900,527,354,-1.0,-1.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+579,1574806514625,38,58,241028700,506,346,-1.0,-0.833333333333,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+580,1574806515019,29,55,76800500,443,308,-1.0,0.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+581,1574806515180,21,57,135920000,394,338,-1.0,-0.888888888889,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+585,1574806519322,20,59,108385200,388,363,-0.9,-0.61161,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+586,1574806521858,29,71,78412400,483,473,-0.5714285714289999,0.441665714286,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+587,1574806522224,27,67,108668400,469,414,-0.714285714286,-0.17930571428599998,MineSweeperBoard.java,17,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+588,1574806522599,6,48,158683100,310,125,-0.180473333333,-0.833333333333,MineSweeperBoard.java,16,MineSweeperBoard.ClassHeader,Member_Variable,1
+592,1574806524875,14,51,216981200,358,666,-0.7894736842110001,-0.34417631578900004,MineSweeperBoard.java,33,MineSweeperBoard.ClassHeader,Member_Variable,1
+596,1574806526542,30,69,336437100,494,449,-0.739130434783,0.0256408695652,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Comment,1
+597,1574806526923,30,71,66906700,494,466,-0.287928571429,0.0643685714286,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+598,1574806527074,31,71,349461100,507,470,-0.8518518518520001,-0.4794207407410001,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+600,1574806529372,21,73,191287200,429,512,-1.0,-0.3,MineSweeperBoard.java,39,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+601,1574806530139,23,61,275045500,405,393,-1.0,-0.444444444444,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+602,1574806530447,22,60,200240000,401,377,-1.0,-0.769230769231,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+603,1574806530880,31,61,78726400,464,394,-0.875,-0.65719375,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+604,1574806530978,20,61,92259300,378,391,-0.888888888889,-0.46895,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+605,1574806531189,22,62,79222400,397,417,-0.833333333333,-0.522908333333,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+606,1574806531468,40,61,79636200,525,394,-1.0,-0.833333333333,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+607,1574806531714,25,59,258551100,427,357,-1.0,-0.8,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+610,1574806534126,10,43,746844900,317,133,0.586614054054,0.0,MineSweeper.java,15,MineSweeper.main,Comment,1
+611,1574806535197,16,117,92967300,353,561,-0.8571428571430001,-0.323077142857,MineSweeper.java,5,MineSweeper.Difficulty:Header,Comment,1
+612,1574806535614,20,103,551352600,381,357,-0.928571428571,-0.300108333333,MineSweeper.java,6,MineSweeper.startGame,Method_Body,1
+613,1574806536235,21,108,145142800,390,429,-0.14285714285700002,1.6419971428600002,MineSweeper.java,16,MineSweeper.startGame,Method_Body,1
+616,1574806539050,22,101,70692500,399,318,-1.0,-0.8,MineSweeper.java,6,MineSweeper.startGame,Method_Body,1
+617,1574806539500,12,101,97086100,330,331,-0.22288,-0.339369230769,MineSweeper.java,6,MineSweeper.startGame,Method_Body,1
+628,1574806549405,14,90,91210400,339,158,-0.2894525,-0.75,MineSweeper.java,17,MineSweeper.customGame,Method_Body,1
+632,1574806552929,22,108,91224700,399,429,0.0,0.201918333333,MineSweeper.java,16,MineSweeper.startGame,Method_Body,1
+633,1574806558470,10,10,79262184200,321,175,0.465996666667,-0.666666666667,MineGenerator.java,0,MineGenerator.ClassBody,Member_Variable,1
+635,1574806560619,23,82,83337800,403,309,-0.5,0.4162475000000001,MineSweeper.java,9,MineSweeper.customGame,Method_Body,1
+637,1574806565527,20,61,166167000,377,314,-0.33312800000000004,0.0348045,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+638,1574806567085,25,50,116185800,419,149,0.048146666666699985,-0.666666666667,MineSweeper.java,4,MineSweeper.newGame:Comment,Comment,1
+639,1574806567634,11,59,63983800,324,282,-0.5,-1.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,1
+640,1574806572343,32,50,75104100,461,148,-1.0,-1.0,MineSweeper.java,4,MineSweeper.newGame:Comment,Comment,1
+641,1574806573988,24,57,62733400,429,263,0.6071975000000001,0.43196,MineSweeperBoard.java,2,MineSweeperBoard.MineSweeperBoard(int int int int):Comment,Comment,1
+643,1574806575918,21,67,158379100,438,414,-0.6,0.413453,MineSweeperBoard.java,17,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+644,1574806576158,32,70,133795900,513,460,-0.767353076923,-0.471633846154,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+645,1574806576492,57,71,91279900,692,475,-1.0,-1.0,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+646,1574806576897,35,70,416147000,541,454,-0.970588235294,-0.470588235294,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+647,1574806577408,44,70,99995800,589,451,-1.0,-0.625,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+648,1574806577934,18,63,107113400,395,348,-1.0,-1.0,MineSweeperBoard.java,5,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+649,1574806578235,15,64,182524400,387,373,-1.0,-0.3,MineSweeperBoard.java,5,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+651,1574806580710,23,44,181732300,427,300,-0.287400909091,-0.258557272727,MineSweeperBoard.java,27,MineSweeperBoard.ClassHeader,Member_Variable,1
+652,1574806587712,24,71,91722100,451,325,-0.28404625,0.96717375,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+653,1574806587846,19,71,83501000,427,322,-1.0,-1.0,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+654,1574806588213,24,70,66289100,457,306,-0.51213625,0.314745,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+659,1574806589979,35,71,100039600,536,320,-0.9,-0.278883,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+660,1574806592795,12,82,100701400,347,478,-1.0,-1.0,MineSweeperBoard.java,0,MineSweeperBoard.MineSweeperBoard(int int int):Comment,Comment,1
+661,1574806592898,15,82,107939000,375,484,-1.0,-0.8,MineSweeperBoard.java,0,MineSweeperBoard.MineSweeperBoard(int int int):Comment,Comment,1
+662,1574806593179,22,85,213355400,426,528,-0.846153846154,-0.554943076923,MineSweeperBoard.java,11,MineSweeperBoard.MineSweeperBoard(int int int),Method_Body,1
+663,1574806593623,14,85,129596800,357,523,-1.0,-0.666666666667,MineSweeperBoard.java,11,MineSweeperBoard.MineSweeperBoard(int int int),Method_Body,1
+667,1574806595520,14,118,524736000,393,378,-1.0,-0.888888888889,MineSweeperBoard.java,29,MineSweeperBoard.generateMines(long Space),Method_Body,1
+668,1574806596228,20,118,333614400,420,387,-0.666666666667,0.024991666666700003,MineSweeperBoard.java,29,MineSweeperBoard.generateMines(long Space),Method_Body,1
+669,1574806596653,13,118,575109800,375,383,-0.88,-0.8445216,MineSweeperBoard.java,29,MineSweeperBoard.generateMines(long Space),Method_Body,1
+670,1574806597278,22,138,225066600,460,681,-0.8823529411759999,-0.647898823529,MineSweeperBoard.java,4,MineSweeperBoard.generateMines(long Space),Method_Body,1
+671,1574806597527,21,137,99939900,457,670,-0.9,-0.673689,MineSweeperBoard.java,4,MineSweeperBoard.generateMines(long Space),Method_Body,1
+672,1574806597745,25,138,374790600,481,675,-1.0,-1.0,MineSweeperBoard.java,4,MineSweeperBoard.generateMines(long Space),Method_Body,1
+673,1574806598903,13,118,216289100,372,380,-0.8666666666670001,-0.677580666667,MineSweeperBoard.java,29,MineSweeperBoard.generateMines(long Space),Method_Body,1
+674,1574806599603,28,138,158780700,503,682,-0.8666666666670001,-0.542216666667,MineSweeperBoard.java,4,MineSweeperBoard.generateMines(long Space),Method_Body,1
+676,1574806601377,14,452,365935800,418,340,-1.0,-0.1,MineSweeperBoard.java,19,MineSweeperBoard.handleFlagClick,Method_Body,1
+680,1574806603325,15,64,318786200,381,393,-0.821428571429,-0.2529325,MineSweeperBoard.java,5,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+683,1574806605602,16,71,191448200,401,506,-1.0,-0.8125,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+685,1574806606168,8,71,103659300,340,502,-1.0,0.0,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+688,1574806606919,12,67,374870300,369,439,-1.0,-0.863636363636,MineSweeperBoard.java,17,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+689,1574806607327,13,67,91420300,378,438,-1.0,-1.0,MineSweeperBoard.java,17,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+690,1574806607493,34,67,83408900,525,439,-1.0,-1.0,MineSweeperBoard.java,17,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+691,1574806608066,12,71,83607800,372,504,-1.0,-0.833333333333,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+693,1574806608366,8,70,199866800,340,489,-1.0,0.0,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+696,1574806609452,10,70,199520000,360,483,-1.0,-0.692307692308,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+697,1574806610155,21,71,145915400,431,495,-1.0,-1.0,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+698,1574806610351,28,71,125160100,479,495,-1.0,-1.0,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+699,1574806610501,31,70,250209300,504,492,-1.0,-0.75,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+700,1574806610793,23,71,109950600,447,501,-1.0,-0.777777777778,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+701,1574806611216,10,71,324900100,357,493,-0.8325976,-0.76,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+706,1574806616299,56,71,166645100,682,503,-1.0,-0.5714285714289999,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+707,1574806616490,44,71,158360100,594,507,-1.0,-0.9,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,1
+708,1574806620290,16,82,201881100,380,664,-1.0,-1.0,MineSweeperBoard.java,0,MineSweeperBoard.MineSweeperBoard(int int int):Comment,Comment,1
+710,1574806621391,13,136,358266600,394,711,-1.0,-1.0,MineSweeperBoard.java,4,MineSweeperBoard.generateMines(long Space),Comment,2
+713,1574806623504,21,114,263158500,432,315,-1.0,-0.888888888889,MineSweeperBoard.java,18,MineSweeperBoard.generateMines(long Space),Method_Body,2
+714,1574806624005,17,118,155203700,403,379,-0.923076923077,-0.7895169230769999,MineSweeperBoard.java,29,MineSweeperBoard.generateMines(long Space),Method_Body,2
+716,1574806624433,13,123,100053200,383,450,0.16019153846200002,0.480863076923,MineSweeperBoard.java,3,MineSweeperBoard.generateMines(long Space),Method_Body,2
+717,1574806626199,21,114,100152400,435,319,-1.0,-1.0,MineSweeperBoard.java,18,MineSweeperBoard.generateMines(long Space),Method_Body,2
+718,1574806626774,16,124,363003700,419,483,-0.7837837837839999,0.0193440540541,MineSweeperBoard.java,3,MineSweeperBoard.generateMines(long Space),Method_Body,2
+720,1574806628349,18,135,75062500,412,640,-1.0,-1.0,MineSweeperBoard.java,4,MineSweeperBoard.generateMines(long Space),Method_Body,2
+721,1574806628575,10,135,115375000,360,635,-0.833333333333,-0.268315833333,MineSweeperBoard.java,4,MineSweeperBoard.generateMines(long Space),Method_Body,2
+722,1574806629858,26,114,74249300,469,319,2.2498150000000003,1.0047,MineSweeperBoard.java,18,MineSweeperBoard.generateMines(long Space),Method_Body,2
+723,1574806630099,8,114,91424100,352,323,-0.399419,0.09353,MineSweeperBoard.java,18,MineSweeperBoard.generateMines(long Space),Method_Body,2
+726,1574806636799,36,104,99946000,514,166,0.256093333333,-0.0913033333333,MineSweeperBoard.java,7,MineSweeperBoard.generateMines(long Space):Comment,Comment,2
+727,1574806637906,6,12,94333800,298,190,1.21730666667,0.251673333333,MineGenerator.java,2,MineGenerator.ClassBody,Method_Signature,2
+730,1574806653004,10,110,199570300,342,263,-0.118857857143,-0.0961092857143,MineSweeperBoard.java,10,MineSweeperBoard.generateMines(long Space),Method_Body,2
+732,1574806657523,23,97,74885200,417,426,-1.0,-1.0,MineSweeperBoard.java,26,MineSweeperBoard.generateMines(Space),Method_Body,2
+733,1574806658049,12,97,99830000,352,429,-1.0,-0.666666666667,MineSweeperBoard.java,26,MineSweeperBoard.generateMines(Space),Method_Body,2
+735,1574806659440,23,97,151522200,423,427,-0.833333333333,0.0874491666667,MineSweeperBoard.java,26,MineSweeperBoard.generateMines(Space),Method_Body,2
+736,1574806659720,25,97,94078100,444,432,-1.0,0.0,MineSweeperBoard.java,26,MineSweeperBoard.generateMines(Space),Method_Body,2
+738,1574806660370,26,93,633088400,445,377,0.0,-0.019776666666700003,MineSweeperBoard.java,42,MineSweeperBoard.generateMines(Space):Comment,Comment,2
+739,1574806663421,14,104,121617100,362,526,-0.5,-1.0,MineSweeperBoard.java,7,MineSweeperBoard.generateMines(long Space):Comment,Comment,2
+740,1574806663617,11,103,75786200,346,501,-1.0,-0.666666666667,MineSweeperBoard.java,7,MineSweeperBoard.generateMines(long Space):Comment,Comment,2
+741,1574806663713,14,104,116347400,364,529,-0.625,0.65767375,MineSweeperBoard.java,7,MineSweeperBoard.generateMines(long Space):Comment,Comment,2
+742,1574806664012,29,105,183239700,465,545,-0.75,-0.203995,MineSweeperBoard.java,7,MineSweeperBoard.generateMines(long Space):Comment,Comment,2
+743,1574806664262,36,106,149909700,517,564,-1.0,-1.0,MineSweeperBoard.java,7,MineSweeperBoard.generateMines(long Space):Comment,Comment,2
+744,1574806664437,30,106,300505000,458,562,-0.954545454545,-0.8642759090909999,MineSweeperBoard.java,7,MineSweeperBoard.generateMines(long Space):Comment,Comment,2
+746,1574806665810,25,104,225034700,437,536,-1.0,-0.533333333333,MineSweeperBoard.java,7,MineSweeperBoard.generateMines(long Space):Comment,Comment,2
+747,1574806666061,17,106,166300900,383,554,-1.0,-0.714285714286,MineSweeperBoard.java,7,MineSweeperBoard.generateMines(long Space):Comment,Comment,2
+748,1574806666302,33,105,606064800,477,549,-1.0,-0.8157894736839999,MineSweeperBoard.java,7,MineSweeperBoard.generateMines(long Space):Comment,Comment,2
+749,1574806667160,27,104,75201700,459,537,-1.0,0.0,MineSweeperBoard.java,7,MineSweeperBoard.generateMines(long Space):Comment,Comment,2
+751,1574806667878,14,110,533681200,368,625,-0.942857142857,-0.835112285714,MineSweeperBoard.java,10,MineSweeperBoard.generateMines(long Space),Method_Body,2
+752,1574806668478,13,97,175555800,357,423,-1.0,0.0,MineSweeperBoard.java,26,MineSweeperBoard.generateMines(Space),Method_Body,2
+753,1574806668803,11,85,108464200,350,284,-1.0,0.0,MineSweeperBoard.java,11,MineSweeperBoard.MineSweeperBoard(int int int),Method_Body,2
+754,1574806669003,7,81,114100100,312,236,-1.0,-0.9,MineSweeperBoard.java,0,MineSweeperBoard.MineSweeperBoard(int int int):Comment,Comment,2
+755,1574806669528,14,78,117143100,361,280,-0.75,-0.22525375,MineSweeperBoard.java,0,MineSweeperBoard.MineSweeperBoard(int int int):Comment,Comment,2
+756,1574806669762,25,80,274779500,449,308,-0.909090909091,-0.524903636364,MineSweeperBoard.java,0,MineSweeperBoard.MineSweeperBoard(int int int):Comment,Comment,2
+757,1574806670781,9,82,521463200,322,333,-0.76157,-0.757493076923,MineSweeperBoard.java,0,MineSweeperBoard.MineSweeperBoard(int int int):Comment,Comment,2
+758,1574806671911,39,80,116193700,537,310,-1.0,-0.428571428571,MineSweeperBoard.java,0,MineSweeperBoard.MineSweeperBoard(int int int):Comment,Comment,2
+759,1574806672103,16,85,233463900,385,383,-1.0,-0.588235294118,MineSweeperBoard.java,11,MineSweeperBoard.MineSweeperBoard(int int int),Method_Body,2
+761,1574806673238,42,85,199269800,556,380,-1.0,-1.0,MineSweeperBoard.java,11,MineSweeperBoard.MineSweeperBoard(int int int),Method_Body,2
+763,1574806674796,56,85,149962300,660,382,-1.0,0.0,MineSweeperBoard.java,11,MineSweeperBoard.MineSweeperBoard(int int int),Method_Body,2
+764,1574806675422,18,93,704479600,388,489,-0.772960666667,0.0,MineSweeperBoard.java,42,MineSweeperBoard.generateMines(Space):Comment,Comment,2
+765,1574806676284,21,62,658808500,417,275,-0.552977352941,-0.0882352941176,MineSweeperBoard.java,5,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Signature,2
+766,1574806677384,32,63,65781200,490,324,-1.0,0.0,MineSweeperBoard.java,5,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,2
+767,1574806677691,18,64,83346500,411,335,-0.327552222222,0.0,MineSweeperBoard.java,5,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,2
+768,1574806677798,20,58,135677700,397,251,-0.134065625,0.0,MineSweeperBoard.java,2,MineSweeperBoard.MineSweeperBoard(int int int int):Comment,Comment,2
+769,1574806677959,18,56,73399000,389,214,0.186741666667,0.0,MineSweeperBoard.java,2,MineSweeperBoard.MineSweeperBoard(int int int int):Comment,Comment,2
+770,1574806678747,22,70,165207500,443,423,0.0,-0.740112307692,MineSweeperBoard.java,6,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,2
+772,1574806679369,31,73,294824700,504,460,0.0,0.547972857143,MineSweeperBoard.java,39,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,2
+773,1574806681099,19,57,133011800,403,229,-1.0,0.0,MineSweeperBoard.java,2,MineSweeperBoard.MineSweeperBoard(int int int int):Comment,Comment,2
+774,1574806681435,18,55,158851400,393,201,-0.706295,0.0,MineSweeperBoard.java,2,MineSweeperBoard.MineSweeperBoard(int int int int):Comment,Comment,2
+775,1574806682351,9,64,80523200,341,328,-0.29073666666700004,0.0,MineSweeperBoard.java,5,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,2
+776,1574806682528,20,64,73218500,431,342,-0.5811,0.0,MineSweeperBoard.java,5,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,2
+779,1574806686257,45,64,72619700,558,361,-0.04148,0.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,2
+781,1574806686958,36,64,174695000,501,366,-0.147271666667,0.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,2
+782,1574806687187,41,64,116677000,525,369,-0.192621666667,0.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,2
+783,1574806687429,21,63,86609000,391,350,-0.115573,0.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,2
+784,1574806687855,24,61,71862100,407,320,-1.0,0.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,2
+785,1574806687976,28,64,326565300,441,364,-1.0,0.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,2
+786,1574806688331,27,64,71746700,433,366,-0.519487142857,0.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,2
+787,1574806688578,30,61,336150200,463,320,-0.04119,0.384908333333,MineSweeper.java,0,MineSweeper.newGame,Method_Body,2
+788,1574806689014,36,56,469989800,503,367,0.0,0.5232141666669999,MineSweeper.java,0,MineSweeper.newGame,Method_Body,2
+789,1574806689608,26,39,198220100,425,337,0.0,0.687215555556,MineSweeper.java,11,MineSweeper.main,Comment,2
+794,1574806695174,18,9,66839300,373,236,-0.2375875,-0.0992625,MineSweeper.java,10,MineSweeper.Imports,NONE,2
+797,1574806696804,28,41,108475700,440,648,-0.9,-0.6531859999999999,MineSweeper.java,11,MineSweeper.main,Method_Body,2
+798,1574806696961,30,41,74794400,446,648,-1.0,-1.0,MineSweeper.java,11,MineSweeper.main,Method_Body,2
+799,1574806697061,26,41,417411900,425,646,-0.825,-0.34153175,MineSweeper.java,11,MineSweeper.main,Method_Body,2
+802,1574806699460,28,49,101266600,441,493,-1.0,-1.0,MineSweeper.java,4,MineSweeper.newGame:Comment,Comment,2
+803,1574806699773,19,58,542374000,371,581,-0.813953488372,-0.414508139535,MineSweeper.java,0,MineSweeper.newGame,Method_Body,2
+804,1574806700331,16,59,283406000,359,587,-0.793103448276,-0.380362068966,MineSweeper.java,0,MineSweeper.newGame,Method_Body,2
+805,1574806700631,7,60,108292400,293,608,-0.692307692308,-0.00235230769231,MineSweeper.java,0,MineSweeper.newGame,Method_Body,2
+809,1574806709046,8,28,80053400,303,112,-1.0,-1.0,MineSweeper.java,2,MineSweeper.main:Comment,Comment,2
+811,1574806714296,23,61,141545300,402,618,-0.636363636364,0.402282727273,MineSweeper.java,0,MineSweeper.newGame,Method_Body,2
+812,1574806714455,20,60,99814600,386,604,-0.692307692308,0.340273846154,MineSweeper.java,0,MineSweeper.newGame,Method_Body,2
+813,1574806716597,8,28,1361675900,300,127,-0.159372,-0.260766,MineSweeper.java,2,MineSweeper.main:Comment,Comment,2
+814,1574806718759,4,28,5299102800,274,123,0.596538333333,0.00154333333333,MineSweeper.java,2,MineSweeper.main:Comment,Comment,2
+815,1574806719817,13,32,188381200,358,447,-0.543223076923,-0.112998461538,MineSweeperBoard.java,9,MineSweeperBoard.ClassHeader,Member_Variable,2
+817,1574806722526,8,2,74522500,299,117,0.304542857143,0.269474285714,MineSweeperBoard.java,13,MineSweeperBoard.Imports,NONE,2
+818,1574806722684,6,3,132636500,287,140,-0.318515,-0.52266,MineSweeperBoard.java,13,MineSweeperBoard.Imports,NONE,2
+823,1574806724301,20,50,65610000,381,451,-0.666666666667,0.5244166666669999,MineSweeper.java,4,MineSweeper.newGame:Comment,Comment,2
+824,1574806724591,20,61,116669200,387,615,-0.833333333333,-0.4300475,MineSweeper.java,0,MineSweeper.newGame,Method_Body,2
+825,1574806727642,18,67,91641000,409,409,-0.5,1.01535666667,MineSweeperBoard.java,17,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,2
+828,1574806729350,23,64,175261700,445,471,-0.461538461538,0.693226153846,MineSweeperBoard.java,5,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,2
+830,1574806730182,2,14,158304600,259,108,-1.0,-1.0,MineSweeperBoard.java,12,MineSweeperBoard.ClassComment,Comment,2
+831,1574806730683,23,40,100067300,426,489,-0.25,1.54956,MineSweeperBoard.java,8,MineSweeperBoard.ClassHeader,Member_Variable,2
+834,1574806734807,7,12,116380300,308,216,0.5097575,0.0,MineGenerator.java,2,MineGenerator.ClassBody,Method_Signature,2
+839,1574806761713,2,10,74661500,249,168,-1.0,-1.0,MineGenerator.java,0,MineGenerator.ClassBody,Member_Variable,3
+843,1574806775044,14,23,141385000,334,299,-0.916666666667,-0.7336199999999999,MineSweeper.java,1,MineSweeper.ClassHeader,Member_Variable,3
+844,1574806775294,11,22,54164876500,324,293,0.0,0.7266699999999999,MineSweeper.java,1,MineSweeper.ClassHeader,Comment,3
+850,1574806781278,14,53,131361900,367,737,-1.0,-1.0,MineSweeperBoard.java,2,MineSweeperBoard.MineSweeperBoard(int int int int):Comment,Comment,3
+851,1574806781676,15,64,87822200,391,746,-1.0,-1.0,MineSweeperBoard.java,14,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+852,1574806781800,16,55,137323800,375,608,-0.888888888889,-0.393936666667,MineSweeperBoard.java,2,MineSweeperBoard.MineSweeperBoard(int int int int):Comment,Comment,3
+853,1574806782040,19,48,187029800,399,504,-1.0,-0.3125,MineSweeperBoard.java,8,MineSweeperBoard.ClassHeader,Member_Variable,3
+855,1574806782522,17,56,145232700,388,610,-0.666666666667,0.149847777778,MineSweeperBoard.java,2,MineSweeperBoard.MineSweeperBoard(int int int int):Comment,Comment,3
+856,1574806782684,17,55,76367800,384,607,-1.0,-1.0,MineSweeperBoard.java,2,MineSweeperBoard.MineSweeperBoard(int int int int):Comment,Comment,3
+857,1574806782934,22,48,178721700,418,507,-0.833333333333,0.07431333333330001,MineSweeperBoard.java,8,MineSweeperBoard.ClassHeader,Member_Variable,3
+858,1574806783175,21,44,62455100,414,448,-1.0,0.0,MineSweeperBoard.java,11,MineSweeperBoard.ClassHeader,Member_Variable,3
+863,1574806786498,14,100,250105900,378,752,-1.0,-1.0,MineSweeperBoard.java,1,MineSweeperBoard.generateMines(long Space):Comment,Comment,3
+864,1574806786940,14,104,116633500,366,672,-1.0,-1.0,MineSweeperBoard.java,1,MineSweeperBoard.generateMines(long Space):Comment,Comment,3
+865,1574806787132,21,103,691372600,422,577,-1.0,-1.0,MineSweeperBoard.java,1,MineSweeperBoard.generateMines(long Space):Comment,Comment,3
+866,1574806787848,8,115,539396500,346,645,-0.964285714286,-0.897097857143,MineSweeperBoard.java,36,MineSweeperBoard.generateMines(long Space),Method_Body,3
+869,1574806789024,10,118,174994000,356,602,-1.0,-1.0,MineSweeperBoard.java,21,MineSweeperBoard.generateMines(long Space),Method_Body,3
+871,1574806789887,20,126,201473300,485,509,-0.8823529411759999,0.0145135294118,MineSweeperBoard.java,4,MineSweeperBoard.generateMines(long Space),Method_Body,3
+876,1574806794396,20,85,150027500,415,198,1.00718769231,1.35058461538,MineSweeperBoard.java,13,MineSweeperBoard.MineSweeperBoard(int int int),Method_Body,3
+877,1574806794588,36,80,208047000,525,122,-0.666666666667,0.57128,MineSweeperBoard.java,0,MineSweeperBoard.MineSweeperBoard(int int int):Comment,Comment,3
+878,1574806796118,25,85,330663600,445,204,0.07460291666669999,0.19653375,MineSweeperBoard.java,13,MineSweeperBoard.MineSweeperBoard(int int int),Method_Body,3
+882,1574806812811,19,35,137984800,401,321,-1.0,-0.5,MineSweeperBoard.java,26,MineSweeperBoard.ClassHeader,Member_Variable,3
+883,1574806813078,10,37,283382800,325,356,0.0118214285714,0.2811,MineSweeperBoard.java,6,MineSweeperBoard.ClassHeader,Comment,3
+887,1574806815353,14,35,341226500,366,345,-0.6842105263160001,0.284983684211,MineSweeperBoard.java,26,MineSweeperBoard.ClassHeader,Member_Variable,3
+888,1574806816203,19,35,125124100,406,338,-1.0,-1.0,MineSweeperBoard.java,26,MineSweeperBoard.ClassHeader,Member_Variable,3
+890,1574806818178,23,41,159056000,422,429,-0.7647058823530001,-0.171597647059,MineSweeperBoard.java,6,MineSweeperBoard.ClassHeader,Member_Variable,3
+892,1574806820331,15,31,269753100,371,292,-0.947368421053,-1.0,MineSweeperBoard.java,5,MineSweeperBoard.ClassHeader,Comment,3
+893,1574806820643,8,32,117191900,318,289,-0.583333333333,0.290233333333,MineSweeperBoard.java,5,MineSweeperBoard.ClassHeader,Member_Variable,3
+894,1574806821077,25,23,166852000,440,161,-1.0,-1.0,MineSweeperBoard.java,16,MineSweeperBoard.RandomComment,Comment,3
+897,1574806822993,16,55,83419100,378,636,-0.8571428571430001,-0.19193,MineSweeperBoard.java,2,MineSweeperBoard.MineSweeperBoard(int int int int):Comment,Comment,3
+898,1574806823152,12,51,125888400,353,571,-0.8,-0.24666,MineSweeperBoard.java,20,MineSweeperBoard.ClassHeader,Member_Variable,3
+902,1574806830755,18,19,62679700,377,242,-1.0,-0.333333333333,MineSweeper.java,3,MineSweeper.ClassComment,Comment,3
+903,1574806830850,20,19,99881200,380,242,-1.0,-1.0,MineSweeper.java,3,MineSweeper.ClassComment,Comment,3
+905,1574806833584,6,8,574922600,286,146,0.3730495,-0.279223666667,MineSweeper.java,6,MineSweeper.Imports,NONE,3
+906,1574806834184,3,9,165946500,267,148,0.106901538462,-0.199638461538,MineSweeper.java,6,MineSweeper.Imports,NONE,3
+907,1574806834409,4,10,108135600,266,168,0.22347,0.1525175,MineGenerator.java,0,MineGenerator.ClassBody,Member_Variable,3
+908,1574806835440,4,14,176566500,302,230,-0.6319590909089999,-0.349333636364,MineGenerator.java,2,MineGenerator.ClassBody,NONE,3
+911,1574806838566,23,23,75222800,406,310,-1.0,0.0,MineSweeper.java,1,MineSweeper.ClassHeader,Member_Variable,3
+916,1574806842121,19,23,75182000,380,300,-1.0,0.0,MineSweeper.java,1,MineSweeper.ClassHeader,Member_Variable,3
+917,1574806844349,19,39,88868800,399,390,-0.25,1.414835,MineSweeperBoard.java,6,MineSweeperBoard.ClassHeader,Member_Variable,3
+921,1574806851287,19,79,665562400,400,430,-0.805555555556,-0.289355833333,MineSweeperBoard.java,0,MineSweeperBoard.MineSweeperBoard(int int int):Comment,Comment,3
+922,1574806852012,28,78,74886600,461,429,-1.0,-1.0,MineSweeperBoard.java,0,MineSweeperBoard.MineSweeperBoard(int int int):Comment,Comment,3
+926,1574806853703,36,71,74913100,545,327,-1.0,-1.0,MineSweeperBoard.java,3,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+927,1574806854075,14,70,104496700,384,305,-1.0,-1.0,MineSweeperBoard.java,3,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+929,1574806854827,12,73,68281000,373,337,-1.0,0.0,MineSweeperBoard.java,24,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+930,1574806855146,8,73,96953100,345,337,-0.888888888889,-0.668191111111,MineSweeperBoard.java,24,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+931,1574806855394,15,71,338006500,393,312,-1.0,-0.35294117647100004,MineSweeperBoard.java,3,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+934,1574806856571,34,71,156872200,525,320,-1.0,-1.0,MineSweeperBoard.java,3,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+935,1574806856782,34,70,61887500,525,313,-0.833333333333,-0.35170500000000005,MineSweeperBoard.java,3,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+939,1574806860252,55,70,93861800,670,319,-1.0,-0.5,MineSweeperBoard.java,3,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+940,1574806860518,47,71,63520700,614,324,-1.0,0.0,MineSweeperBoard.java,3,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+941,1574806860960,48,71,75382000,621,324,1.3279375,0.0,MineSweeperBoard.java,3,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+945,1574806873485,52,70,98647800,651,310,-1.0,0.0,MineSweeperBoard.java,0,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+947,1574806903601,30,71,158617200,488,330,-0.802081428571,-0.187847857143,MineSweeperBoard.java,4,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+949,1574806907301,15,70,66301100,386,302,-0.406012,-0.6,MineSweeperBoard.java,4,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+955,1574806915983,11,59,83466200,341,143,1.828576,-0.2,MineSweeperBoard.java,2,MineSweeperBoard.MineSweeperBoard(int int int int):Comment,Comment,3
+957,1574806918977,14,78,265598300,364,424,0.0,2.1460125,MineSweeperBoard.java,0,MineSweeperBoard.MineSweeperBoard(int int int):Comment,Comment,3
+958,1574806920541,17,58,231732200,381,127,0.839867857143,0.8572078571430001,MineSweeperBoard.java,2,MineSweeperBoard.MineSweeperBoard(int int int int):Comment,Comment,3
+959,1574806922366,9,70,66445200,345,310,-1.0,-0.666666666667,MineSweeperBoard.java,4,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+962,1574806925748,12,50,108633500,321,224,-1.0,-1.0,MineSweeper.java,2,MineSweeper.newGame:Comment,Comment,3
+963,1574806926524,23,60,74682200,404,391,-1.0,-0.2,MineSweeper.java,0,MineSweeper.newGame,Method_Body,3
+965,1574806927763,19,63,85434200,380,428,-0.777777777778,-0.311278888889,MineSweeper.java,0,MineSweeper.newGame,Method_Body,3
+967,1574806929215,18,43,316218000,369,114,1.64625333333,-0.222222222222,MineSweeper.java,5,MineSweeper.main,Comment,3
+969,1574806929990,10,44,75170300,310,137,2.50598,0.0,MineSweeper.java,5,MineSweeper.main,Method_Body,3
+970,1574806930431,9,44,274819300,309,150,0.15165,-0.769230769231,MineSweeper.java,5,MineSweeper.main,Method_Body,3
+971,1574806930806,12,3,62869500,329,141,0.298008333333,0.045083333333300016,MineSweeperBoard.java,24,MineSweeperBoard.Imports,NONE,3
+973,1574806933461,17,67,212422600,406,409,-0.631806923077,0.12469,MineSweeperBoard.java,13,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+975,1574806935655,23,39,150220800,428,482,-1.0,-0.5714285714289999,MineSweeperBoard.java,6,MineSweeperBoard.ClassHeader,Member_Variable,3
+976,1574806937548,18,48,457072000,391,630,-0.925,-0.83418375,MineSweeperBoard.java,11,MineSweeperBoard.ClassHeader,Member_Variable,3
+977,1574806938066,26,39,155446200,443,488,-1.0,-0.125,MineSweeperBoard.java,6,MineSweeperBoard.ClassHeader,Member_Variable,3
+980,1574806940389,16,70,174561800,391,453,-0.611111111111,-0.00936055555556,MineSweeperBoard.java,4,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+989,1574806944596,20,67,183390700,423,424,-0.8823529411759999,-0.13896,MineSweeperBoard.java,13,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+991,1574806946269,14,73,93789300,385,501,-0.5,1.07683,MineSweeperBoard.java,29,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+992,1574806954646,18,73,81956300,410,491,-0.8,-0.4,MineSweeperBoard.java,29,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+999,1574806959594,11,70,150234700,367,455,-1.0,-1.0,MineSweeperBoard.java,4,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1002,1574806962043,4,45,75008000,274,159,0.0,-1.0,MineSweeper.java,12,MineSweeper.main,NONE,3
+1003,1574806973284,10,64,449927400,311,435,0.260498545455,0.325091454545,MineSweeper.java,0,MineSweeper.newGame,Method_Body,3
+1004,1574806973750,7,64,158394000,299,436,0.23964,0.266376,MineSweeper.java,0,MineSweeper.newGame,Method_Body,3
+1006,1574806975197,5,64,79213300,274,441,-0.391233333333,0.179541111111,MineSweeper.java,0,MineSweeper.newGame,Method_Body,3
+1007,1574806975301,7,65,199971300,293,451,0.003826,-0.0127544,MineSweeper.java,0,MineSweeper.newGame,Method_Body,3
+1008,1574806975559,9,63,300289100,310,424,0.166595945946,0.234586486486,MineSweeper.java,0,MineSweeper.newGame,Method_Body,3
+1009,1574806975951,8,60,159353100,300,381,0.149307894737,-0.226744736842,MineSweeper.java,0,MineSweeper.newGame,Method_Body,3
+1010,1574806976383,13,50,158133800,336,228,1.47918666667,0.00316166666667,MineSweeper.java,2,MineSweeper.newGame:Comment,Comment,3
+1012,1574806980850,22,67,133284400,399,489,-1.0,-1.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,3
+1014,1574806982883,9,44,100180100,310,140,2.313445,0.0,MineSweeper.java,5,MineSweeper.main,Method_Body,3
+1017,1574806985390,44,70,375148800,595,458,-1.0,0.0,MineSweeperBoard.java,4,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1018,1574806986740,41,71,244387200,576,481,-1.0,-0.692307692308,MineSweeperBoard.java,4,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1019,1574806986986,35,71,89102700,538,467,-1.0,-0.666666666667,MineSweeperBoard.java,4,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1020,1574806987116,16,71,524689600,387,465,-0.953488372093,-0.860465116279,MineSweeperBoard.java,4,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1021,1574806988715,49,71,74848500,627,465,-1.0,-0.714285714286,MineSweeperBoard.java,4,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1022,1574806988874,30,70,150045900,492,460,-1.0,-0.916666666667,MineSweeperBoard.java,4,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1023,1574806990276,32,71,94847000,509,476,-0.7272727272730001,0.00917545454545,MineSweeperBoard.java,4,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1024,1574806990420,17,71,129147300,408,463,-1.0,-0.8181818181820001,MineSweeperBoard.java,4,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1028,1574806992324,42,71,66142700,582,477,-1.0,-0.25,MineSweeperBoard.java,4,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1030,1574806992824,14,71,341222200,385,480,-1.0,-0.478260869565,MineSweeperBoard.java,4,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1031,1574806993198,14,69,141026500,388,448,-1.0,-0.714285714286,MineSweeperBoard.java,4,MineSweeperBoard.MineSweeperBoard(int int int int),Comment,3
+1032,1574806993764,38,67,133714700,548,413,-1.0,-0.833333333333,MineSweeperBoard.java,13,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1038,1574806998889,36,71,154082000,538,478,-1.0,-0.545454545455,MineSweeperBoard.java,4,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1039,1574806999189,23,71,175061100,456,474,-1.0,-0.6,MineSweeperBoard.java,4,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1040,1574806999414,17,71,75135700,406,466,-1.0,-1.0,MineSweeperBoard.java,4,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1041,1574806999963,14,71,204314000,379,464,-0.909090909091,-1.0,MineSweeperBoard.java,4,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1045,1574807008792,10,81,275212000,337,470,-1.0,-0.545454545455,MineSweeperBoard.java,0,MineSweeperBoard.MineSweeperBoard(int int int):Comment,Comment,3
+1046,1574807009768,16,85,66324200,381,461,-1.0,-1.0,MineSweeperBoard.java,20,MineSweeperBoard.MineSweeperBoard(int int int),Method_Body,3
+1048,1574807010767,20,97,225247000,410,502,-1.0,-1.0,MineSweeperBoard.java,19,MineSweeperBoard.generateMines(Space),Method_Body,3
+1049,1574807011109,29,97,99982200,466,495,-1.0,-1.0,MineSweeperBoard.java,19,MineSweeperBoard.generateMines(Space),Method_Body,3
+1050,1574807011618,12,97,66216500,346,495,-1.0,-1.0,MineSweeperBoard.java,19,MineSweeperBoard.generateMines(Space),Method_Body,3
+1051,1574807011917,15,105,125147200,372,532,-1.0,-1.0,MineSweeperBoard.java,7,MineSweeperBoard.generateMines(long Space):Comment,Comment,3
+1052,1574807012083,17,103,647817400,385,491,-1.0,-1.0,MineSweeperBoard.java,7,MineSweeperBoard.generateMines(long Space):Comment,Comment,3
+1053,1574807012786,17,105,81990000,387,524,-1.0,-1.0,MineSweeperBoard.java,7,MineSweeperBoard.generateMines(long Space):Comment,Comment,3
+1054,1574807013010,25,104,107433200,441,518,-1.0,-1.0,MineSweeperBoard.java,7,MineSweeperBoard.generateMines(long Space):Comment,Comment,3
+1055,1574807013184,21,105,109624900,409,532,-1.0,-1.0,MineSweeperBoard.java,7,MineSweeperBoard.generateMines(long Space):Comment,Comment,3
+1056,1574807013809,12,118,283395700,374,548,-1.0,-1.0,MineSweeperBoard.java,31,MineSweeperBoard.generateMines(long Space),Method_Body,3
+1058,1574807015292,19,135,301478200,421,665,-1.0,-0.8235294117649999,MineSweeperBoard.java,3,MineSweeperBoard.generateMines(long Space),Method_Body,3
+1059,1574807015637,28,137,84387500,499,669,-1.0,-1.0,MineSweeperBoard.java,3,MineSweeperBoard.generateMines(long Space),Method_Body,3
+1060,1574807015992,16,150,691489500,384,613,-1.0,-0.805555555556,MineSweeperBoard.java,21,MineSweeperBoard.newGame,Method_Body,3
+1062,1574807017358,10,169,133654500,362,681,-0.916666666667,-0.833333333333,MineSweeperBoard.java,15,MineSweeperBoard.restart,Method_Body,3
+1063,1574807017658,12,168,187694200,364,599,-1.0,-0.928571428571,MineSweeperBoard.java,15,MineSweeperBoard.restart,Method_Body,3
+1065,1574807018533,10,196,150165900,376,550,-1.0,-0.692307692308,MineSweeperBoard.java,12,MineSweeperBoard.saveGame,Method_Body,3
+1066,1574807019466,17,213,141114800,429,528,-1.0,-1.0,MineSweeperBoard.java,1,MineSweeperBoard.loadGame,Method_Body,3
+1067,1574807019771,14,232,87131700,380,550,-1.0,-0.5,MineSweeperBoard.java,10,MineSweeperBoard.resetData,Method_Body,3
+1068,1574807019883,15,231,78734500,389,528,-1.0,-1.0,MineSweeperBoard.java,10,MineSweeperBoard.resetData,Method_Body,3
+1069,1574807020017,17,216,175586000,421,345,-1.0,-0.888888888889,MineSweeperBoard.java,1,MineSweeperBoard.loadGame,Method_Body,3
+1070,1574807020292,12,214,66277600,390,360,-1.0,-1.0,MineSweeperBoard.java,1,MineSweeperBoard.loadGame,Method_Body,3
+1071,1574807020633,33,217,208613700,514,412,-1.0,-1.0,MineSweeperBoard.java,1,MineSweeperBoard.loadGame,Method_Body,3
+1072,1574807021141,29,213,124834900,513,407,-1.0,-1.0,MineSweeperBoard.java,1,MineSweeperBoard.loadGame,Method_Body,3
+1073,1574807021341,16,218,75019900,414,464,0.0,-1.0,MineSweeperBoard.java,1,MineSweeperBoard.loadGame,Method_Body,3
+1076,1574807023316,28,123,174558200,503,576,-1.0,-0.6,MineSweeperBoard.java,8,MineSweeperBoard.generateMines(long Space),Method_Body,3
+1079,1574807025582,13,43,188399600,354,341,-1.0,-1.0,MineSweeperBoard.java,18,MineSweeperBoard.ClassHeader,Comment,3
+1080,1574807027196,23,44,176093000,424,572,-1.0,-1.0,MineSweeperBoard.java,18,MineSweeperBoard.ClassHeader,Member_Variable,3
+1082,1574807027888,19,48,227596300,397,612,-1.0,-0.529411764706,MineSweeperBoard.java,11,MineSweeperBoard.ClassHeader,Member_Variable,3
+1086,1574807030234,21,71,173002600,429,533,-1.0,-0.7272727272730001,MineSweeperBoard.java,4,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1089,1574807033331,13,59,74715200,357,353,-1.0,-0.666666666667,MineSweeperBoard.java,2,MineSweeperBoard.MineSweeperBoard(int int int int):Comment,Comment,3
+1091,1574807036205,56,70,99700600,681,513,0.0,-1.0,MineSweeperBoard.java,4,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1092,1574807038439,18,55,124978200,390,286,-1.0,-1.0,MineSweeperBoard.java,2,MineSweeperBoard.MineSweeperBoard(int int int int):Comment,Comment,3
+1095,1574807039756,33,70,133551900,513,514,-1.0,-0.888888888889,MineSweeperBoard.java,4,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1096,1574807040130,18,71,175052900,413,529,-1.0,-0.8,MineSweeperBoard.java,4,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1097,1574807040381,12,71,474585300,372,525,-1.0,-0.891891891892,MineSweeperBoard.java,4,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1098,1574807040880,12,73,117772400,369,556,-1.0,-0.5,MineSweeperBoard.java,29,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1099,1574807041143,18,73,86920800,410,558,-1.0,-0.5,MineSweeperBoard.java,29,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1100,1574807041455,17,73,449776700,403,559,-1.0,-0.5714285714289999,MineSweeperBoard.java,29,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1104,1574807044554,18,73,649839600,409,549,-1.0,-0.7647058823530001,MineSweeperBoard.java,29,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1108,1574807048413,26,73,249746400,467,568,-0.888888888889,-1.0,MineSweeperBoard.java,29,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1109,1574807055962,10,55,427097500,315,308,0.0,-1.0,MineSweeper.java,0,MineSweeper.newGame,Method_Body,3
+1111,1574807057062,8,44,183762400,301,136,-0.2149275,-0.5,MineSweeper.java,5,MineSweeper.main,Method_Body,3
+1113,1574807059141,10,33,137742300,330,463,-0.7600100000000001,-0.8,MineSweeperBoard.java,9,MineSweeperBoard.ClassHeader,Member_Variable,3
+1114,1574807060202,21,63,333990100,388,424,-0.952380952381,-0.798732380952,MineSweeper.java,0,MineSweeper.newGame,Method_Body,3
+1115,1574807063052,22,41,161228100,422,523,-1.0,-0.785714285714,MineSweeperBoard.java,6,MineSweeperBoard.ClassHeader,Member_Variable,3
+1116,1574807063261,18,39,383166100,397,486,-1.0,-0.590909090909,MineSweeperBoard.java,6,MineSweeperBoard.ClassHeader,Member_Variable,3
+1117,1574807063961,20,40,77687500,405,499,-1.0,-0.8571428571430001,MineSweeperBoard.java,6,MineSweeperBoard.ClassHeader,Member_Variable,3
+1118,1574807064303,18,64,308301100,395,633,-1.0,-1.0,MineSweeperBoard.java,5,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1121,1574807065210,17,73,541461900,403,489,-0.888888888889,-0.5859714814810001,MineSweeperBoard.java,29,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1122,1574807065811,28,73,274872700,485,488,-1.0,-1.0,MineSweeperBoard.java,29,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1127,1574807083078,16,71,91787800,397,476,-0.7272727272730001,0.06376272727269999,MineSweeperBoard.java,4,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1128,1574807085119,15,70,75168700,391,459,-0.50141,0.191121,MineSweeperBoard.java,4,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1129,1574807085236,9,67,75138100,348,407,-0.8571428571430001,-0.418731428571,MineSweeperBoard.java,13,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1130,1574807085461,25,71,241844200,465,478,-0.252285769231,0.214733846154,MineSweeperBoard.java,4,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1131,1574807089064,26,59,104748300,449,283,-0.03625,0.127110909091,MineSweeperBoard.java,2,MineSweeperBoard.MineSweeperBoard(int int int int):Comment,Comment,3
+1132,1574807089489,16,73,263479200,406,509,-0.744781578947,-0.407598947368,MineSweeperBoard.java,29,MineSweeperBoard.MineSweeperBoard(int int int int),Method_Body,3
+1134,1574807093760,26,82,122244800,451,632,-0.629869166667,-0.6058033333330001,MineSweeperBoard.java,0,MineSweeperBoard.MineSweeperBoard(int int int):Comment,Comment,3

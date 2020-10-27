@@ -1,0 +1,1324 @@
+<Events startTimestamp="1563985282026" logVersion="0.11.0.201504031625" osName="Windows 10" osVersion="10.0" lineSeparator="\r\n" numMonitors="1" monitorBounds="[0, 0, 1920, 1080]">
+  <Command __id="0" _type="ShellBoundsCommand" bounds="[-8, -8, 1936, 1056]" timestamp="6" />
+  <Command __id="1" _type="FileOpenCommand" docASTNodeCount="260" docActiveCodeLength="2374" docExpressionCount="151" docLength="3861" projectName="MineSweeper" timestamp="24">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeper.java]]></filePath>
+    <snapshot><![CDATA[/*
+BUG REPORT #2
+MineSweeper has 3 difficulty levels. The size of the board and the number of the mines are different for each level. 
+Sometimes, we end up having a smaller number of mines in the game. 
+For an easy game, we want to have 10 mines, but sometimes it is 9, 8, or even less.
+*/
+
+package logic;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+
+import presentation.CustomMenu;
+import presentation.MineSweeperGui;
+
+/**
+ * Main launcher class for MineSweeper, containing all the menus and general
+ * prompts
+ *
+ * @author  KnightMiner
+ */
+
+public class MineSweeper {
+    // currently running instance of the game
+    private static MineSweeperGui gui;
+
+    /**
+     * Primary way to boot the game
+     * @param args  Default args (unused)
+     */
+    
+    public static void main(String[] args) {
+        // High DPI stuff
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        // load the help panels
+        // this has a side effect of loading the icons for the pieces
+        Help.load();
+
+        // start the game on easy
+        newGame(Difficulty.EASY);
+    }
+
+    /**
+     * Creates a new MineSweeper game with one of three default sizes or custom
+     * @param difficulty Game difficulty
+     */
+    
+    public static void newGame(Difficulty difficulty) {
+        // difficulty switch
+        MineSweeperBoard board = null;
+        switch(difficulty) {
+            case EASY:
+                board = new MineSweeperBoard(9, 9, 10, 0);
+                break;
+            case NORMAL:
+                board = new MineSweeperBoard(16, 16, 40, 1);
+                break;
+            case HARD:
+                board = new MineSweeperBoard(30, 16, 99, 3);
+                break;
+            case CUSTOM:
+                board = customGame();
+                break;
+        }
+
+        startGame(board);
+    }
+
+    /**
+     * Creates a new game with the custom size
+     * @return  A board of the custom size
+     */
+    
+    public static MineSweeperBoard customGame() {
+        CustomMenu menu = new CustomMenu();
+
+        int result = JOptionPane.showConfirmDialog(null, menu,
+                "Custom", JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.PLAIN_MESSAGE);
+
+        // if they pressed OK
+        if(result == JOptionPane.OK_OPTION) {
+            return menu.createBoard();
+        }
+        else {
+            return null;
+        }
+    }
+
+    /**
+     * Starts a new game with the specified board
+     * @param board  Game board to start
+     */
+    
+    public static void startGame(MineSweeperBoard board) {
+        // must be a valid board
+        if(board != null) {
+            // remove the current gui and define the new one
+            if(gui != null) {
+                gui.dispose();
+            }
+
+            // create a new instance
+            gui = new MineSweeperGui(board);
+        }
+    }
+
+    /**
+     * List of buttons for the GUI
+     */
+    
+    public enum Difficulty {
+        /** Easy game */
+        EASY("Easy"),
+        /** Normal game */
+        NORMAL("Normal"),
+        /** Hard game */
+        HARD("Expert"),
+        /** Custom size and mines from the GUI */
+        CUSTOM("Custom");
+
+        // data
+        private String label;
+
+        /**
+         * Default constructor
+         * @param  Button label
+         */
+        
+        Difficulty(String label) {
+            this.label = label;
+        }
+
+        /**
+         * Gets the label for the difficulty
+         * @return  Difficulty name
+         */
+        
+        public String getLabel() {
+            return label;
+        }
+    }
+}
+]]></snapshot>
+  </Command>
+  <Command __id="2" _type="MoveCaretCommand" caretOffset="15" docOffset="296" timestamp="236" />
+  <Command __id="3" _type="SelectTextCommand" caretOffset="1551" docEnd="1654" docOffset="1654" docStart="1641" end="1551" start="1538" timestamp="96675" />
+  <Command __id="4" _type="MoveCaretCommand" caretOffset="1527" docOffset="1630" timestamp="122346" />
+  <Command __id="5" _type="SelectTextCommand" caretOffset="1538" docEnd="1641" docOffset="1641" docStart="1625" end="1538" start="1522" timestamp="122515" />
+  <Command __id="6" _type="FileOpenCommand" docASTNodeCount="1769" docActiveCodeLength="10590" docExpressionCount="1040" docLength="19616" projectName="MineSweeper" timestamp="124294">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeperBoard.java]]></filePath>
+    <snapshot><![CDATA[package logic;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.*;
+
+import util.Piece;
+import util.Space;
+
+/**
+ * Contains all the visible pieces in the MineSweeper game
+ * 
+ * @author KnightMiner
+ */
+
+public class MineSweeperBoard implements Serializable {
+
+	/**
+	 * Random number generator used to create game seeds Minefields use a sepparate
+	 * object created using a specific seed
+	 */
+	
+	public static final Random RANDOM = new Random();
+
+	// resizable
+	private transient Queue<Space> update;
+
+	// board dimensions
+	private int width, height;
+	private MineGenerator data = new MineGenerator();
+
+	private int flagCount;
+
+	// board data
+	private Piece[][] pieces;
+	private boolean[][] mines;
+	private boolean gameOver;
+	private boolean victory;
+
+	// determines if the first click happened yet
+	private boolean firstClick;
+
+	// determines if we have used our one cheat
+	private int cheatsAllowed;
+	private int cheats = 0;
+
+	// board seed
+	private long seed;
+
+	/**
+	 * Creates a new minesweaper board with the specified dimensions
+	 * 
+	 * @param width     Width of the board
+	 * @param height    Height of the board
+	 * @param mineCount Total mines
+	 * @param cheats    Cheats allowed
+	 */
+	
+	public MineSweeperBoard(int width, int height, int mineCount, int cheats) {
+		this.width = width;
+		this.height = height;
+
+		this.pieces = new Piece[height][width];
+		this.mines = new boolean[height][width];
+
+		// sanity check in case the GUI fails to correct the number
+		this.data.mineCount = Math.min(mineCount, width * height - 9);
+		this.cheatsAllowed = this.cheats = cheats;
+
+		update = new LinkedList<>();
+	}
+
+	/**
+	 * Creates a new minesweaper board with the specified dimensions
+	 * 
+	 * @param width     Width of the board
+	 * @param height    Height of the board
+	 * @param mineCount Total mines
+	 */
+	
+	public MineSweeperBoard(int width, int height, int mineCount) {
+		this(width, height, mineCount, 1);
+	}
+
+	/* Main logic */
+
+	/**
+	 * Populates the board with mines with a random seed
+	 * 
+	 * @param space Space clicked
+	 */
+	
+	public void generateMines(Space space) {
+		generateMines(RANDOM.nextLong(), space);
+	}
+
+	/**
+	 * Populates the board with mines
+	 * 
+	 * @param seed    Seed to generate mines. Two fields with the same size and seed
+	 *                will have the same mines locations
+	 * @param clicked space clicked when generating the mines
+	 */
+	
+	protected void generateMines(long seed, Space clicked) {
+		// store the current seed for saving games
+		this.seed = seed;
+
+		// no mines? no work
+		if (data.mineCount == 0) {
+			return;
+		}
+
+		// list of spaces we can still place a mine at
+		List<Space> remainingSpaces = new ArrayList<>(Arrays.asList(getAllSpaces()));
+
+		// if we clicked somewhere, remove all nearby spaces
+		if (clicked != null) {
+			// remove all unclickable spaces
+			final int x = clicked.getX(), y = clicked.getY();
+			remainingSpaces.removeIf((space) -> {
+				return (y - 1) <= space.getY() && space.getY() <= (y + 1) && (x - 1) <= space.getX()
+						&& space.getX() <= (x + 1);
+			});
+		}
+
+		// random object seeded so results can be controlled
+		Random random = new Random(seed);
+
+		// place mines
+		this.mines = new boolean[height][width];
+		for (int i = 0; i < data.mineCount; i++) {
+			// just get the linear location of the next mine and place it
+			int mine = random.nextInt(remainingSpaces.size());
+			Space space = remainingSpaces.get(mine);
+			mines[space.getY()][space.getX()] = true;
+
+		}
+	}
+
+	/**
+	 * Creates a new game with the same dimensions
+	 */
+	
+	public void newGame() {
+		// first, regenerate the mines
+		this.mines = new boolean[height][width];
+
+		// next, clear game specific data
+		resetData();
+
+		// then mark all spaces for a rendering update
+		for (Space space : getAllSpaces()) {
+			markUpdate(space);
+		}
+	}
+
+	/**
+	 * Restarts the current game
+	 */
+	
+	public void restart() {
+		// if we have not clicked yet, do nothing
+		// we don't have a seed to restart from
+		if (!firstClick) {
+			return;
+		}
+
+		// reset any relevant data
+		resetData();
+
+		// but assume we already clicked so the mines don't change
+		firstClick = true;
+
+		// and mark all spaces for an update
+		for (Space space : getAllSpaces()) {
+			markUpdate(space);
+		}
+	}
+
+	/**
+	 * Saves the board to a binary file
+	 * 
+	 * @param filename Location of the game
+	 */
+	
+	public void saveGame(String filename) {
+		// TODO: better saving logic
+		try {
+			FileOutputStream file = new FileOutputStream(filename + ".bin");
+			ObjectOutputStream stream = new ObjectOutputStream(file);
+			stream.writeObject(this);
+			stream.flush();
+			stream.close();
+		} catch (IOException e) {
+		}
+	}
+
+	/**
+	 * Load the board from a binary file
+	 * 
+	 * @param filename Location of the game
+	 * @return The board, or null if invalid
+	 */
+	
+	public static MineSweeperBoard loadGame(String filename) {
+		try {
+			FileInputStream file = new FileInputStream(filename + ".bin");
+			ObjectInputStream stream = new ObjectInputStream(file);
+			MineSweeperBoard board = (MineSweeperBoard) stream.readObject();
+			stream.close();
+			return board;
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	/**
+	 * Resets generic data
+	 */
+	
+	private void resetData() {
+		this.pieces = new Piece[height][width];
+		gameOver = false;
+		firstClick = false;
+		cheats = cheatsAllowed;
+		flagCount = 0;
+		victory = false;
+	}
+
+	/**
+	 * Ends the game with a loss
+	 * 
+	 * @param clicked Location clicked causing the loss
+	 * @return Mine clicked
+	 */
+	
+	public void loseGame(Space clicked) {
+		// set the game to over
+		gameOver = true;
+
+		showMines(clicked, false);
+	}
+
+	/**
+	 * Checks if the game has been won, and sets the appropiate statuses
+	 */
+	
+	public void checkVictory() {
+		// check all spaces
+		for (Space space : getAllSpaces()) {
+
+			// only spaces without mines need to be checked, we don't care about
+			// flags or marks on mine spaces
+			if (!isMine(space)) {
+				// if the piece is unclicked or not a number, we failed
+				Piece piece = getPiece(space);
+				if (piece == null || !piece.isNumber()) {
+					return;
+				}
+			}
+		}
+
+		// made it through that? we won
+		victory = true;
+		gameOver = true;
+
+		showMines(null, true);
+	}
+
+	/**
+	 * Shows all the mines on the board
+	 * 
+	 * @param space   Space that was clicked
+	 * @param victory Determines if the game was won or lost
+	 */
+	
+	private void showMines(Space clicked, boolean victory) {
+		// set the mine color based on victory
+		Piece mine = victory ? Piece.MINE_GREEN : Piece.MINE;
+
+		// set the clicked space to red
+		if (clicked != null && isMine(clicked)) {
+			setPiece(clicked, Piece.MINE_RED);
+		}
+
+		// show mines on the board
+		for (Space space : getAllSpaces()) {
+			if (space.equals(clicked)) {
+				continue;
+			}
+			Piece piece = getPiece(space);
+			if (isMine(space)) {
+				// but only on empty or marks
+				if (piece == null || piece.isMark()) {
+					setPiece(space, mine);
+				}
+			} else {
+				// if the space has a flag but no mine, mark it as such
+				if (piece == Piece.FLAG) {
+					setPiece(space, Piece.FLAG_NOT);
+				}
+			}
+		}
+	}
+
+	/* Clicking */
+
+	/**
+	 * Handle standard game clicks
+	 * 
+	 * @param space  Space clicked
+	 * @param action Type of click
+	 */
+	
+	public void handleClick(Space space, ClickAction action) {
+		// stop playing when the game is over
+		if (gameOver) {
+			return;
+		}
+		// simply passes it along to the dedicated function
+		switch (action) {
+		case DEFAULT:
+			handleDefaultClick(space);
+			break;
+		case FLAG:
+			handleFlagClick(space);
+			break;
+		case MARK:
+			handleMarkClick(space);
+			break;
+		case CHEAT:
+			handleCheatClick(space);
+			break;
+		}
+	}
+
+	/**
+	 * Space clicking core, does the actual clicking action
+	 * 
+	 * @param space Space clicked
+	 */
+	
+	private void clickSpace(Space space) {
+		// if the space is not replaceable, stop now
+		// called here so we don't click flags as they are mines
+		if (!isReplaceable(space)) {
+			return;
+		}
+
+		// if the space is a mine, we lose
+		if (isMine(space)) {
+			loseGame(space);
+		}
+
+		// otherwise do a normal click
+		else {
+			// sets the piece to the number of surrounding mines
+			Piece newPiece = getNumber(space);
+			setPiece(space, newPiece);
+
+			// if the piece is 0, update surrounding pieces as none of them are mines
+			// this won't eternally recur since this space is no longer clickable
+			if (newPiece == Piece.N0) {
+				for (Space neighbor : getNeighbors(space)) {
+					clickSpace(neighbor);
+				}
+			}
+		}
+	}
+
+	/**
+	 * Default clicks, clicks a space and displays a number or loses the game
+	 * 
+	 * @param space Space clicked
+	 */
+	
+	private void handleDefaultClick(Space space) {
+		// first click should generate the minefield
+		if (!firstClick) {
+			firstClick(space);
+		}
+
+		// if the space cannot be replaced then stop here
+		// as we run this function on every click
+		if (isNumber(space)) {
+			// if the number of flags around this space is the same as the number
+			Space[] neighbors = getNeighbors(space);
+
+			// count the flags around the piece
+			int flags = 0;
+			for (Space neighbor : neighbors) {
+				if (getPiece(neighbor) == Piece.FLAG) {
+					flags++;
+				}
+			}
+
+			// same number of flags as the piece number?
+			if (flags == getPiece(space).getNumber()) {
+				// click all the spaces. This is a risky move if a flag is wrong
+				for (Space neighbor : neighbors) {
+					clickSpace(neighbor);
+				}
+			}
+		}
+		// otherwise if not a number, just click the space
+		else {
+			clickSpace(space);
+		}
+
+		// check just once at the end of clicking
+		checkVictory();
+	}
+
+	/**
+	 * Handle the first click in the game. This click will generate the minefield as
+	 * it cannot be on a mine
+	 * 
+	 * @param space Space clicked
+	 */
+	
+	private void firstClick(Space space) {
+		generateMines(space);
+		firstClick = true;
+	}
+
+	/**
+	 * Flag clicks, essentially click once to add
+	 * 
+	 * @param space Space clicked
+	 */
+	
+	private void handleFlagClick(Space space) {
+		// if already a flag, set a mark
+		Piece piece = getPiece(space);
+		if (piece == Piece.FLAG) {
+			setPiece(space, Piece.MARK_RED);
+			flagCount--;
+		}
+		// remove marks
+		else if (piece != null && piece.isMark()) {
+			setPiece(space, null);
+		}
+		// otherwise if we can add one
+		else if (isReplaceable(space)) {
+			if(flagCount < data.mineCount) {
+				setPiece(space, Piece.FLAG);
+				flagCount++;
+			}
+		}
+	}
+
+	/**
+	 * Mark clicks, changes the color of a mark
+	 * 
+	 * @param space Space clicked
+	 */
+	
+	private void handleMarkClick(Space space) {
+		// tobble the mark
+		Piece piece = getPiece(space);
+		if (piece == Piece.MARK_RED) {
+			setPiece(space, Piece.MARK_GREEN);
+		}
+		// remove marks
+		else if (piece == Piece.MARK_GREEN) {
+			setPiece(space, Piece.MARK_BLUE);
+		}
+		// otherwise if we can add one
+		else if (piece == Piece.MARK_BLUE) {
+			setPiece(space, Piece.MARK_RED);
+		}
+
+		// if its a flag, remove it
+		else if (piece == Piece.FLAG) {
+			setPiece(space, Piece.MARK_RED);
+			flagCount--;
+		}
+
+		// essentially all that is left here is null, but still
+		else if (isReplaceable(space)) {
+			setPiece(space, Piece.MARK_RED);
+		}
+	}
+
+	/**
+	 * Cheat clicks, click a space and it will show a "ghost" bomb if one exists
+	 * 
+	 * @param space Space clicked
+	 */
+	
+	private void handleCheatClick(Space space) {
+		// already ran, don't run again
+		if (!canCheat()) {
+			return;
+		}
+
+		// no mines if we have not clicked
+		if (!firstClick) {
+			// you cheated for the first click, useless move as now we don't care
+			// about click protection
+			firstClick(null);
+		}
+
+		// only marks and empty spaces can be cheated, to save accidental clicks
+		Piece piece = getPiece(space);
+		if (piece != null && !piece.isMark()) {
+			return;
+		}
+
+		// if its a mine, show that
+		if (isMine(space)) {
+			setPiece(space, Piece.MINE_GREEN);
+		}
+		// otherwise click the space as we know its safe
+		else {
+			clickSpace(space);
+		}
+
+		// use a cheat
+		cheats--;
+
+		// need to check, since it could be the last click
+		checkVictory();
+	}
+
+	/* Helper functions */
+
+	/**
+	 * Gets a list of all spaces
+	 * 
+	 * @return a list of all spaces
+	 */
+	
+	public Space[] getAllSpaces() {
+		Space[] spaces = new Space[width * height];
+
+		// loop through all spaces, adding them to an array
+		int i = 0;
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				spaces[i] = new Space(x, y);
+				i++;
+			}
+		}
+
+		return spaces;
+	}
+
+	/**
+	 * Helper function to get the coordinates of all 8 neighbors to the space Note
+	 * that some may be invalid spaces
+	 * 
+	 * @param space Space around which to get neighbors
+	 * @return an array of spaces of the 8 neighbors, or less on edges
+	 */
+	
+	public Space[] getNeighbors(Space space) {
+		// if not valid, return no neighbors
+		if (!isValid(space)) {
+			return new Space[0];
+		}
+
+		// array cannot be bigger than 8
+		Space[] neighbors = new Space[8];
+		int x = space.getX();
+		int y = space.getY();
+
+		// 2D loop from x - 1, y - 1 up to x + 1, y + 1
+		int neighborCount = 0;
+		for (int i = -1; i <= 1; i++) {
+			for (int j = -1; j <= 1; j++) {
+				// skip offset of 0,0 as that is the input space
+				if (i == 0 && j == 0) {
+					continue;
+				}
+
+				// make sure the space is valid before returning it
+				Space neighbor = new Space(x + i, y + j);
+				if (isValid(neighbor)) {
+					neighbors[neighborCount] = neighbor;
+					neighborCount++;
+				}
+			}
+		}
+
+		return neighbors;
+	}
+
+	/**
+	 * Marks a space as needing update by the graphics display
+	 * 
+	 * @param space space needing an update
+	 */
+	
+	public void markUpdate(Space space) {
+		if (!update.contains(space)) {
+			update.add(space);
+		}
+	}
+
+	/**
+	 * Returns the number to display on the space after clicking it Does not take
+	 * bombs on this space into account, check isMine() first
+	 * 
+	 * @param space Space to check
+	 * @return The number of bombs around this space
+	 */
+	
+	public Piece getNumber(Space space) {
+		// no space? no return
+		if (!isValid(space)) {
+			return null;
+		}
+
+		int count = 0;
+		// check all the neighbors for a bomb
+		for (Space neighbor : getNeighbors(space)) {
+			// if they have one, add to the running total
+			if (isMine(neighbor)) {
+				count++;
+			}
+		}
+
+		// return the specific piece
+		return Piece.fromNumber(count);
+	}
+
+	/* Getters, setters, and basic return logic */
+
+	/**
+	 * Gets the piece on the specified space
+	 * 
+	 * @param space Space to check for a piece
+	 * @return the piece on the specified space
+	 */
+	
+	public Piece getPiece(Space space) {
+		// invalid gets null
+		if (!isValid(space)) {
+			return null;
+		}
+
+		// otherwise go with the contained piece
+		return pieces[space.getY()][space.getX()];
+	}
+
+	/**
+	 * Placed a piece on a space
+	 * 
+	 * @param space Space to place the piece
+	 * @param piece Piece to place on the space
+	 */
+	
+	public void setPiece(Space space, Piece piece) {
+		// must be valid
+		if (isValid(space)) {
+			pieces[space.getY()][space.getX()] = piece;
+			markUpdate(space);
+		}
+	}
+
+	/**
+	 * Determines if a space contains a bomb
+	 * 
+	 * @param space Space to check
+	 * @return True if the space contains a bomb
+	 */
+	
+	public boolean isMine(Space space) {
+		// not a valid space?
+		if (!isValid(space)) {
+			return false;
+		}
+
+		return mines[space.getY()][space.getX()];
+	}
+
+	/**
+	 * Determines if a space appears enabled, or pressed up
+	 * 
+	 * @param space Space to check
+	 * @return True if the space appears enabled
+	 */
+	
+	public boolean isEnabled(Space space) {
+		if (!isValid(space)) {
+			return false;
+		}
+
+		Piece piece = getPiece(space);
+
+		// if the space is empty, it pops up
+		if (piece == null) {
+			return true;
+		}
+
+		// otherwise go based on the contained value
+		return piece.isEnabled();
+	}
+
+	/**
+	 * Determines if the contents of a space can be replaced
+	 * 
+	 * @param space Space clicked
+	 */
+	
+	private boolean isReplaceable(Space space) {
+		// invalid spaces are always false
+		if (!isValid(space)) {
+			return false;
+		}
+
+		Piece piece = getPiece(space);
+
+		// if the space is empty, it can be clicked
+		if (piece == null) {
+			return true;
+		}
+
+		// otherwise go based on the contained value
+		return piece.isReplaceable();
+	}
+
+	/**
+	 * Determines if the space is a number
+	 * 
+	 * @param space Space clicked
+	 */
+	
+	private boolean isNumber(Space space) {
+		// invalid spaces are always false
+		if (!isValid(space)) {
+			return false;
+		}
+
+		Piece piece = getPiece(space);
+
+		// if the space is empty, it is not a number
+		if (piece == null) {
+			return false;
+		}
+
+		// otherwise go based on the contained value
+		return piece.isNumber();
+	}
+
+	/* Data */
+
+	/**
+	 * Gets the width of the board
+	 * 
+	 * @return The width of the board
+	 */
+	
+	public int getWidth() {
+		return width;
+	}
+
+	/**
+	 * Gets the height of the board
+	 * 
+	 * @return The height of the board
+	 */
+	
+	public int getHeight() {
+		return height;
+	}
+
+	/**
+	 * Gets the number of mines left on the board
+	 * 
+	 * @return number of mines remaining
+	 */
+	
+	public int getRemainingMines() {
+		return data.mineCount - flagCount;
+	}
+
+	/**
+	 * Checks if the player has used their cheat
+	 * 
+	 * @return if the player has used their cheat
+	 */
+	
+	public boolean canCheat() {
+		return cheats > 0;
+	}
+
+	/**
+	 * Checks how many cheats the player has left
+	 * 
+	 * @return remaining cheats
+	 */
+	
+	public int getCheats() {
+		return cheats;
+	}
+
+	/**
+	 * Checks if the game ended
+	 * 
+	 * @return true if the game ended
+	 */
+	
+	public boolean gameOver() {
+		return gameOver;
+	}
+
+	/**
+	 * Checks if the player won the game
+	 * 
+	 * @return true if the player won the game
+	 */
+	
+	public boolean hasWon() {
+		return victory;
+	}
+
+	/**
+	 * Checks if a space is within the bounds of this board
+	 * 
+	 * @param space Space to check
+	 * @return true if the space is within this board
+	 */
+	
+	public boolean isValid(Space space) {
+		// no space?
+		if (space == null) {
+			return false;
+		}
+
+		// first, check if the space is entirely invalid
+		if (space.getX() < 0 || space.getY() < 0) {
+			return false;
+		}
+
+		// next, check if this is outside of this board
+		if (space.getY() >= height || space.getX() >= width) {
+			return false;
+		}
+
+		// fits in both? return true then
+		return true;
+	}
+
+	/**
+	 * Gets a list of spaces pending updates to update the button displays
+	 * 
+	 * @return a list of spaces needing an update
+	 */
+	
+	public Queue<Space> getUpdates() {
+		return update;
+	}
+
+	/**
+	 * Actions that can be performed on click. Used by buttons to pass along a
+	 * constant rather than a list of modifiers.
+	 */
+	
+	public enum ClickAction {
+		/** Normal click */
+		DEFAULT,
+		/** Placing a flag or mark */
+		FLAG,
+		/** Placing a mark of different colors */
+		MARK,
+		/** Safely clicking a mine */
+		CHEAT;
+	}
+}
+]]></snapshot>
+  </Command>
+  <Command __id="7" _type="EclipseCommand" commandID="org.eclipse.jdt.ui.edit.text.java.open.editor" timestamp="124336" />
+  <Command __id="8" _type="SelectTextCommand" caretOffset="1214" docEnd="1441" docOffset="1441" docStart="1425" end="1214" start="1198" timestamp="124373" />
+  <Command __id="9" _type="FileOpenCommand" docASTNodeCount="260" docActiveCodeLength="2374" docExpressionCount="151" docLength="3861" projectName="MineSweeper" timestamp="148762">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeper.java]]></filePath>
+  </Command>
+  <Command __id="10" _type="SelectTextCommand" caretOffset="1538" docEnd="1641" docOffset="1641" docStart="1625" end="1538" start="1522" timestamp="148798" />
+  <Command __id="11" _type="RunCommand" kind="Create" projectName="MineSweeper" timestamp="150416" type="Run" />
+  <Command __id="12" _type="RunCommand" exitValue="0" kind="Terminate" projectName="MineSweeper" timestamp="160211" type="Run" />
+  <Command __id="13" _type="RunCommand" kind="Create" projectName="MineSweeper" timestamp="162439" type="Run" />
+  <Command __id="14" _type="RunCommand" exitValue="0" kind="Terminate" projectName="MineSweeper" timestamp="166442" type="Run" />
+  <Command __id="15" _type="MoveCaretCommand" caretOffset="1540" docOffset="1643" timestamp="190460" />
+  <Command __id="16" _type="SelectTextCommand" caretOffset="1539" docEnd="1642" docOffset="1642" docStart="1641" end="1539" start="1538" timestamp="192003" />
+  <Command __id="17" _type="MoveCaretCommand" caretOffset="1540" docOffset="1643" timestamp="192443" />
+  <Command __id="18" _type="RunCommand" kind="Create" projectName="MineSweeper" timestamp="194117" type="Run" />
+  <Command __id="19" _type="RunCommand" exitValue="0" kind="Terminate" projectName="MineSweeper" timestamp="197676" type="Run" />
+  <Command __id="20" _type="SelectTextCommand" caretOffset="1547" docEnd="1650" docOffset="1650" docStart="1647" end="1547" start="1544" timestamp="199051" />
+  <Command __id="21" _type="FileOpenCommand" docASTNodeCount="1769" docActiveCodeLength="10590" docExpressionCount="1040" docLength="19616" projectName="MineSweeper" timestamp="200550">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeperBoard.java]]></filePath>
+  </Command>
+  <Command __id="22" _type="SelectTextCommand" caretOffset="1214" docEnd="1441" docOffset="1441" docStart="1425" end="1214" start="1198" timestamp="200597" />
+  <Command __id="23" _type="MoveCaretCommand" caretOffset="1882" docOffset="2109" timestamp="204379" />
+  <Command __id="24" _type="SelectTextCommand" caretOffset="1888" docEnd="2115" docOffset="2115" docStart="2106" end="1888" start="1879" timestamp="204572" />
+  <Command __id="25" _type="FileOpenCommand" docASTNodeCount="260" docActiveCodeLength="2374" docExpressionCount="151" docLength="3861" projectName="MineSweeper" timestamp="241343">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeper.java]]></filePath>
+  </Command>
+  <Command __id="26" _type="SelectTextCommand" caretOffset="1547" docEnd="1650" docOffset="1650" docStart="1647" end="1547" start="1544" timestamp="241379" />
+  <Command __id="27" _type="FileOpenCommand" docASTNodeCount="1769" docActiveCodeLength="10590" docExpressionCount="1040" docLength="19616" projectName="MineSweeper" timestamp="287810">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeperBoard.java]]></filePath>
+  </Command>
+  <Command __id="28" _type="SelectTextCommand" caretOffset="1888" docEnd="2115" docOffset="2115" docStart="2106" end="1888" start="1879" timestamp="287857" />
+  <Command __id="29" _type="MoveCaretCommand" caretOffset="1247" docOffset="1474" timestamp="303275" />
+  <Command __id="30" _type="SelectTextCommand" caretOffset="1251" docEnd="1478" docOffset="1478" docStart="1469" end="1251" start="1242" timestamp="303467" />
+  <Command __id="31" _type="SelectTextCommand" caretOffset="1511" docEnd="1738" docOffset="1738" docStart="1730" end="1511" start="1503" timestamp="312227" />
+  <Command __id="32" _type="SelectTextCommand" caretOffset="1503" docEnd="1739" docOffset="1730" docStart="1730" end="1512" start="1503" timestamp="318635" />
+  <Command __id="33" _type="FileOpenCommand" docASTNodeCount="260" docActiveCodeLength="2374" docExpressionCount="151" docLength="3861" projectName="MineSweeper" timestamp="320789">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeper.java]]></filePath>
+  </Command>
+  <Command __id="34" _type="SelectTextCommand" caretOffset="1547" docEnd="1650" docOffset="1650" docStart="1647" end="1547" start="1544" timestamp="320826" />
+  <Command __id="35" _type="SelectTextCommand" caretOffset="1547" docEnd="1650" docOffset="1650" docStart="1648" end="1547" start="1545" timestamp="326307" />
+  <DocumentChange __id="36" _type="Replace" docASTNodeCount="260" docActiveCodeLength="2373" docExpressionCount="151" docLength="3860" endLine="57" insertionLength="1" int_docASTNodeCount="259" int_docActiveCodeLength="2372" int_docExpressionCount="150" int_docLength="3859" length="2" offset="1648" startLine="57" timestamp="327431">
+    <deletedText><![CDATA[10]]></deletedText>
+    <insertedText><![CDATA[9]]></insertedText>
+  </DocumentChange>
+  <Command __id="37" _type="InsertStringCommand" timestamp="327443">
+    <data><![CDATA[9]]></data>
+  </Command>
+  <Command __id="38" _type="RunCommand" kind="Create" projectName="MineSweeper" timestamp="334380" type="Run" />
+  <Command __id="39" _type="RunCommand" exitValue="0" kind="Terminate" projectName="MineSweeper" timestamp="340893" type="Run" />
+  <DocumentChange __id="40" _type="Replace" docASTNodeCount="260" docActiveCodeLength="2374" docExpressionCount="151" docLength="3861" endLine="57" insertionLength="2" int_docASTNodeCount="259" int_docActiveCodeLength="2372" int_docExpressionCount="150" int_docLength="3859" length="1" offset="1648" startLine="57" timestamp="343271">
+    <deletedText><![CDATA[9]]></deletedText>
+    <insertedText><![CDATA[10]]></insertedText>
+  </DocumentChange>
+  <Command __id="41" _type="UndoCommand" timestamp="343279" />
+  <Command __id="42" _type="EclipseCommand" commandID="org.eclipse.ui.file.save" timestamp="346055" />
+  <Command __id="43" _type="RunCommand" kind="Create" projectName="MineSweeper" timestamp="348434" type="Run" />
+  <Command __id="44" _type="RunCommand" exitValue="0" kind="Terminate" projectName="MineSweeper" timestamp="350676" type="Run" />
+  <Command __id="45" _type="RunCommand" kind="Create" projectName="MineSweeper" timestamp="353349" type="Run" />
+  <Command __id="46" _type="RunCommand" exitValue="0" kind="Terminate" projectName="MineSweeper" timestamp="355067" type="Run" />
+  <Command __id="47" _type="SelectTextCommand" caretOffset="1657" docEnd="1761" docOffset="1760" docStart="1760" end="1658" start="1657" timestamp="380699" />
+  <Command __id="48" _type="MoveCaretCommand" caretOffset="1767" docOffset="1870" timestamp="382602" />
+  <Command __id="49" _type="RunCommand" kind="Create" projectName="MineSweeper" timestamp="387666" type="Run" />
+  <Command __id="50" _type="RunCommand" exitValue="0" kind="Terminate" projectName="MineSweeper" timestamp="410052" type="Run" />
+  <Command __id="51" _type="FileOpenCommand" docASTNodeCount="43" docActiveCodeLength="235" docExpressionCount="27" docLength="235" projectName="MineSweeper" timestamp="443775">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineGenerator.java]]></filePath>
+    <snapshot><![CDATA[package logic;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
+import util.Space;
+
+public class MineGenerator {
+	public int mineCount;
+
+	public MineGenerator() {
+	}
+}]]></snapshot>
+  </Command>
+  <Command __id="52" _type="MoveCaretCommand" caretOffset="0" docOffset="0" timestamp="443837" />
+  <Command __id="53" _type="MoveCaretCommand" caretOffset="66" docOffset="164" timestamp="451956" />
+  <Command __id="54" _type="SelectTextCommand" caretOffset="75" docEnd="173" docOffset="173" docStart="160" end="75" start="62" timestamp="452139" />
+  <Command __id="55" _type="FileOpenCommand" docASTNodeCount="260" docActiveCodeLength="2374" docExpressionCount="151" docLength="3861" projectName="MineSweeper" timestamp="454783">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeper.java]]></filePath>
+  </Command>
+  <Command __id="56" _type="MoveCaretCommand" caretOffset="1767" docOffset="1870" timestamp="454882" />
+  <Command __id="57" _type="FileOpenCommand" docASTNodeCount="1769" docActiveCodeLength="10590" docExpressionCount="1040" docLength="19616" projectName="MineSweeper" timestamp="456354">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeperBoard.java]]></filePath>
+  </Command>
+  <Command __id="58" _type="SelectTextCommand" caretOffset="1503" docEnd="1739" docOffset="1730" docStart="1730" end="1512" start="1503" timestamp="456394" />
+  <Command __id="59" _type="SelectTextCommand" caretOffset="2141" docEnd="2368" docOffset="2368" docStart="2352" end="2141" start="2125" timestamp="479115" />
+  <Command __id="60" _type="MoveCaretCommand" caretOffset="2151" docOffset="2378" timestamp="480403" />
+  <Command __id="61" _type="MoveCaretCommand" caretOffset="6575" docOffset="6802" timestamp="548411" />
+  <Command __id="62" _type="SelectTextCommand" caretOffset="6582" docEnd="6809" docOffset="6809" docStart="6800" end="6582" start="6573" timestamp="548595" />
+  <Command __id="63" _type="MoveCaretCommand" caretOffset="6445" docOffset="6672" timestamp="551835" />
+  <Command __id="64" _type="RunCommand" kind="Create" projectName="MineSweeper" timestamp="554062" type="Run" />
+  <Command __id="65" _type="MoveCaretCommand" caretOffset="6288" docOffset="6515" timestamp="576443" />
+  <Command __id="66" _type="MoveCaretCommand" caretOffset="2538" docOffset="2765" timestamp="584955" />
+  <Command __id="67" _type="MoveCaretCommand" caretOffset="2606" docOffset="2833" timestamp="586643" />
+  <Command __id="68" _type="MoveCaretCommand" caretOffset="2659" docOffset="2886" timestamp="589315" />
+  <Command __id="69" _type="MoveCaretCommand" caretOffset="3425" docOffset="3652" timestamp="626955" />
+  <Command __id="70" _type="RunCommand" exitValue="0" kind="Terminate" projectName="MineSweeper" timestamp="758047" type="Run" />
+  <Command __id="71" _type="MoveCaretCommand" caretOffset="3488" docOffset="3715" timestamp="758732" />
+  <Command __id="72" _type="SelectTextCommand" caretOffset="3491" docEnd="3718" docOffset="3718" docStart="3714" end="3491" start="3487" timestamp="758891" />
+  <Command __id="73" _type="FileOpenCommand" docASTNodeCount="96" docActiveCodeLength="619" docExpressionCount="53" docLength="1308" projectName="MineSweeper" timestamp="763369">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\util\Space.java]]></filePath>
+    <snapshot><![CDATA[package util;
+
+/**
+ * Primarily a wrapper for holding two integers, but also useful as it passes
+ * some methods from MineSweeperBoard
+ * 
+ * @author  KnightMiner
+ */
+
+public class Space {
+
+    private int x, y;
+
+    /**
+     * Creates a new space with the specified row and column
+     * @param x  X value of the space
+     * @param y  Y value of the space
+     */
+    
+    public Space(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    /**
+     * Gets the x value
+     * @return  The x value
+     */
+    
+    public int getX() {
+        return x;
+    }
+
+    /**
+     * Gets the y value
+     * @return  The y value
+     */
+    
+    public int getY() {
+        return y;
+    }
+
+    /**
+     * Determines if two spaces are equal
+     * @param other  Space to compare
+     * @return  true if the two spaces are equal
+     */
+    
+    public boolean equals(Space other) {
+        if(other == null) {
+            return false;
+        }
+
+        return this.x == other.x
+                && this.y == other.y;
+    }
+
+    /**
+     * Creates a string of the current space
+     * @return  a string of the current space
+     */
+    
+    @Override
+    public String toString() {
+        return String.format("(%d,%d)", x, y);
+    }
+}
+]]></snapshot>
+  </Command>
+  <Command __id="74" _type="EclipseCommand" commandID="org.eclipse.jdt.ui.edit.text.java.open.editor" timestamp="763394" />
+  <Command __id="75" _type="SelectTextCommand" caretOffset="703" docEnd="703" docOffset="703" docStart="699" end="703" start="699" timestamp="763422" />
+  <Command __id="76" _type="FileOpenCommand" docASTNodeCount="1769" docActiveCodeLength="10590" docExpressionCount="1040" docLength="19616" projectName="MineSweeper" timestamp="770865">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeperBoard.java]]></filePath>
+  </Command>
+  <Command __id="77" _type="SelectTextCommand" caretOffset="3491" docEnd="3718" docOffset="3718" docStart="3714" end="3491" start="3487" timestamp="770905" />
+  <Command __id="78" _type="MoveCaretCommand" caretOffset="3490" docOffset="3717" timestamp="772428" />
+  <Command __id="79" _type="MoveCaretCommand" caretOffset="3491" docOffset="3718" timestamp="773707" />
+  <DocumentChange __id="80" _type="Delete" docASTNodeCount="1769" docActiveCodeLength="10589" docExpressionCount="1040" docLength="19615" endLine="139" length="1" offset="3717" startLine="139" timestamp="775051">
+    <text><![CDATA[Y]]></text>
+  </DocumentChange>
+  <Command __id="81" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="775056" />
+  <DocumentChange __id="82" _type="Insert" docASTNodeCount="1769" docActiveCodeLength="10590" docExpressionCount="1040" docLength="19616" length="1" offset="3717" timestamp="775498">
+    <text><![CDATA[X]]></text>
+  </DocumentChange>
+  <Command __id="83" _type="InsertStringCommand" timestamp="775502">
+    <data><![CDATA[X]]></data>
+  </Command>
+  <Command __id="84" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_NEXT" repeat="13" timestamp="775907" timestamp2="777300" />
+  <Command __id="97" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.SELECT_COLUMN_NEXT" timestamp="777764" />
+  <DocumentChange __id="98" _type="Replace" docASTNodeCount="1769" docActiveCodeLength="10590" docExpressionCount="1040" docLength="19616" endLine="139" insertionLength="1" int_docASTNodeCount="1769" int_docActiveCodeLength="10589" int_docExpressionCount="1040" int_docLength="19615" length="1" offset="3731" startLine="139" timestamp="778683">
+    <deletedText><![CDATA[X]]></deletedText>
+    <insertedText><![CDATA[Y]]></insertedText>
+  </DocumentChange>
+  <Command __id="99" _type="InsertStringCommand" timestamp="778689">
+    <data><![CDATA[Y]]></data>
+  </Command>
+  <Command __id="100" _type="EclipseCommand" commandID="org.eclipse.ui.file.save" timestamp="779603" />
+  <Command __id="101" _type="RunCommand" kind="Create" projectName="MineSweeper" timestamp="781204" type="Run" />
+  <Command __id="102" _type="MoveCaretCommand" caretOffset="3171" docOffset="3398" timestamp="876676" />
+  <Command __id="103" _type="SelectTextCommand" caretOffset="3174" docEnd="3401" docOffset="3401" docStart="3395" end="3174" start="3168" timestamp="876891" />
+  <Command __id="104" _type="EclipseCommand" commandID="org.eclipse.jdt.ui.edit.text.java.search.references.in.workspace" timestamp="884731" />
+  <Command __id="105" _type="MoveCaretCommand" caretOffset="3414" docOffset="3641" timestamp="890075" />
+  <Command __id="106" _type="SelectTextCommand" caretOffset="3490" docEnd="3718" docOffset="3717" docStart="3717" end="3491" start="3490" timestamp="929579" />
+  <DocumentChange __id="107" _type="Replace" docASTNodeCount="1769" docActiveCodeLength="10590" docExpressionCount="1040" docLength="19616" endLine="139" insertionLength="1" int_docASTNodeCount="1769" int_docActiveCodeLength="10589" int_docExpressionCount="1040" int_docLength="19615" length="1" offset="3717" startLine="139" timestamp="931173">
+    <deletedText><![CDATA[X]]></deletedText>
+    <insertedText><![CDATA[Y]]></insertedText>
+  </DocumentChange>
+  <Command __id="108" _type="InsertStringCommand" timestamp="931179">
+    <data><![CDATA[Y]]></data>
+  </Command>
+  <Command __id="109" _type="SelectTextCommand" caretOffset="3505" docEnd="3732" docOffset="3732" docStart="3731" end="3505" start="3504" timestamp="932508" />
+  <DocumentChange __id="110" _type="Replace" docASTNodeCount="1769" docActiveCodeLength="10590" docExpressionCount="1040" docLength="19616" endLine="139" insertionLength="1" int_docASTNodeCount="1769" int_docActiveCodeLength="10589" int_docExpressionCount="1040" int_docLength="19615" length="1" offset="3731" startLine="139" timestamp="933072">
+    <deletedText><![CDATA[Y]]></deletedText>
+    <insertedText><![CDATA[X]]></insertedText>
+  </DocumentChange>
+  <Command __id="111" _type="InsertStringCommand" timestamp="933077">
+    <data><![CDATA[X]]></data>
+  </Command>
+  <Command __id="112" _type="EclipseCommand" commandID="org.eclipse.ui.file.save" timestamp="933744" />
+  <Command __id="113" _type="RunCommand" kind="Create" projectName="MineSweeper" timestamp="936674" type="Run" />
+  <Command __id="114" _type="MoveCaretCommand" caretOffset="3425" docOffset="3652" timestamp="999699" />
+  <Command __id="115" _type="MoveCaretCommand" caretOffset="3518" docOffset="3745" timestamp="1024323" />
+  <DocumentChange __id="116" _type="Insert" docASTNodeCount="1769" docActiveCodeLength="10593" docExpressionCount="1040" docLength="19619" length="3" offset="3745" timestamp="1024647">
+    <text><![CDATA[			]]></text>
+  </DocumentChange>
+  <Command __id="117" _type="InsertStringCommand" timestamp="1024648">
+    <data><![CDATA[	]]></data>
+  </Command>
+  <DocumentChange __id="118" _type="Insert" docASTNodeCount="1773" docActiveCodeLength="10611" docExpressionCount="1043" docLength="19637" length="18" offset="3748" repeat="18" timestamp="1028701" timestamp2="1033517">
+    <text><![CDATA[remainingSpaces.re]]></text>
+  </DocumentChange>
+  <Command __id="119" _type="InsertStringCommand" repeat="16" timestamp="1028703" timestamp2="1032739">
+    <data><![CDATA[remainingSpaces.]]></data>
+  </Command>
+  <Command __id="150" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="true" start_end="START" timestamp="1032776" />
+  <Command __id="153" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="1047691" />
+  <DocumentChange __id="154" _type="Insert" docASTNodeCount="1773" docActiveCodeLength="10611" docExpressionCount="1043" docLength="19637" length="11" offset="3766" timestamp="1047712">
+    <text><![CDATA[move(index)]]></text>
+  </DocumentChange>
+  <DocumentChange __id="155" _type="Replace" docASTNodeCount="1774" docActiveCodeLength="10618" docExpressionCount="1044" docLength="19644" endLine="140" insertionLength="1" int_docASTNodeCount="1773" int_docActiveCodeLength="10617" int_docExpressionCount="1043" int_docLength="19643" length="5" offset="3771" startLine="140" timestamp="1048986">
+    <deletedText><![CDATA[index]]></deletedText>
+    <insertedText><![CDATA[S]]></insertedText>
+  </DocumentChange>
+  <Command __id="156" _type="InsertStringCommand" timestamp="1048991">
+    <data><![CDATA[S]]></data>
+  </Command>
+  <DocumentChange __id="157" _type="Delete" docASTNodeCount="1773" docActiveCodeLength="10617" docExpressionCount="1043" docLength="19643" endLine="140" length="1" offset="3771" startLine="140" timestamp="1049761">
+    <text><![CDATA[S]]></text>
+  </DocumentChange>
+  <Command __id="158" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="1049763" />
+  <DocumentChange __id="159" _type="Insert" docASTNodeCount="1774" docActiveCodeLength="10621" docExpressionCount="1044" docLength="19647" length="4" offset="3771" repeat="4" timestamp="1049973" timestamp2="1050714">
+    <text><![CDATA[spea]]></text>
+  </DocumentChange>
+  <Command __id="160" _type="InsertStringCommand" repeat="4" timestamp="1049975" timestamp2="1050716">
+    <data><![CDATA[spea]]></data>
+  </Command>
+  <DocumentChange __id="167" _type="Delete" docASTNodeCount="1774" docActiveCodeLength="10619" docExpressionCount="1044" docLength="19645" endLine="140" length="2" offset="3773" repeat="2" startLine="140" timestamp="1050991" timestamp2="1051121">
+    <text><![CDATA[ea]]></text>
+  </DocumentChange>
+  <Command __id="168" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="2" timestamp="1050993" timestamp2="1051123" />
+  <DocumentChange __id="171" _type="Insert" docASTNodeCount="1774" docActiveCodeLength="10622" docExpressionCount="1044" docLength="19648" length="3" offset="3773" repeat="3" timestamp="1051160" timestamp2="1051448">
+    <text><![CDATA[ace]]></text>
+  </DocumentChange>
+  <Command __id="172" _type="InsertStringCommand" repeat="3" timestamp="1051161" timestamp2="1051449">
+    <data><![CDATA[ace]]></data>
+  </Command>
+  <Command __id="177" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_NEXT" timestamp="1052388" />
+  <DocumentChange __id="178" _type="Insert" docASTNodeCount="1774" docActiveCodeLength="10623" docExpressionCount="1044" docLength="19649" length="1" offset="3777" timestamp="1053339">
+    <text><![CDATA[;]]></text>
+  </DocumentChange>
+  <Command __id="179" _type="InsertStringCommand" timestamp="1053342">
+    <data><![CDATA[;]]></data>
+  </Command>
+  <Command __id="180" _type="EclipseCommand" commandID="org.eclipse.ui.file.save" timestamp="1057314" />
+  <Command __id="181" _type="RunCommand" kind="Create" projectName="MineSweeper" timestamp="1058389" type="Run" />
+  <Command __id="182" _type="MoveCaretCommand" caretOffset="3258" docOffset="3485" timestamp="1156851" />
+  <Command __id="183" _type="ShellBoundsCommand" bounds="[-8, -8, 1936, 1056]" timestamp="1159288" />
+</Events>

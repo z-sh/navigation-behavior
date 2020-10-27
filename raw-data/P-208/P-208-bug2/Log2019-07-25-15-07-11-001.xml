@@ -1,0 +1,3116 @@
+<Events startTimestamp="1564081631001" logVersion="0.11.0.201504031625" osName="Windows 10" osVersion="10.0" lineSeparator="\r\n" numMonitors="1" monitorBounds="[0, 0, 1920, 1080]">
+  <Command __id="0" _type="ShellBoundsCommand" bounds="[-8, -8, 1936, 1056]" timestamp="6" />
+  <Command __id="1" _type="FileOpenCommand" docASTNodeCount="260" docActiveCodeLength="2374" docExpressionCount="151" docLength="3861" projectName="MineSweeper" timestamp="25">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeper.java]]></filePath>
+    <snapshot><![CDATA[/*
+BUG REPORT #2
+MineSweeper has 3 difficulty levels. The size of the board and the number of the mines are different for each level. 
+Sometimes, we end up having a smaller number of mines in the game. 
+For an easy game, we want to have 10 mines, but sometimes it is 9, 8, or even less.
+*/
+
+package logic;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+
+import presentation.CustomMenu;
+import presentation.MineSweeperGui;
+
+/**
+ * Main launcher class for MineSweeper, containing all the menus and general
+ * prompts
+ *
+ * @author  KnightMiner
+ */
+
+public class MineSweeper {
+    // currently running instance of the game
+    private static MineSweeperGui gui;
+
+    /**
+     * Primary way to boot the game
+     * @param args  Default args (unused)
+     */
+    
+    public static void main(String[] args) {
+        // High DPI stuff
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        // load the help panels
+        // this has a side effect of loading the icons for the pieces
+        Help.load();
+
+        // start the game on easy
+        newGame(Difficulty.EASY);
+    }
+
+    /**
+     * Creates a new MineSweeper game with one of three default sizes or custom
+     * @param difficulty Game difficulty
+     */
+    
+    public static void newGame(Difficulty difficulty) {
+        // difficulty switch
+        MineSweeperBoard board = null;
+        switch(difficulty) {
+            case EASY:
+                board = new MineSweeperBoard(9, 9, 10, 0);
+                break;
+            case NORMAL:
+                board = new MineSweeperBoard(16, 16, 40, 1);
+                break;
+            case HARD:
+                board = new MineSweeperBoard(30, 16, 99, 3);
+                break;
+            case CUSTOM:
+                board = customGame();
+                break;
+        }
+
+        startGame(board);
+    }
+
+    /**
+     * Creates a new game with the custom size
+     * @return  A board of the custom size
+     */
+    
+    public static MineSweeperBoard customGame() {
+        CustomMenu menu = new CustomMenu();
+
+        int result = JOptionPane.showConfirmDialog(null, menu,
+                "Custom", JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.PLAIN_MESSAGE);
+
+        // if they pressed OK
+        if(result == JOptionPane.OK_OPTION) {
+            return menu.createBoard();
+        }
+        else {
+            return null;
+        }
+    }
+
+    /**
+     * Starts a new game with the specified board
+     * @param board  Game board to start
+     */
+    
+    public static void startGame(MineSweeperBoard board) {
+        // must be a valid board
+        if(board != null) {
+            // remove the current gui and define the new one
+            if(gui != null) {
+                gui.dispose();
+            }
+
+            // create a new instance
+            gui = new MineSweeperGui(board);
+        }
+    }
+
+    /**
+     * List of buttons for the GUI
+     */
+    
+    public enum Difficulty {
+        /** Easy game */
+        EASY("Easy"),
+        /** Normal game */
+        NORMAL("Normal"),
+        /** Hard game */
+        HARD("Expert"),
+        /** Custom size and mines from the GUI */
+        CUSTOM("Custom");
+
+        // data
+        private String label;
+
+        /**
+         * Default constructor
+         * @param  Button label
+         */
+        
+        Difficulty(String label) {
+            this.label = label;
+        }
+
+        /**
+         * Gets the label for the difficulty
+         * @return  Difficulty name
+         */
+        
+        public String getLabel() {
+            return label;
+        }
+    }
+}
+]]></snapshot>
+  </Command>
+  <Command __id="2" _type="SelectTextCommand" caretOffset="447" docEnd="831" docOffset="831" docStart="827" end="447" start="443" timestamp="375" />
+  <Command __id="3" _type="MoveCaretCommand" caretOffset="491" docOffset="875" timestamp="28106" />
+  <Command __id="4" _type="MoveCaretCommand" caretOffset="855" docOffset="958" timestamp="38922" />
+  <Command __id="5" _type="MoveCaretCommand" caretOffset="17" docOffset="17" timestamp="41793" />
+  <Command __id="6" _type="SelectTextCommand" caretOffset="64" docEnd="64" docOffset="64" docStart="33" end="64" start="33" timestamp="44498" />
+  <Command __id="7" _type="MoveCaretCommand" caretOffset="77" docOffset="77" timestamp="44938" />
+  <Command __id="8" _type="MoveCaretCommand" caretOffset="98" docOffset="98" timestamp="46570" />
+  <Command __id="9" _type="SelectTextCommand" caretOffset="199" docEnd="199" docOffset="199" docStart="148" end="199" start="148" timestamp="51970" />
+  <Command __id="10" _type="SelectTextCommand" caretOffset="256" docEnd="256" docOffset="256" docStart="225" end="256" start="225" timestamp="53745" />
+  <Command __id="11" _type="MoveCaretCommand" caretOffset="262" docOffset="262" timestamp="54027" />
+  <Command __id="12" _type="RunCommand" kind="Create" projectName="MineSweeper" timestamp="55533" type="Run" />
+  <Command __id="13" _type="RunCommand" exitValue="0" kind="Terminate" projectName="MineSweeper" timestamp="106724" type="Run" />
+  <Command __id="14" _type="MoveCaretCommand" caretOffset="604" docOffset="707" timestamp="107645" />
+  <Command __id="15" _type="FileOpenCommand" docASTNodeCount="43" docActiveCodeLength="235" docExpressionCount="27" docLength="235" projectName="MineSweeper" timestamp="112268">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineGenerator.java]]></filePath>
+    <snapshot><![CDATA[package logic;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
+import util.Space;
+
+public class MineGenerator {
+	public int mineCount;
+
+	public MineGenerator() {
+	}
+}]]></snapshot>
+  </Command>
+  <Command __id="16" _type="MoveCaretCommand" caretOffset="0" docOffset="0" timestamp="112420" />
+  <Command __id="17" _type="MoveCaretCommand" caretOffset="122" docOffset="220" timestamp="114930" />
+  <Command __id="18" _type="MoveCaretCommand" caretOffset="97" docOffset="195" timestamp="116050" />
+  <Command __id="19" _type="FileOpenCommand" docASTNodeCount="260" docActiveCodeLength="2374" docExpressionCount="151" docLength="3861" projectName="MineSweeper" timestamp="125672">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeper.java]]></filePath>
+  </Command>
+  <Command __id="20" _type="MoveCaretCommand" caretOffset="604" docOffset="707" timestamp="125727" />
+  <Command __id="21" _type="FileOpenCommand" docASTNodeCount="1769" docActiveCodeLength="10590" docExpressionCount="1040" docLength="19616" projectName="MineSweeper" timestamp="137599">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeperBoard.java]]></filePath>
+    <snapshot><![CDATA[package logic;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.*;
+
+import util.Piece;
+import util.Space;
+
+/**
+ * Contains all the visible pieces in the MineSweeper game
+ * 
+ * @author KnightMiner
+ */
+
+public class MineSweeperBoard implements Serializable {
+
+	/**
+	 * Random number generator used to create game seeds Minefields use a sepparate
+	 * object created using a specific seed
+	 */
+	
+	public static final Random RANDOM = new Random();
+
+	// resizable
+	private transient Queue<Space> update;
+
+	// board dimensions
+	private int width, height;
+	private MineGenerator data = new MineGenerator();
+
+	private int flagCount;
+
+	// board data
+	private Piece[][] pieces;
+	private boolean[][] mines;
+	private boolean gameOver;
+	private boolean victory;
+
+	// determines if the first click happened yet
+	private boolean firstClick;
+
+	// determines if we have used our one cheat
+	private int cheatsAllowed;
+	private int cheats = 0;
+
+	// board seed
+	private long seed;
+
+	/**
+	 * Creates a new minesweaper board with the specified dimensions
+	 * 
+	 * @param width     Width of the board
+	 * @param height    Height of the board
+	 * @param mineCount Total mines
+	 * @param cheats    Cheats allowed
+	 */
+	
+	public MineSweeperBoard(int width, int height, int mineCount, int cheats) {
+		this.width = width;
+		this.height = height;
+
+		this.pieces = new Piece[height][width];
+		this.mines = new boolean[height][width];
+
+		// sanity check in case the GUI fails to correct the number
+		this.data.mineCount = Math.min(mineCount, width * height - 9);
+		this.cheatsAllowed = this.cheats = cheats;
+
+		update = new LinkedList<>();
+	}
+
+	/**
+	 * Creates a new minesweaper board with the specified dimensions
+	 * 
+	 * @param width     Width of the board
+	 * @param height    Height of the board
+	 * @param mineCount Total mines
+	 */
+	
+	public MineSweeperBoard(int width, int height, int mineCount) {
+		this(width, height, mineCount, 1);
+	}
+
+	/* Main logic */
+
+	/**
+	 * Populates the board with mines with a random seed
+	 * 
+	 * @param space Space clicked
+	 */
+	
+	public void generateMines(Space space) {
+		generateMines(RANDOM.nextLong(), space);
+	}
+
+	/**
+	 * Populates the board with mines
+	 * 
+	 * @param seed    Seed to generate mines. Two fields with the same size and seed
+	 *                will have the same mines locations
+	 * @param clicked space clicked when generating the mines
+	 */
+	
+	protected void generateMines(long seed, Space clicked) {
+		// store the current seed for saving games
+		this.seed = seed;
+
+		// no mines? no work
+		if (data.mineCount == 0) {
+			return;
+		}
+
+		// list of spaces we can still place a mine at
+		List<Space> remainingSpaces = new ArrayList<>(Arrays.asList(getAllSpaces()));
+
+		// if we clicked somewhere, remove all nearby spaces
+		if (clicked != null) {
+			// remove all unclickable spaces
+			final int x = clicked.getX(), y = clicked.getY();
+			remainingSpaces.removeIf((space) -> {
+				return (y - 1) <= space.getY() && space.getY() <= (y + 1) && (x - 1) <= space.getX()
+						&& space.getX() <= (x + 1);
+			});
+		}
+
+		// random object seeded so results can be controlled
+		Random random = new Random(seed);
+
+		// place mines
+		this.mines = new boolean[height][width];
+		for (int i = 0; i < data.mineCount; i++) {
+			// just get the linear location of the next mine and place it
+			int mine = random.nextInt(remainingSpaces.size());
+			Space space = remainingSpaces.get(mine);
+			mines[space.getY()][space.getX()] = true;
+
+		}
+	}
+
+	/**
+	 * Creates a new game with the same dimensions
+	 */
+	
+	public void newGame() {
+		// first, regenerate the mines
+		this.mines = new boolean[height][width];
+
+		// next, clear game specific data
+		resetData();
+
+		// then mark all spaces for a rendering update
+		for (Space space : getAllSpaces()) {
+			markUpdate(space);
+		}
+	}
+
+	/**
+	 * Restarts the current game
+	 */
+	
+	public void restart() {
+		// if we have not clicked yet, do nothing
+		// we don't have a seed to restart from
+		if (!firstClick) {
+			return;
+		}
+
+		// reset any relevant data
+		resetData();
+
+		// but assume we already clicked so the mines don't change
+		firstClick = true;
+
+		// and mark all spaces for an update
+		for (Space space : getAllSpaces()) {
+			markUpdate(space);
+		}
+	}
+
+	/**
+	 * Saves the board to a binary file
+	 * 
+	 * @param filename Location of the game
+	 */
+	
+	public void saveGame(String filename) {
+		// TODO: better saving logic
+		try {
+			FileOutputStream file = new FileOutputStream(filename + ".bin");
+			ObjectOutputStream stream = new ObjectOutputStream(file);
+			stream.writeObject(this);
+			stream.flush();
+			stream.close();
+		} catch (IOException e) {
+		}
+	}
+
+	/**
+	 * Load the board from a binary file
+	 * 
+	 * @param filename Location of the game
+	 * @return The board, or null if invalid
+	 */
+	
+	public static MineSweeperBoard loadGame(String filename) {
+		try {
+			FileInputStream file = new FileInputStream(filename + ".bin");
+			ObjectInputStream stream = new ObjectInputStream(file);
+			MineSweeperBoard board = (MineSweeperBoard) stream.readObject();
+			stream.close();
+			return board;
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	/**
+	 * Resets generic data
+	 */
+	
+	private void resetData() {
+		this.pieces = new Piece[height][width];
+		gameOver = false;
+		firstClick = false;
+		cheats = cheatsAllowed;
+		flagCount = 0;
+		victory = false;
+	}
+
+	/**
+	 * Ends the game with a loss
+	 * 
+	 * @param clicked Location clicked causing the loss
+	 * @return Mine clicked
+	 */
+	
+	public void loseGame(Space clicked) {
+		// set the game to over
+		gameOver = true;
+
+		showMines(clicked, false);
+	}
+
+	/**
+	 * Checks if the game has been won, and sets the appropiate statuses
+	 */
+	
+	public void checkVictory() {
+		// check all spaces
+		for (Space space : getAllSpaces()) {
+
+			// only spaces without mines need to be checked, we don't care about
+			// flags or marks on mine spaces
+			if (!isMine(space)) {
+				// if the piece is unclicked or not a number, we failed
+				Piece piece = getPiece(space);
+				if (piece == null || !piece.isNumber()) {
+					return;
+				}
+			}
+		}
+
+		// made it through that? we won
+		victory = true;
+		gameOver = true;
+
+		showMines(null, true);
+	}
+
+	/**
+	 * Shows all the mines on the board
+	 * 
+	 * @param space   Space that was clicked
+	 * @param victory Determines if the game was won or lost
+	 */
+	
+	private void showMines(Space clicked, boolean victory) {
+		// set the mine color based on victory
+		Piece mine = victory ? Piece.MINE_GREEN : Piece.MINE;
+
+		// set the clicked space to red
+		if (clicked != null && isMine(clicked)) {
+			setPiece(clicked, Piece.MINE_RED);
+		}
+
+		// show mines on the board
+		for (Space space : getAllSpaces()) {
+			if (space.equals(clicked)) {
+				continue;
+			}
+			Piece piece = getPiece(space);
+			if (isMine(space)) {
+				// but only on empty or marks
+				if (piece == null || piece.isMark()) {
+					setPiece(space, mine);
+				}
+			} else {
+				// if the space has a flag but no mine, mark it as such
+				if (piece == Piece.FLAG) {
+					setPiece(space, Piece.FLAG_NOT);
+				}
+			}
+		}
+	}
+
+	/* Clicking */
+
+	/**
+	 * Handle standard game clicks
+	 * 
+	 * @param space  Space clicked
+	 * @param action Type of click
+	 */
+	
+	public void handleClick(Space space, ClickAction action) {
+		// stop playing when the game is over
+		if (gameOver) {
+			return;
+		}
+		// simply passes it along to the dedicated function
+		switch (action) {
+		case DEFAULT:
+			handleDefaultClick(space);
+			break;
+		case FLAG:
+			handleFlagClick(space);
+			break;
+		case MARK:
+			handleMarkClick(space);
+			break;
+		case CHEAT:
+			handleCheatClick(space);
+			break;
+		}
+	}
+
+	/**
+	 * Space clicking core, does the actual clicking action
+	 * 
+	 * @param space Space clicked
+	 */
+	
+	private void clickSpace(Space space) {
+		// if the space is not replaceable, stop now
+		// called here so we don't click flags as they are mines
+		if (!isReplaceable(space)) {
+			return;
+		}
+
+		// if the space is a mine, we lose
+		if (isMine(space)) {
+			loseGame(space);
+		}
+
+		// otherwise do a normal click
+		else {
+			// sets the piece to the number of surrounding mines
+			Piece newPiece = getNumber(space);
+			setPiece(space, newPiece);
+
+			// if the piece is 0, update surrounding pieces as none of them are mines
+			// this won't eternally recur since this space is no longer clickable
+			if (newPiece == Piece.N0) {
+				for (Space neighbor : getNeighbors(space)) {
+					clickSpace(neighbor);
+				}
+			}
+		}
+	}
+
+	/**
+	 * Default clicks, clicks a space and displays a number or loses the game
+	 * 
+	 * @param space Space clicked
+	 */
+	
+	private void handleDefaultClick(Space space) {
+		// first click should generate the minefield
+		if (!firstClick) {
+			firstClick(space);
+		}
+
+		// if the space cannot be replaced then stop here
+		// as we run this function on every click
+		if (isNumber(space)) {
+			// if the number of flags around this space is the same as the number
+			Space[] neighbors = getNeighbors(space);
+
+			// count the flags around the piece
+			int flags = 0;
+			for (Space neighbor : neighbors) {
+				if (getPiece(neighbor) == Piece.FLAG) {
+					flags++;
+				}
+			}
+
+			// same number of flags as the piece number?
+			if (flags == getPiece(space).getNumber()) {
+				// click all the spaces. This is a risky move if a flag is wrong
+				for (Space neighbor : neighbors) {
+					clickSpace(neighbor);
+				}
+			}
+		}
+		// otherwise if not a number, just click the space
+		else {
+			clickSpace(space);
+		}
+
+		// check just once at the end of clicking
+		checkVictory();
+	}
+
+	/**
+	 * Handle the first click in the game. This click will generate the minefield as
+	 * it cannot be on a mine
+	 * 
+	 * @param space Space clicked
+	 */
+	
+	private void firstClick(Space space) {
+		generateMines(space);
+		firstClick = true;
+	}
+
+	/**
+	 * Flag clicks, essentially click once to add
+	 * 
+	 * @param space Space clicked
+	 */
+	
+	private void handleFlagClick(Space space) {
+		// if already a flag, set a mark
+		Piece piece = getPiece(space);
+		if (piece == Piece.FLAG) {
+			setPiece(space, Piece.MARK_RED);
+			flagCount--;
+		}
+		// remove marks
+		else if (piece != null && piece.isMark()) {
+			setPiece(space, null);
+		}
+		// otherwise if we can add one
+		else if (isReplaceable(space)) {
+			if(flagCount < data.mineCount) {
+				setPiece(space, Piece.FLAG);
+				flagCount++;
+			}
+		}
+	}
+
+	/**
+	 * Mark clicks, changes the color of a mark
+	 * 
+	 * @param space Space clicked
+	 */
+	
+	private void handleMarkClick(Space space) {
+		// tobble the mark
+		Piece piece = getPiece(space);
+		if (piece == Piece.MARK_RED) {
+			setPiece(space, Piece.MARK_GREEN);
+		}
+		// remove marks
+		else if (piece == Piece.MARK_GREEN) {
+			setPiece(space, Piece.MARK_BLUE);
+		}
+		// otherwise if we can add one
+		else if (piece == Piece.MARK_BLUE) {
+			setPiece(space, Piece.MARK_RED);
+		}
+
+		// if its a flag, remove it
+		else if (piece == Piece.FLAG) {
+			setPiece(space, Piece.MARK_RED);
+			flagCount--;
+		}
+
+		// essentially all that is left here is null, but still
+		else if (isReplaceable(space)) {
+			setPiece(space, Piece.MARK_RED);
+		}
+	}
+
+	/**
+	 * Cheat clicks, click a space and it will show a "ghost" bomb if one exists
+	 * 
+	 * @param space Space clicked
+	 */
+	
+	private void handleCheatClick(Space space) {
+		// already ran, don't run again
+		if (!canCheat()) {
+			return;
+		}
+
+		// no mines if we have not clicked
+		if (!firstClick) {
+			// you cheated for the first click, useless move as now we don't care
+			// about click protection
+			firstClick(null);
+		}
+
+		// only marks and empty spaces can be cheated, to save accidental clicks
+		Piece piece = getPiece(space);
+		if (piece != null && !piece.isMark()) {
+			return;
+		}
+
+		// if its a mine, show that
+		if (isMine(space)) {
+			setPiece(space, Piece.MINE_GREEN);
+		}
+		// otherwise click the space as we know its safe
+		else {
+			clickSpace(space);
+		}
+
+		// use a cheat
+		cheats--;
+
+		// need to check, since it could be the last click
+		checkVictory();
+	}
+
+	/* Helper functions */
+
+	/**
+	 * Gets a list of all spaces
+	 * 
+	 * @return a list of all spaces
+	 */
+	
+	public Space[] getAllSpaces() {
+		Space[] spaces = new Space[width * height];
+
+		// loop through all spaces, adding them to an array
+		int i = 0;
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				spaces[i] = new Space(x, y);
+				i++;
+			}
+		}
+
+		return spaces;
+	}
+
+	/**
+	 * Helper function to get the coordinates of all 8 neighbors to the space Note
+	 * that some may be invalid spaces
+	 * 
+	 * @param space Space around which to get neighbors
+	 * @return an array of spaces of the 8 neighbors, or less on edges
+	 */
+	
+	public Space[] getNeighbors(Space space) {
+		// if not valid, return no neighbors
+		if (!isValid(space)) {
+			return new Space[0];
+		}
+
+		// array cannot be bigger than 8
+		Space[] neighbors = new Space[8];
+		int x = space.getX();
+		int y = space.getY();
+
+		// 2D loop from x - 1, y - 1 up to x + 1, y + 1
+		int neighborCount = 0;
+		for (int i = -1; i <= 1; i++) {
+			for (int j = -1; j <= 1; j++) {
+				// skip offset of 0,0 as that is the input space
+				if (i == 0 && j == 0) {
+					continue;
+				}
+
+				// make sure the space is valid before returning it
+				Space neighbor = new Space(x + i, y + j);
+				if (isValid(neighbor)) {
+					neighbors[neighborCount] = neighbor;
+					neighborCount++;
+				}
+			}
+		}
+
+		return neighbors;
+	}
+
+	/**
+	 * Marks a space as needing update by the graphics display
+	 * 
+	 * @param space space needing an update
+	 */
+	
+	public void markUpdate(Space space) {
+		if (!update.contains(space)) {
+			update.add(space);
+		}
+	}
+
+	/**
+	 * Returns the number to display on the space after clicking it Does not take
+	 * bombs on this space into account, check isMine() first
+	 * 
+	 * @param space Space to check
+	 * @return The number of bombs around this space
+	 */
+	
+	public Piece getNumber(Space space) {
+		// no space? no return
+		if (!isValid(space)) {
+			return null;
+		}
+
+		int count = 0;
+		// check all the neighbors for a bomb
+		for (Space neighbor : getNeighbors(space)) {
+			// if they have one, add to the running total
+			if (isMine(neighbor)) {
+				count++;
+			}
+		}
+
+		// return the specific piece
+		return Piece.fromNumber(count);
+	}
+
+	/* Getters, setters, and basic return logic */
+
+	/**
+	 * Gets the piece on the specified space
+	 * 
+	 * @param space Space to check for a piece
+	 * @return the piece on the specified space
+	 */
+	
+	public Piece getPiece(Space space) {
+		// invalid gets null
+		if (!isValid(space)) {
+			return null;
+		}
+
+		// otherwise go with the contained piece
+		return pieces[space.getY()][space.getX()];
+	}
+
+	/**
+	 * Placed a piece on a space
+	 * 
+	 * @param space Space to place the piece
+	 * @param piece Piece to place on the space
+	 */
+	
+	public void setPiece(Space space, Piece piece) {
+		// must be valid
+		if (isValid(space)) {
+			pieces[space.getY()][space.getX()] = piece;
+			markUpdate(space);
+		}
+	}
+
+	/**
+	 * Determines if a space contains a bomb
+	 * 
+	 * @param space Space to check
+	 * @return True if the space contains a bomb
+	 */
+	
+	public boolean isMine(Space space) {
+		// not a valid space?
+		if (!isValid(space)) {
+			return false;
+		}
+
+		return mines[space.getY()][space.getX()];
+	}
+
+	/**
+	 * Determines if a space appears enabled, or pressed up
+	 * 
+	 * @param space Space to check
+	 * @return True if the space appears enabled
+	 */
+	
+	public boolean isEnabled(Space space) {
+		if (!isValid(space)) {
+			return false;
+		}
+
+		Piece piece = getPiece(space);
+
+		// if the space is empty, it pops up
+		if (piece == null) {
+			return true;
+		}
+
+		// otherwise go based on the contained value
+		return piece.isEnabled();
+	}
+
+	/**
+	 * Determines if the contents of a space can be replaced
+	 * 
+	 * @param space Space clicked
+	 */
+	
+	private boolean isReplaceable(Space space) {
+		// invalid spaces are always false
+		if (!isValid(space)) {
+			return false;
+		}
+
+		Piece piece = getPiece(space);
+
+		// if the space is empty, it can be clicked
+		if (piece == null) {
+			return true;
+		}
+
+		// otherwise go based on the contained value
+		return piece.isReplaceable();
+	}
+
+	/**
+	 * Determines if the space is a number
+	 * 
+	 * @param space Space clicked
+	 */
+	
+	private boolean isNumber(Space space) {
+		// invalid spaces are always false
+		if (!isValid(space)) {
+			return false;
+		}
+
+		Piece piece = getPiece(space);
+
+		// if the space is empty, it is not a number
+		if (piece == null) {
+			return false;
+		}
+
+		// otherwise go based on the contained value
+		return piece.isNumber();
+	}
+
+	/* Data */
+
+	/**
+	 * Gets the width of the board
+	 * 
+	 * @return The width of the board
+	 */
+	
+	public int getWidth() {
+		return width;
+	}
+
+	/**
+	 * Gets the height of the board
+	 * 
+	 * @return The height of the board
+	 */
+	
+	public int getHeight() {
+		return height;
+	}
+
+	/**
+	 * Gets the number of mines left on the board
+	 * 
+	 * @return number of mines remaining
+	 */
+	
+	public int getRemainingMines() {
+		return data.mineCount - flagCount;
+	}
+
+	/**
+	 * Checks if the player has used their cheat
+	 * 
+	 * @return if the player has used their cheat
+	 */
+	
+	public boolean canCheat() {
+		return cheats > 0;
+	}
+
+	/**
+	 * Checks how many cheats the player has left
+	 * 
+	 * @return remaining cheats
+	 */
+	
+	public int getCheats() {
+		return cheats;
+	}
+
+	/**
+	 * Checks if the game ended
+	 * 
+	 * @return true if the game ended
+	 */
+	
+	public boolean gameOver() {
+		return gameOver;
+	}
+
+	/**
+	 * Checks if the player won the game
+	 * 
+	 * @return true if the player won the game
+	 */
+	
+	public boolean hasWon() {
+		return victory;
+	}
+
+	/**
+	 * Checks if a space is within the bounds of this board
+	 * 
+	 * @param space Space to check
+	 * @return true if the space is within this board
+	 */
+	
+	public boolean isValid(Space space) {
+		// no space?
+		if (space == null) {
+			return false;
+		}
+
+		// first, check if the space is entirely invalid
+		if (space.getX() < 0 || space.getY() < 0) {
+			return false;
+		}
+
+		// next, check if this is outside of this board
+		if (space.getY() >= height || space.getX() >= width) {
+			return false;
+		}
+
+		// fits in both? return true then
+		return true;
+	}
+
+	/**
+	 * Gets a list of spaces pending updates to update the button displays
+	 * 
+	 * @return a list of spaces needing an update
+	 */
+	
+	public Queue<Space> getUpdates() {
+		return update;
+	}
+
+	/**
+	 * Actions that can be performed on click. Used by buttons to pass along a
+	 * constant rather than a list of modifiers.
+	 */
+	
+	public enum ClickAction {
+		/** Normal click */
+		DEFAULT,
+		/** Placing a flag or mark */
+		FLAG,
+		/** Placing a mark of different colors */
+		MARK,
+		/** Safely clicking a mine */
+		CHEAT;
+	}
+}
+]]></snapshot>
+  </Command>
+  <Command __id="22" _type="MoveCaretCommand" caretOffset="0" docOffset="0" timestamp="137671" />
+  <Command __id="23" _type="FileOpenCommand" docASTNodeCount="260" docActiveCodeLength="2374" docExpressionCount="151" docLength="3861" projectName="MineSweeper" timestamp="140380">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeper.java]]></filePath>
+  </Command>
+  <Command __id="24" _type="MoveCaretCommand" caretOffset="604" docOffset="707" timestamp="140439" />
+  <Command __id="25" _type="FileOpenCommand" docASTNodeCount="1769" docActiveCodeLength="10590" docExpressionCount="1040" docLength="19616" projectName="MineSweeper" timestamp="141656">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeperBoard.java]]></filePath>
+  </Command>
+  <Command __id="26" _type="MoveCaretCommand" caretOffset="0" docOffset="0" timestamp="141694" />
+  <Command __id="27" _type="FileOpenCommand" docASTNodeCount="260" docActiveCodeLength="2374" docExpressionCount="151" docLength="3861" projectName="MineSweeper" timestamp="142684">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeper.java]]></filePath>
+  </Command>
+  <Command __id="28" _type="MoveCaretCommand" caretOffset="604" docOffset="707" timestamp="142733" />
+  <Command __id="29" _type="FileOpenCommand" docASTNodeCount="1769" docActiveCodeLength="10590" docExpressionCount="1040" docLength="19616" projectName="MineSweeper" timestamp="143782">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeperBoard.java]]></filePath>
+  </Command>
+  <Command __id="30" _type="MoveCaretCommand" caretOffset="0" docOffset="0" timestamp="143820" />
+  <Command __id="31" _type="MoveCaretCommand" caretOffset="1247" docOffset="1474" timestamp="146882" />
+  <Command __id="32" _type="SelectTextCommand" caretOffset="1528" docEnd="1755" docOffset="1755" docStart="1740" end="1528" start="1513" timestamp="171777" />
+  <Command __id="33" _type="MoveCaretCommand" caretOffset="1405" docOffset="1632" timestamp="172081" />
+  <Command __id="34" _type="FileOpenCommand" docASTNodeCount="43" docActiveCodeLength="235" docExpressionCount="27" docLength="235" projectName="MineSweeper" timestamp="173293">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineGenerator.java]]></filePath>
+  </Command>
+  <Command __id="35" _type="MoveCaretCommand" caretOffset="97" docOffset="195" timestamp="173326" />
+  <Command __id="36" _type="FileOpenCommand" docASTNodeCount="260" docActiveCodeLength="2374" docExpressionCount="151" docLength="3861" projectName="MineSweeper" timestamp="174099">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeper.java]]></filePath>
+  </Command>
+  <Command __id="37" _type="MoveCaretCommand" caretOffset="604" docOffset="707" timestamp="174136" />
+  <Command __id="38" _type="FileOpenCommand" docASTNodeCount="1769" docActiveCodeLength="10590" docExpressionCount="1040" docLength="19616" projectName="MineSweeper" timestamp="177142">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeperBoard.java]]></filePath>
+  </Command>
+  <Command __id="39" _type="MoveCaretCommand" caretOffset="1405" docOffset="1632" timestamp="177182" />
+  <Command __id="40" _type="FileOpenCommand" docASTNodeCount="260" docActiveCodeLength="2374" docExpressionCount="151" docLength="3861" projectName="MineSweeper" timestamp="180348">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeper.java]]></filePath>
+  </Command>
+  <Command __id="41" _type="MoveCaretCommand" caretOffset="604" docOffset="707" timestamp="180383" />
+  <Command __id="42" _type="FileOpenCommand" docASTNodeCount="1769" docActiveCodeLength="10590" docExpressionCount="1040" docLength="19616" projectName="MineSweeper" timestamp="182031">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeperBoard.java]]></filePath>
+  </Command>
+  <Command __id="43" _type="MoveCaretCommand" caretOffset="1405" docOffset="1632" timestamp="182067" />
+  <Command __id="44" _type="MoveCaretCommand" caretOffset="1486" docOffset="1713" timestamp="185857" />
+  <Command __id="45" _type="EclipseCommand" commandID="org.eclipse.jdt.ui.edit.text.java.search.references.in.project" timestamp="196826" />
+  <Command __id="46" _type="MoveCaretCommand" caretOffset="1264" docOffset="1491" timestamp="206121" />
+  <Command __id="47" _type="FileOpenCommand" docASTNodeCount="260" docActiveCodeLength="2374" docExpressionCount="151" docLength="3861" projectName="MineSweeper" timestamp="207453">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeper.java]]></filePath>
+  </Command>
+  <Command __id="48" _type="MoveCaretCommand" caretOffset="604" docOffset="707" timestamp="207489" />
+  <Command __id="49" _type="FileOpenCommand" docASTNodeCount="1769" docActiveCodeLength="10590" docExpressionCount="1040" docLength="19616" projectName="MineSweeper" timestamp="210928">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeperBoard.java]]></filePath>
+  </Command>
+  <Command __id="50" _type="MoveCaretCommand" caretOffset="1264" docOffset="1491" timestamp="210973" />
+  <Command __id="51" _type="MoveCaretCommand" caretOffset="1618" docOffset="1845" timestamp="212659" />
+  <Command __id="52" _type="MoveCaretCommand" caretOffset="1369" docOffset="1596" timestamp="216634" />
+  <Command __id="53" _type="MoveCaretCommand" caretOffset="1589" docOffset="1816" timestamp="218730" />
+  <Command __id="54" _type="MoveCaretCommand" caretOffset="1620" docOffset="1847" timestamp="222570" />
+  <Command __id="55" _type="MoveCaretCommand" caretOffset="1506" docOffset="1733" timestamp="224027" />
+  <Command __id="56" _type="MoveCaretCommand" caretOffset="1479" docOffset="1706" timestamp="225330" />
+  <Command __id="57" _type="MoveCaretCommand" caretOffset="1370" docOffset="1597" timestamp="226154" />
+  <Command __id="58" _type="FileOpenCommand" docASTNodeCount="260" docActiveCodeLength="2374" docExpressionCount="151" docLength="3861" projectName="MineSweeper" timestamp="238605">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeper.java]]></filePath>
+  </Command>
+  <Command __id="59" _type="MoveCaretCommand" caretOffset="604" docOffset="707" timestamp="238642" />
+  <Command __id="60" _type="MoveCaretCommand" caretOffset="1913" docOffset="2016" timestamp="239658" />
+  <Command __id="61" _type="EclipseCommand" commandID="org.eclipse.jdt.ui.edit.text.java.open.editor" timestamp="241565" />
+  <Command __id="62" _type="MoveCaretCommand" caretOffset="2685" docOffset="2788" timestamp="250362" />
+  <Command __id="63" _type="MoveCaretCommand" caretOffset="2959" docOffset="3062" timestamp="251521" />
+  <Command __id="64" _type="FileOpenCommand" docASTNodeCount="1302" docActiveCodeLength="11201" docExpressionCount="866" docLength="14073" projectName="MineSweeper" timestamp="253746">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\presentation\MineSweeperGui.java]]></filePath>
+    <snapshot><![CDATA[package presentation;
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.io.File;
+import java.net.URL;
+import java.util.Queue;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+
+import logic.Help;
+import logic.MineSweeper;
+import logic.MineSweeperBoard;
+import util.Space;
+
+/**
+ * Main GUI object for Minesweeper games. Called when gameplay is ready
+ *
+ * @author  KnightMiner
+ */
+
+public class MineSweeperGui extends JFrame implements ActionListener {
+    // data
+    private MineSweeperBoard board;
+
+    // states
+    private boolean isCheating;
+
+    // buttons and labels
+    private JLabel mines;
+    private MineButton[][] buttons;
+
+    private JButton buttonNewGame;
+    private JButton buttonCheat;
+
+    // menus
+    private JMenuBar bar;
+    private JMenu menuMineSweeper;
+
+    private JMenu menuNewGame;
+    private JMenuItem buttonRestart;
+    private JMenuItem buttonSave;
+    private JMenuItem buttonLoad;
+    private JMenuItem buttonExit;
+
+    private JMenu menuHelp;
+    private JMenuItem buttonRules;
+    private JMenuItem buttonMenu;
+    private JMenuItem buttonDifficulty;
+
+    /**
+     * Makes a new minesweaper window
+     * @param board  Input board, the display will take the size and pieces on the board
+     */
+    
+    public MineSweeperGui(MineSweeperBoard board) {
+        this.setTitle("MineSweeper");
+        this.board = board;
+
+        // construct the top menu
+        bar = new JMenuBar();
+        setJMenuBar(bar);
+
+        // miscelanous actions
+        menuMineSweeper = new JMenu("MineSweeper");
+        bar.add(menuMineSweeper);
+
+        // new game menu
+        menuNewGame = new JMenu("New Game");
+        menuMineSweeper.add(menuNewGame);
+
+        // add all difficulties
+        for(MineSweeper.Difficulty difficulty : MineSweeper.Difficulty.values()) {
+            DifficultyButton button = new DifficultyButton(difficulty);
+            menuNewGame.add(button);
+        }
+
+
+        // restarts the current game
+        buttonRestart = new JMenuItem("Restart");
+        buttonRestart.addActionListener(this);
+        menuMineSweeper.add(buttonRestart);
+
+        // saves the current game
+        buttonSave = new JMenuItem("Save game");
+        buttonSave.addActionListener(this);
+        menuMineSweeper.add(buttonSave);
+
+        // loads a new game from a file
+        buttonLoad = new JMenuItem("Load game");
+        buttonLoad.addActionListener(this);
+        menuMineSweeper.add(buttonLoad);
+
+        // exits the game
+        menuMineSweeper.addSeparator();
+        buttonExit = new JMenuItem("Exit");
+        buttonExit.addActionListener(this);
+        menuMineSweeper.add(buttonExit);
+
+        // help menu
+        menuHelp = new JMenu("Help");
+        bar.add(menuHelp);
+
+        // shows the rules
+        buttonRules = new JMenuItem("Rules");
+        buttonRules.addActionListener(this);
+        menuHelp.add(buttonRules);
+
+        // shows help about the menu
+        buttonMenu = new JMenuItem("Menus");
+        buttonMenu.addActionListener(this);
+        menuHelp.add(buttonMenu);
+
+        // shows available difficulties
+        buttonDifficulty = new JMenuItem("Difficulties");
+        buttonDifficulty.addActionListener(this);
+        menuHelp.add(buttonDifficulty);
+
+
+        // GUI Layout
+
+        // gives use four regions and a center
+        Container pane = getContentPane();
+        pane.setLayout(new BorderLayout());
+
+
+        // new game with same dimensions
+        buttonNewGame = new JButton("New game");
+        buttonNewGame.addActionListener(this);
+
+        // remaining mines display
+        mines = new JLabel("Mines", SwingConstants.CENTER);
+        updateMines();
+
+        // top row of the board
+        Container top = new Container();
+        top.setLayout(new GridLayout(1, 3));
+        top.add(mines);
+        top.add(buttonNewGame);
+
+
+        // cheating, skip if 0 cheats to start
+        if(board.canCheat()) {
+            buttonCheat = new JButton();
+            updateCheat();
+            buttonCheat.addActionListener(this);
+            top.add(buttonCheat);
+        } else {
+            top.add(new JLabel(""));
+        }
+
+        top.setPreferredSize(new Dimension(20, top.getFontMetrics(buttonNewGame.getFont()).getHeight() * 2));
+
+        pane.add(top, BorderLayout.NORTH);
+
+
+        // main button grid
+        Container minesContainer = new Container();
+        int width2 = board.getWidth();
+        int height2 = board.getHeight();
+        minesContainer.setLayout(new GridLayout(height2, width2));
+        buttons = new MineButton[height2][width2];
+
+        // and add them all
+        for(int y = 0; y < height2; y++) {
+            for(int x = 0; x < width2; x++) {
+                // add buttons, and store them
+                buttons[y][x] = new MineButton(this, board, new Space(x, y));
+                minesContainer.add(buttons[y][x]);
+            }
+        }
+
+        pane.add(minesContainer, BorderLayout.CENTER);
+
+
+        // sizes, we need them for the top bar
+        int width = board.getWidth() * 40;
+        int height = board.getHeight() * 40 + 100;
+
+        setSize(width, height);
+        setVisible(true);
+
+        // eventually I will replace this with an event that fires a prompt
+        // basically, allow the user to save their game before quitting
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+
+    /**
+     * Gets a MineButton at the specified location
+     * @param space  Location of the button
+     * @return  the button at the location
+     */
+    
+    public MineButton getButton(Space space) {
+        if(!board.isValid(space)) {
+            return null;
+        }
+        return buttons[space.getY()][space.getX()];
+    }
+
+    /**
+     * Updates all spaces pending update to display their current value
+     */
+    
+    public void updateSpaces() {
+        Queue<Space> queue = board.getUpdates();
+        while(!queue.isEmpty()) {
+            Space space = queue.poll();
+            MineButton update = getButton(space);
+            if(update != null) {
+                update.updatePiece();
+            }
+        }
+
+        updateMines();
+    }
+
+    /**
+     * Updates the mines display
+     */
+    
+    public void updateMines() {
+        mines.setText(String.format("Mines: %d", board.getRemainingMines()));
+    }
+
+    /**
+     * Sets the cheat status
+     * @param cheat  Whether the user is in cheat mode
+     */
+    
+    private void setCheating(boolean cheat) {
+        // and change the button text
+        if(cheat) {
+            buttonCheat.setText("Cancel cheat");
+            isCheating = true;
+        }
+        // otherwise, run general cheating code
+        else {
+            updateCheat();
+        }
+    }
+
+    /**
+     * Sets the cheat button to used
+     */
+    
+    public void updateCheat() {
+    	if(buttonCheat != null) {
+    		// if we can cheat, set the label
+            if(board.canCheat()) {
+                buttonCheat.setText("Cheats: " + board.getCheats());
+                buttonCheat.setEnabled(true);
+            }
+            // otherwise, set the out of cheats label
+            else {
+                buttonCheat.setText("Out of cheats");
+                buttonCheat.setEnabled(false);
+            }
+            isCheating = false;
+    	}   
+    }
+
+    /**
+     * Sets the cheat button to used
+     */
+    
+    public void resetButtons() {
+        buttonNewGame.setText("New game");
+
+        updateCheat();        
+        updateSpaces();
+    }
+
+    /**
+     * Sets the winning text
+     * @param victory  Whether the player won
+     */
+    
+    public void gameOver(boolean victory) {
+        if(victory) {
+            buttonNewGame.setText("You Win!");
+        }
+        else {
+            buttonNewGame.setText("You Lose");
+        }
+    }
+
+    /**
+     * Checks if the cheat button is active
+     * @return  true if the cheat button is active
+     */
+    
+    public boolean isCheating() {
+        return isCheating;
+    }
+
+    /**
+     * Called when the 'X' button is pressed on the window
+     * @param e  Event the button is called with
+     */
+    
+    public void windowClosing(WindowEvent e) {
+        // simply run the menu
+        //this.menu();
+    }
+
+    /**
+     * Handles all single instance buttons
+     * @param e  Calling event
+     */
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object button = e.getSource();
+
+        // restart the current game
+        if(button == buttonNewGame) {
+            // make the board new
+            board.newGame();
+
+            // and clear game data
+            resetButtons();
+            return;
+        }
+
+        // restart the current game
+        if(button == buttonRestart) {
+            // make the board new
+            board.restart();
+
+            // and clear game data
+            resetButtons();
+            return;
+        }
+
+        // saves the game
+        if(button == buttonSave) {
+            String filename = JOptionPane.showInputDialog(this,
+                    "Enter filename to save game",
+                    "MineSweeper - Save game",
+                    JOptionPane.QUESTION_MESSAGE
+                    );
+
+            // user canceled
+            if(filename == null || filename.equals("")) {
+                return;
+            }
+
+            // if it exists, prompt to continue
+            if(new File(filename + ".bin").exists()) {
+                int result = JOptionPane.showConfirmDialog(this,
+                        "Save game " + filename + " already exists, overwrite?",
+                        "MineSweeper - Save game",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.ERROR_MESSAGE
+                        );
+
+                if(result != JOptionPane.YES_OPTION) {
+                    return;
+                }
+            }
+
+            board.saveGame(filename);
+        }
+
+        // loads the game
+        if(button == buttonLoad) {
+            String filename = JOptionPane.showInputDialog(this,
+                    "Enter filename to load game",
+                    "MineSweeper - Load game",
+                    JOptionPane.QUESTION_MESSAGE
+                    );
+
+            // user canceled
+            if(filename == null || filename.equals("")) {
+                return;
+            }
+
+            // if it exists, prompt to continue
+            if(new File(filename + ".bin").exists()) {
+                MineSweeperBoard board = MineSweeperBoard.loadGame(filename);
+                if(board != null) {
+                    MineSweeper.startGame(board);
+                }
+                // did not load right
+                else {
+                    JOptionPane.showMessageDialog(this,
+                            "Error reading save game " + filename,
+                            "MineSweeper - Load game",
+                            JOptionPane.ERROR_MESSAGE
+                            );
+                }
+            }
+            else {
+                // file does not exist
+                JOptionPane.showMessageDialog(this,
+                        "Saved game " + filename + " does not exist",
+                        "MineSweeper - Load game",
+                        JOptionPane.ERROR_MESSAGE
+                        );
+            }
+        }
+
+        // cheat button
+        if(button == buttonCheat) {
+            // no cheating too many times
+            if(!board.canCheat()) {
+                return;
+            }
+
+            // toggle cheating
+            setCheating(!isCheating);
+            return;
+        }
+
+        // cheat button
+        if(button == buttonExit) {
+            this.dispose();
+            return;
+        }
+
+
+        /* Help */
+
+        // rules
+        if(button == buttonRules) {
+            Help.showRules(this);
+        }
+
+        // menus
+        if(button == buttonMenu) {
+            Help.menuHelp(this);
+        }
+
+        // rules
+        if(button == buttonDifficulty) {
+            Help.difficultyHelp(this);
+        }
+    }
+
+    /**
+     * Returns an ImageIcon, or null if the path was invalid.
+     * @author  Larry Vail
+     * @param  path  Icon path
+     * @param  description  Basic description of the icon
+     * @return  Returns the icon at the path, or null if the path is invalid
+     */
+    
+    protected ImageIcon createImageIcon(String path, String description) {
+        URL imgURL = getClass().getResource(path);
+        if (imgURL != null) {
+            return new ImageIcon(imgURL, description);
+        } else {
+            System.err.println("Couldn't find file: " + path);
+            return null;
+        }
+    }
+
+    /**
+     * Common code for difficulty buttons
+     */
+    
+    private class DifficultyButton extends JMenuItem implements ActionListener {
+        // data
+        private MineSweeper.Difficulty difficulty;
+
+        public DifficultyButton(MineSweeper.Difficulty difficulty) {
+            super(difficulty.getLabel());
+
+            this.difficulty = difficulty;
+            this.addActionListener(this);
+        }
+
+        /**
+         * Called when the button is clicked
+         */
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            MineSweeper.newGame(difficulty);
+        }
+    }
+}
+]]></snapshot>
+  </Command>
+  <Command __id="65" _type="EclipseCommand" commandID="org.eclipse.jdt.ui.edit.text.java.open.editor" timestamp="253773" />
+  <Command __id="66" _type="SelectTextCommand" caretOffset="1086" docEnd="1727" docOffset="1727" docStart="1713" end="1086" start="1072" timestamp="253832" />
+  <Command __id="67" _type="MoveCaretCommand" caretOffset="1107" docOffset="1748" timestamp="255138" />
+  <Command __id="68" _type="FileOpenCommand" docASTNodeCount="1769" docActiveCodeLength="10590" docExpressionCount="1040" docLength="19616" projectName="MineSweeper" timestamp="258408">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeperBoard.java]]></filePath>
+  </Command>
+  <Command __id="69" _type="MoveCaretCommand" caretOffset="1370" docOffset="1597" timestamp="258454" />
+  <Command __id="70" _type="FileOpenCommand" docASTNodeCount="43" docActiveCodeLength="235" docExpressionCount="27" docLength="235" projectName="MineSweeper" timestamp="259019">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineGenerator.java]]></filePath>
+  </Command>
+  <Command __id="71" _type="MoveCaretCommand" caretOffset="97" docOffset="195" timestamp="259053" />
+  <Command __id="72" _type="FileOpenCommand" docASTNodeCount="1769" docActiveCodeLength="10590" docExpressionCount="1040" docLength="19616" projectName="MineSweeper" timestamp="259835">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeperBoard.java]]></filePath>
+  </Command>
+  <Command __id="73" _type="MoveCaretCommand" caretOffset="1370" docOffset="1597" timestamp="259881" />
+  <Command __id="74" _type="FileOpenCommand" docASTNodeCount="43" docActiveCodeLength="235" docExpressionCount="27" docLength="235" projectName="MineSweeper" timestamp="284022">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineGenerator.java]]></filePath>
+  </Command>
+  <Command __id="75" _type="MoveCaretCommand" caretOffset="97" docOffset="195" timestamp="284065" />
+  <Command __id="76" _type="FileOpenCommand" docASTNodeCount="1302" docActiveCodeLength="11201" docExpressionCount="866" docLength="14073" projectName="MineSweeper" timestamp="285414">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\presentation\MineSweeperGui.java]]></filePath>
+  </Command>
+  <Command __id="77" _type="MoveCaretCommand" caretOffset="1107" docOffset="1748" timestamp="285450" />
+  <Command __id="78" _type="FileOpenCommand" docASTNodeCount="1769" docActiveCodeLength="10590" docExpressionCount="1040" docLength="19616" projectName="MineSweeper" timestamp="285952">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeperBoard.java]]></filePath>
+  </Command>
+  <Command __id="79" _type="MoveCaretCommand" caretOffset="1370" docOffset="1597" timestamp="286000" />
+  <Command __id="80" _type="MoveCaretCommand" caretOffset="2433" docOffset="2660" timestamp="313817" />
+  <Command __id="81" _type="EclipseCommand" commandID="org.eclipse.jdt.ui.edit.text.java.search.references.in.project" timestamp="319219" />
+  <Command __id="82" _type="MoveCaretCommand" caretOffset="2089" docOffset="2316" timestamp="323954" />
+  <Command __id="83" _type="FileOpenCommand" docASTNodeCount="43" docActiveCodeLength="235" docExpressionCount="27" docLength="235" projectName="MineSweeper" timestamp="337739">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineGenerator.java]]></filePath>
+  </Command>
+  <Command __id="84" _type="MoveCaretCommand" caretOffset="97" docOffset="195" timestamp="337775" />
+  <Command __id="85" _type="FileOpenCommand" docASTNodeCount="260" docActiveCodeLength="2374" docExpressionCount="151" docLength="3861" projectName="MineSweeper" timestamp="338812">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeper.java]]></filePath>
+  </Command>
+  <Command __id="86" _type="MoveCaretCommand" caretOffset="2959" docOffset="3062" timestamp="338846" />
+  <Command __id="87" _type="FileOpenCommand" docASTNodeCount="1769" docActiveCodeLength="10590" docExpressionCount="1040" docLength="19616" projectName="MineSweeper" timestamp="342583">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeperBoard.java]]></filePath>
+  </Command>
+  <Command __id="88" _type="MoveCaretCommand" caretOffset="2089" docOffset="2316" timestamp="342633" />
+  <Command __id="89" _type="FileOpenCommand" docASTNodeCount="43" docActiveCodeLength="235" docExpressionCount="27" docLength="235" projectName="MineSweeper" timestamp="344147">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineGenerator.java]]></filePath>
+  </Command>
+  <Command __id="90" _type="MoveCaretCommand" caretOffset="97" docOffset="195" timestamp="344178" />
+  <Command __id="91" _type="FileOpenCommand" docASTNodeCount="1769" docActiveCodeLength="10590" docExpressionCount="1040" docLength="19616" projectName="MineSweeper" timestamp="344917">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeperBoard.java]]></filePath>
+  </Command>
+  <Command __id="92" _type="MoveCaretCommand" caretOffset="2089" docOffset="2316" timestamp="344956" />
+  <Command __id="93" _type="MoveCaretCommand" caretOffset="2121" docOffset="2348" timestamp="351170" />
+  <Command __id="94" _type="MoveCaretCommand" caretOffset="2148" docOffset="2375" timestamp="356323" />
+  <Command __id="95" _type="MoveCaretCommand" caretOffset="2089" docOffset="2316" timestamp="356841" />
+  <Command __id="96" _type="MoveCaretCommand" caretOffset="1487" docOffset="1714" timestamp="365074" />
+  <Command __id="97" _type="EclipseCommand" commandID="org.eclipse.jdt.ui.edit.text.java.search.references.in.project" timestamp="369516" />
+  <Command __id="98" _type="MoveCaretCommand" caretOffset="17572" docOffset="17799" timestamp="376426" />
+  <Command __id="99" _type="EclipseCommand" commandID="org.eclipse.jdt.ui.edit.text.java.search.references.in.project" timestamp="395359" />
+  <Command __id="100" _type="FileOpenCommand" docASTNodeCount="1302" docActiveCodeLength="11201" docExpressionCount="866" docLength="14073" projectName="MineSweeper" timestamp="397126">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\presentation\MineSweeperGui.java]]></filePath>
+  </Command>
+  <Command __id="101" _type="SelectTextCommand" caretOffset="6238" docEnd="6879" docOffset="6879" docStart="6860" end="6238" start="6219" timestamp="397184" />
+  <Command __id="102" _type="MoveCaretCommand" caretOffset="6178" docOffset="6819" timestamp="400498" />
+  <Command __id="103" _type="MoveCaretCommand" caretOffset="6194" docOffset="6835" timestamp="401842" />
+  <Command __id="104" _type="MoveCaretCommand" caretOffset="6225" docOffset="6866" timestamp="403986" />
+  <Command __id="105" _type="FileOpenCommand" docASTNodeCount="1769" docActiveCodeLength="10590" docExpressionCount="1040" docLength="19616" projectName="MineSweeper" timestamp="408214">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeperBoard.java]]></filePath>
+  </Command>
+  <Command __id="106" _type="MoveCaretCommand" caretOffset="17572" docOffset="17799" timestamp="408255" />
+  <Command __id="107" _type="FileOpenCommand" docASTNodeCount="1302" docActiveCodeLength="11201" docExpressionCount="866" docLength="14073" projectName="MineSweeper" timestamp="408855">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\presentation\MineSweeperGui.java]]></filePath>
+  </Command>
+  <Command __id="108" _type="MoveCaretCommand" caretOffset="6225" docOffset="6866" timestamp="408894" />
+  <Command __id="109" _type="FileOpenCommand" docASTNodeCount="1769" docActiveCodeLength="10590" docExpressionCount="1040" docLength="19616" projectName="MineSweeper" timestamp="409950">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeperBoard.java]]></filePath>
+  </Command>
+  <Command __id="110" _type="EclipseCommand" commandID="org.eclipse.ui.navigate.backwardHistory" timestamp="409969" />
+  <Command __id="111" _type="MoveCaretCommand" caretOffset="17572" docOffset="17799" timestamp="410089" />
+  <Command __id="112" _type="FileOpenCommand" docASTNodeCount="1302" docActiveCodeLength="11201" docExpressionCount="866" docLength="14073" projectName="MineSweeper" timestamp="416008">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\presentation\MineSweeperGui.java]]></filePath>
+  </Command>
+  <Command __id="113" _type="EclipseCommand" commandID="org.eclipse.ui.navigate.backwardHistory" timestamp="416026" />
+  <Command __id="114" _type="MoveCaretCommand" caretOffset="6225" docOffset="6866" timestamp="416056" />
+  <Command __id="115" _type="EclipseCommand" commandID="org.eclipse.ui.navigate.backwardHistory" repeat="2" timestamp="417625" timestamp2="418263" />
+  <Command __id="116" _type="FileOpenCommand" docASTNodeCount="1769" docActiveCodeLength="10590" docExpressionCount="1040" docLength="19616" projectName="MineSweeper" timestamp="418245">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeperBoard.java]]></filePath>
+  </Command>
+  <Command __id="118" _type="MoveCaretCommand" caretOffset="17572" docOffset="17799" timestamp="418290" />
+  <Command __id="119" _type="MoveCaretCommand" caretOffset="3290" docOffset="3517" timestamp="452346" />
+  <Command __id="120" _type="MoveCaretCommand" caretOffset="3518" docOffset="3745" timestamp="454090" />
+  <Command __id="121" _type="MoveCaretCommand" caretOffset="3523" docOffset="3750" timestamp="455586" />
+  <Command __id="122" _type="MoveCaretCommand" caretOffset="3518" docOffset="3745" timestamp="456210" />
+  <DocumentChange __id="123" _type="Delete" docASTNodeCount="1769" docActiveCodeLength="10588" docExpressionCount="1040" docLength="19614" endLine="140" length="2" offset="3743" startLine="139" timestamp="459970">
+    <text><![CDATA[
+]]></text>
+  </DocumentChange>
+  <Command __id="124" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="459980" />
+  <Command __id="125" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.LINE_DOWN" timestamp="460536" />
+  <DocumentChange __id="126" _type="Insert" docASTNodeCount="1769" docActiveCodeLength="10592" docExpressionCount="1040" docLength="19618" length="4" offset="3748" timestamp="461154">
+    <text><![CDATA[
+		]]></text>
+  </DocumentChange>
+  <Command __id="127" _type="InsertStringCommand" timestamp="461160">
+    <data><![CDATA[]]></data>
+  </Command>
+  <DocumentChange __id="128" _type="Insert" docASTNodeCount="1774" docActiveCodeLength="10600" docExpressionCount="1042" docLength="19626" length="8" offset="3752" repeat="8" timestamp="462741" timestamp2="464822">
+    <text><![CDATA[int i=0;]]></text>
+  </DocumentChange>
+  <Command __id="129" _type="InsertStringCommand" repeat="8" timestamp="462743" timestamp2="464825">
+    <data><![CDATA[int i=0;]]></data>
+  </Command>
+  <DocumentChange __id="144" _type="Insert" docASTNodeCount="1774" docActiveCodeLength="10604" docExpressionCount="1042" docLength="19630" length="4" offset="3760" timestamp="465006">
+    <text><![CDATA[
+		]]></text>
+  </DocumentChange>
+  <Command __id="145" _type="InsertStringCommand" timestamp="465012">
+    <data><![CDATA[]]></data>
+  </Command>
+  <DocumentChange __id="146" _type="Insert" docASTNodeCount="1774" docActiveCodeLength="10608" docExpressionCount="1042" docLength="19634" length="4" offset="3764" repeat="4" timestamp="465325" timestamp2="465673">
+    <text><![CDATA[for ]]></text>
+  </DocumentChange>
+  <Command __id="147" _type="InsertStringCommand" repeat="4" timestamp="465328" timestamp2="465676">
+    <data><![CDATA[for ]]></data>
+  </Command>
+  <Command __id="154" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.LINE_UP" timestamp="466595" />
+  <Command __id="155" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_NEXT" timestamp="466787" />
+  <DocumentChange __id="156" _type="Insert" docASTNodeCount="1774" docActiveCodeLength="10609" docExpressionCount="1042" docLength="19635" length="1" offset="3757" timestamp="467172">
+    <text><![CDATA[ ]]></text>
+  </DocumentChange>
+  <Command __id="157" _type="InsertStringCommand" timestamp="467175">
+    <data><![CDATA[ ]]></data>
+  </Command>
+  <Command __id="158" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_NEXT" timestamp="467402" />
+  <DocumentChange __id="159" _type="Insert" docASTNodeCount="1774" docActiveCodeLength="10610" docExpressionCount="1042" docLength="19636" length="1" offset="3759" timestamp="467677">
+    <text><![CDATA[ ]]></text>
+  </DocumentChange>
+  <Command __id="160" _type="InsertStringCommand" timestamp="467680">
+    <data><![CDATA[ ]]></data>
+  </Command>
+  <Command __id="161" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_PREVIOUS" timestamp="468028" />
+  <Command __id="162" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.LINE_DOWN" timestamp="468477" />
+  <DocumentChange __id="163" _type="Insert" docASTNodeCount="1776" docActiveCodeLength="10616" docExpressionCount="1042" docLength="19642" length="6" offset="3770" repeat="5" timestamp="471248" timestamp2="472177">
+    <text><![CDATA[(int )]]></text>
+  </DocumentChange>
+  <Command __id="164" _type="InsertStringCommand" repeat="5" timestamp="471263" timestamp2="472178">
+    <data><![CDATA[(int ]]></data>
+  </Command>
+  <Command __id="173" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.LINE_UP" timestamp="472519" />
+  <Command __id="174" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_PREVIOUS" repeat="4" timestamp="472667" timestamp2="473034" />
+  <DocumentChange __id="178" _type="Delete" docASTNodeCount="1776" docActiveCodeLength="10615" docExpressionCount="1043" docLength="19641" endLine="141" length="1" offset="3756" startLine="141" timestamp="473415">
+    <text><![CDATA[i]]></text>
+  </DocumentChange>
+  <Command __id="179" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="473419" />
+  <DocumentChange __id="180" _type="Insert" docASTNodeCount="1776" docActiveCodeLength="10618" docExpressionCount="1042" docLength="19644" length="3" offset="3756" repeat="3" timestamp="473549" timestamp2="473830">
+    <text><![CDATA[cnt]]></text>
+  </DocumentChange>
+  <Command __id="181" _type="InsertStringCommand" repeat="3" timestamp="473551" timestamp2="473833">
+    <data><![CDATA[cnt]]></data>
+  </Command>
+  <Command __id="186" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.LINE_DOWN" timestamp="474277" />
+  <Command __id="187" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_NEXT" repeat="2" timestamp="474427" timestamp2="474597" />
+  <DocumentChange __id="189" _type="Insert" docASTNodeCount="1780" docActiveCodeLength="10620" docExpressionCount="1044" docLength="19646" length="2" offset="3777" repeat="2" timestamp="475445" timestamp2="475974">
+    <text><![CDATA[i=]]></text>
+  </DocumentChange>
+  <Command __id="190" _type="InsertStringCommand" repeat="2" timestamp="475448" timestamp2="475976">
+    <data><![CDATA[i=]]></data>
+  </Command>
+  <DocumentChange __id="193" _type="Insert" docASTNodeCount="1786" docActiveCodeLength="10638" docExpressionCount="1050" docLength="19664" length="18" offset="3779" repeat="17" timestamp="478006" timestamp2="481167">
+    <text><![CDATA[0; i < space.get()]]></text>
+  </DocumentChange>
+  <Command __id="194" _type="InsertStringCommand" repeat="13" timestamp="478009" timestamp2="479969">
+    <data><![CDATA[0; i < space.]]></data>
+  </Command>
+  <Command __id="219" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="true" start_end="START" timestamp="479993" />
+  <Command __id="221" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="480110" />
+  <Command __id="223" _type="InsertStringCommand" repeat="4" timestamp="480153" timestamp2="481238">
+    <data><![CDATA[et()]]></data>
+  </Command>
+  <DocumentChange __id="229" _type="Delete" docASTNodeCount="1784" docActiveCodeLength="10636" docExpressionCount="1048" docLength="19662" endLine="142" length="2" offset="3795" repeat="2" startLine="142" timestamp="481749" timestamp2="481909">
+    <text><![CDATA[()]]></text>
+  </DocumentChange>
+  <Command __id="230" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="2" timestamp="481752" timestamp2="481912" />
+  <DocumentChange __id="233" _type="Insert" docASTNodeCount="1779" docActiveCodeLength="10644" docExpressionCount="1044" docLength="19670" length="8" offset="3795" repeat="7" timestamp="482289" timestamp2="483845">
+    <text><![CDATA[X(); ++i]]></text>
+  </DocumentChange>
+  <Command __id="234" _type="InsertStringCommand" repeat="8" timestamp="482293" timestamp2="483847">
+    <data><![CDATA[X(); ++i]]></data>
+  </Command>
+  <Command __id="248" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_NEXT" timestamp="484298" />
+  <DocumentChange __id="249" _type="Insert" docASTNodeCount="1788" docActiveCodeLength="10646" docExpressionCount="1052" docLength="19672" length="2" offset="3804" repeat="2" timestamp="484777" timestamp2="484940">
+    <text><![CDATA[ {]]></text>
+  </DocumentChange>
+  <Command __id="250" _type="InsertStringCommand" repeat="2" timestamp="484784" timestamp2="484944">
+    <data><![CDATA[ {]]></data>
+  </Command>
+  <DocumentChange __id="253" _type="Insert" docASTNodeCount="1788" docActiveCodeLength="10656" docExpressionCount="1052" docLength="19682" length="10" offset="3806" timestamp="485099">
+    <text><![CDATA[
+			
+		}]]></text>
+  </DocumentChange>
+  <Command __id="254" _type="InsertStringCommand" timestamp="485115">
+    <data><![CDATA[]]></data>
+  </Command>
+  <DocumentChange __id="255" _type="Replace" docASTNodeCount="1790" docActiveCodeLength="10656" docExpressionCount="1052" docLength="19682" endLine="143" insertionLength="1" int_docASTNodeCount="1788" int_docActiveCodeLength="10655" int_docExpressionCount="1052" int_docLength="19681" length="1" offset="3810" startLine="143" timestamp="485290">
+    <deletedText><![CDATA[	]]></deletedText>
+    <insertedText><![CDATA[}]]></insertedText>
+  </DocumentChange>
+  <Command __id="256" _type="InsertStringCommand" timestamp="485295">
+    <data><![CDATA[}]]></data>
+  </Command>
+  <Command __id="257" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.LINE_UP" timestamp="485526" />
+  <Command __id="258" _type="EclipseCommand" commandID="org.eclipse.ui.edit.text.goto.lineEnd" timestamp="485965" />
+  <DocumentChange __id="259" _type="Insert" docASTNodeCount="1790" docActiveCodeLength="10661" docExpressionCount="1052" docLength="19687" length="5" offset="3806" timestamp="486770">
+    <text><![CDATA[
+			]]></text>
+  </DocumentChange>
+  <Command __id="260" _type="InsertStringCommand" timestamp="486776">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="261" _type="MoveCaretCommand" caretOffset="3521" docOffset="3748" timestamp="497889" />
+  <Command __id="262" _type="MoveCaretCommand" caretOffset="3439" docOffset="3666" timestamp="499385" />
+  <Command __id="263" _type="MoveCaretCommand" caretOffset="3456" docOffset="3683" timestamp="501602" />
+  <Command __id="264" _type="MoveCaretCommand" caretOffset="3594" docOffset="3821" timestamp="507690" />
+  <Command __id="265" _type="MoveCaretCommand" caretOffset="3589" docOffset="3816" timestamp="508265" />
+  <Command __id="266" _type="SelectTextCommand" caretOffset="3564" docEnd="3791" docOffset="3791" docStart="3787" end="3564" start="3560" timestamp="513042" />
+  <Command __id="267" _type="SelectTextCommand" caretOffset="3571" docEnd="3798" docOffset="3798" docStart="3786" end="3571" start="3559" timestamp="515977" />
+  <DocumentChange __id="268" _type="Replace" docASTNodeCount="1788" docActiveCodeLength="10655" docExpressionCount="1050" docLength="19681" endLine="142" insertionLength="6" int_docASTNodeCount="1781" int_docActiveCodeLength="10649" int_docExpressionCount="1044" int_docLength="19675" length="12" offset="3786" repeat="6" startLine="142" timestamp="517212" timestamp2="518032">
+    <deletedText><![CDATA[space.getX()]]></deletedText>
+    <insertedText><![CDATA[height]]></insertedText>
+  </DocumentChange>
+  <Command __id="269" _type="InsertStringCommand" repeat="6" timestamp="517216" timestamp2="518035">
+    <data><![CDATA[height]]></data>
+  </Command>
+  <Command __id="280" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_PREVIOUS" repeat="14" timestamp="518508" timestamp2="519698" />
+  <DocumentChange __id="294" _type="Delete" docASTNodeCount="1787" docActiveCodeLength="10654" docExpressionCount="1050" docLength="19680" endLine="142" length="1" offset="3777" startLine="142" timestamp="520197">
+    <text><![CDATA[i]]></text>
+  </DocumentChange>
+  <Command __id="295" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="520199" />
+  <DocumentChange __id="296" _type="Insert" docASTNodeCount="1788" docActiveCodeLength="10655" docExpressionCount="1050" docLength="19681" length="1" offset="3777" timestamp="520294">
+    <text><![CDATA[h]]></text>
+  </DocumentChange>
+  <Command __id="297" _type="InsertStringCommand" timestamp="520297">
+    <data><![CDATA[h]]></data>
+  </Command>
+  <Command __id="298" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_NEXT" repeat="5" timestamp="520459" timestamp2="521056" />
+  <DocumentChange __id="303" _type="Delete" docASTNodeCount="1786" docActiveCodeLength="10654" docExpressionCount="1048" docLength="19680" endLine="142" length="1" offset="3782" startLine="142" timestamp="521493">
+    <text><![CDATA[i]]></text>
+  </DocumentChange>
+  <Command __id="304" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="521495" />
+  <DocumentChange __id="305" _type="Insert" docASTNodeCount="1788" docActiveCodeLength="10655" docExpressionCount="1050" docLength="19681" length="1" offset="3782" timestamp="521591">
+    <text><![CDATA[h]]></text>
+  </DocumentChange>
+  <Command __id="306" _type="InsertStringCommand" timestamp="521593">
+    <data><![CDATA[h]]></data>
+  </Command>
+  <Command __id="307" _type="EclipseCommand" commandID="org.eclipse.ui.edit.text.goto.lineEnd" timestamp="521855" />
+  <Command __id="308" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_PREVIOUS" repeat="3" timestamp="522282" timestamp2="522594" />
+  <DocumentChange __id="311" _type="Delete" docASTNodeCount="1781" docActiveCodeLength="10654" docExpressionCount="1044" docLength="19680" endLine="142" length="1" offset="3796" startLine="142" timestamp="522957">
+    <text><![CDATA[i]]></text>
+  </DocumentChange>
+  <Command __id="312" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="522959" />
+  <DocumentChange __id="313" _type="Insert" docASTNodeCount="1788" docActiveCodeLength="10655" docExpressionCount="1050" docLength="19681" length="1" offset="3796" timestamp="523053">
+    <text><![CDATA[h]]></text>
+  </DocumentChange>
+  <Command __id="314" _type="InsertStringCommand" timestamp="523056">
+    <data><![CDATA[h]]></data>
+  </Command>
+  <Command __id="315" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.LINE_DOWN" timestamp="523405" />
+  <DocumentChange __id="316" _type="Insert" docASTNodeCount="1796" docActiveCodeLength="10678" docExpressionCount="1054" docLength="19704" length="23" offset="3805" repeat="22" timestamp="523968" timestamp2="529727">
+    <text><![CDATA[for (int w=0; w < wied)]]></text>
+  </DocumentChange>
+  <Command __id="317" _type="InsertStringCommand" repeat="22" timestamp="523972" timestamp2="529728">
+    <data><![CDATA[for (int w=0; w < wied]]></data>
+  </Command>
+  <DocumentChange __id="360" _type="Delete" docASTNodeCount="1796" docActiveCodeLength="10676" docExpressionCount="1054" docLength="19702" endLine="143" length="2" offset="3825" repeat="2" startLine="143" timestamp="529870" timestamp2="530006">
+    <text><![CDATA[ed]]></text>
+  </DocumentChange>
+  <Command __id="361" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="2" timestamp="529872" timestamp2="530008" />
+  <DocumentChange __id="364" _type="Insert" docASTNodeCount="1786" docActiveCodeLength="10684" docExpressionCount="1046" docLength="19710" length="8" offset="3825" repeat="8" timestamp="530087" timestamp2="531184">
+    <text><![CDATA[dth; ++w]]></text>
+  </DocumentChange>
+  <Command __id="365" _type="InsertStringCommand" repeat="8" timestamp="530089" timestamp2="531185">
+    <data><![CDATA[dth; ++w]]></data>
+  </Command>
+  <Command __id="380" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_NEXT" timestamp="531770" />
+  <DocumentChange __id="381" _type="Insert" docASTNodeCount="1798" docActiveCodeLength="10686" docExpressionCount="1058" docLength="19712" length="2" offset="3834" repeat="2" timestamp="532223" timestamp2="532455">
+    <text><![CDATA[ {]]></text>
+  </DocumentChange>
+  <Command __id="382" _type="InsertStringCommand" repeat="2" timestamp="532227" timestamp2="532464">
+    <data><![CDATA[ {]]></data>
+  </Command>
+  <DocumentChange __id="385" _type="Insert" docASTNodeCount="1798" docActiveCodeLength="10692" docExpressionCount="1058" docLength="19718" length="6" offset="3836" timestamp="532606">
+    <text><![CDATA[
+				]]></text>
+  </DocumentChange>
+  <Command __id="386" _type="InsertStringCommand" timestamp="532611">
+    <data><![CDATA[]]></data>
+  </Command>
+  <DocumentChange __id="387" _type="Replace" docASTNodeCount="1800" docActiveCodeLength="10692" docExpressionCount="1058" docLength="19718" endLine="144" insertionLength="1" int_docASTNodeCount="1798" int_docActiveCodeLength="10691" int_docExpressionCount="1058" int_docLength="19717" length="1" offset="3841" startLine="144" timestamp="533454">
+    <deletedText><![CDATA[	]]></deletedText>
+    <insertedText><![CDATA[}]]></insertedText>
+  </DocumentChange>
+  <Command __id="388" _type="InsertStringCommand" timestamp="533462">
+    <data><![CDATA[}]]></data>
+  </Command>
+  <Command __id="389" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.LINE_DOWN" repeat="2" timestamp="533942" timestamp2="534118" />
+  <DocumentChange __id="391" _type="Delete" docASTNodeCount="1798" docActiveCodeLength="10687" docExpressionCount="1058" docLength="19713" endLine="146" length="5" offset="3847" repeat="4" startLine="145" timestamp="534508" timestamp2="534999">
+    <text><![CDATA[
+		}]]></text>
+  </DocumentChange>
+  <Command __id="392" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="4" timestamp="534510" timestamp2="535004" />
+  <Command __id="399" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.LINE_UP" repeat="2" timestamp="535475" timestamp2="535868" />
+  <Command __id="401" _type="EclipseCommand" commandID="org.eclipse.ui.edit.text.goto.lineEnd" timestamp="536139" />
+  <DocumentChange __id="402" _type="Insert" docASTNodeCount="1798" docActiveCodeLength="10693" docExpressionCount="1058" docLength="19719" length="6" offset="3836" timestamp="536358">
+    <text><![CDATA[
+				]]></text>
+  </DocumentChange>
+  <Command __id="403" _type="InsertStringCommand" timestamp="536363">
+    <data><![CDATA[]]></data>
+  </Command>
+  <DocumentChange __id="404" _type="Insert" docASTNodeCount="1805" docActiveCodeLength="10707" docExpressionCount="1063" docLength="19733" length="14" offset="3842" repeat="12" timestamp="537390" timestamp2="540361">
+    <text><![CDATA[if mines[h][w]]]></text>
+  </DocumentChange>
+  <Command __id="405" _type="InsertStringCommand" repeat="14" timestamp="537393" timestamp2="540479">
+    <data><![CDATA[if mines[h][w]]]></data>
+  </Command>
+  <DocumentChange __id="430" _type="Insert" docASTNodeCount="1805" docActiveCodeLength="10708" docExpressionCount="1063" docLength="19734" length="1" offset="3856" timestamp="546694">
+    <text><![CDATA[ ]]></text>
+  </DocumentChange>
+  <Command __id="431" _type="InsertStringCommand" timestamp="546698">
+    <data><![CDATA[ ]]></data>
+  </Command>
+  <DocumentChange __id="432" _type="Delete" docASTNodeCount="1805" docActiveCodeLength="10707" docExpressionCount="1063" docLength="19733" endLine="144" length="1" offset="3856" startLine="144" timestamp="547865">
+    <text><![CDATA[ ]]></text>
+  </DocumentChange>
+  <Command __id="433" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="547867" />
+  <DocumentChange __id="434" _type="Insert" docASTNodeCount="1805" docActiveCodeLength="10708" docExpressionCount="1063" docLength="19734" length="1" offset="3856" timestamp="548741">
+    <text><![CDATA[)]]></text>
+  </DocumentChange>
+  <Command __id="435" _type="InsertStringCommand" timestamp="548745">
+    <data><![CDATA[)]]></data>
+  </Command>
+  <Command __id="436" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_PREVIOUS" repeat="12" timestamp="549203" timestamp2="551132" />
+  <DocumentChange __id="448" _type="Insert" docASTNodeCount="1805" docActiveCodeLength="10709" docExpressionCount="1063" docLength="19735" length="1" offset="3845" timestamp="551516">
+    <text><![CDATA[(]]></text>
+  </DocumentChange>
+  <Command __id="449" _type="InsertStringCommand" timestamp="551520">
+    <data><![CDATA[(]]></data>
+  </Command>
+  <Command __id="450" _type="EclipseCommand" commandID="org.eclipse.ui.edit.text.goto.lineEnd" timestamp="552061" />
+  <DocumentChange __id="451" _type="Insert" docASTNodeCount="1807" docActiveCodeLength="10716" docExpressionCount="1065" docLength="19742" length="7" offset="3858" repeat="7" timestamp="554000" timestamp2="555110">
+    <text><![CDATA[ ++cnt;]]></text>
+  </DocumentChange>
+  <Command __id="452" _type="InsertStringCommand" repeat="7" timestamp="554005" timestamp2="555112">
+    <data><![CDATA[ ++cnt;]]></data>
+  </Command>
+  <Command __id="465" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.LINE_DOWN" repeat="3" timestamp="555658" timestamp2="556024" />
+  <Command __id="468" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.LINE_UP" timestamp="556470" />
+  <DocumentChange __id="469" _type="Insert" docASTNodeCount="1807" docActiveCodeLength="10720" docExpressionCount="1065" docLength="19746" length="4" offset="3876" timestamp="556804">
+    <text><![CDATA[
+		]]></text>
+  </DocumentChange>
+  <Command __id="470" _type="InsertStringCommand" timestamp="556810">
+    <data><![CDATA[]]></data>
+  </Command>
+  <DocumentChange __id="471" _type="Insert" docASTNodeCount="1809" docActiveCodeLength="10726" docExpressionCount="1066" docLength="19752" length="6" offset="3880" repeat="6" timestamp="557734" timestamp2="558550">
+    <text><![CDATA[System]]></text>
+  </DocumentChange>
+  <Command __id="472" _type="InsertStringCommand" repeat="6" timestamp="557736" timestamp2="558552">
+    <data><![CDATA[System]]></data>
+  </Command>
+  <DocumentChange __id="483" _type="Delete" docASTNodeCount="1809" docActiveCodeLength="10723" docExpressionCount="1066" docLength="19749" endLine="147" length="3" offset="3883" repeat="3" startLine="147" timestamp="562389" timestamp2="562685">
+    <text><![CDATA[tem]]></text>
+  </DocumentChange>
+  <Command __id="484" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="3" timestamp="562390" timestamp2="562686" />
+  <DocumentChange __id="489" _type="Insert" docASTNodeCount="1809" docActiveCodeLength="10724" docExpressionCount="1066" docLength="19750" length="1" offset="3883" timestamp="562973">
+    <text><![CDATA[	]]></text>
+  </DocumentChange>
+  <Command __id="490" _type="InsertStringCommand" timestamp="562975">
+    <data><![CDATA[	]]></data>
+  </Command>
+  <DocumentChange __id="491" _type="Delete" docASTNodeCount="1809" docActiveCodeLength="10723" docExpressionCount="1066" docLength="19749" endLine="147" length="1" offset="3883" startLine="147" timestamp="563444">
+    <text><![CDATA[	]]></text>
+  </DocumentChange>
+  <Command __id="492" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="563446" />
+  <Command __id="493" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="START" timestamp="563659" />
+  <Command __id="494" _type="EclipseCommand" commandID="org.eclipse.ui.edit.text.contentAssist.proposals" timestamp="563722" />
+  <DocumentChange __id="495" _type="Insert" docASTNodeCount="1811" docActiveCodeLength="10730" docExpressionCount="1068" docLength="19756" length="7" offset="3883" repeat="7" timestamp="565397" timestamp2="567650">
+    <text><![CDATA[tem.log]]></text>
+  </DocumentChange>
+  <Command __id="498" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="565823" />
+  <Command __id="500" _type="InsertStringCommand" timestamp="565830">
+    <data><![CDATA[.]]></data>
+  </Command>
+  <Command __id="501" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="true" start_end="START" timestamp="565832" />
+  <Command __id="505" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="567655" />
+  <DocumentChange __id="506" _type="Delete" docASTNodeCount="1809" docActiveCodeLength="10727" docExpressionCount="1066" docLength="19753" endLine="147" length="3" offset="3887" repeat="3" startLine="147" timestamp="568184" timestamp2="568696">
+    <text><![CDATA[log]]></text>
+  </DocumentChange>
+  <Command __id="507" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="3" timestamp="568186" timestamp2="568698" />
+  <DocumentChange __id="512" _type="Insert" docASTNodeCount="1811" docActiveCodeLength="10731" docExpressionCount="1068" docLength="19757" length="4" offset="3887" repeat="4" timestamp="569175" timestamp2="569670">
+    <text><![CDATA[prin]]></text>
+  </DocumentChange>
+  <Command __id="513" _type="InsertStringCommand" repeat="4" timestamp="569178" timestamp2="569674">
+    <data><![CDATA[prin]]></data>
+  </Command>
+  <Command __id="520" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="START" timestamp="570227" />
+  <Command __id="521" _type="EclipseCommand" commandID="org.eclipse.ui.edit.text.contentAssist.proposals" timestamp="570245" />
+  <DocumentChange __id="522" _type="Delete" docASTNodeCount="1809" docActiveCodeLength="10727" docExpressionCount="1066" docLength="19753" endLine="147" length="4" offset="3887" repeat="4" startLine="147" timestamp="570838" timestamp2="571276">
+    <text><![CDATA[prin]]></text>
+  </DocumentChange>
+  <Command __id="523" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="570847" />
+  <Command __id="525" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="3" timestamp="570993" timestamp2="571278" />
+  <DocumentChange __id="530" _type="Insert" docASTNodeCount="1811" docActiveCodeLength="10732" docExpressionCount="1068" docLength="19758" length="5" offset="3887" repeat="5" timestamp="578861" timestamp2="579348">
+    <text><![CDATA[print]]></text>
+  </DocumentChange>
+  <Command __id="531" _type="InsertStringCommand" repeat="5" timestamp="578863" timestamp2="579351">
+    <data><![CDATA[print]]></data>
+  </Command>
+  <Command __id="540" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="START" timestamp="579820" />
+  <Command __id="541" _type="EclipseCommand" commandID="org.eclipse.ui.edit.text.contentAssist.proposals" timestamp="579838" />
+  <DocumentChange __id="542" _type="Delete" docASTNodeCount="1809" docActiveCodeLength="10727" docExpressionCount="1066" docLength="19753" endLine="147" length="5" offset="3887" repeat="5" startLine="147" timestamp="580206" timestamp2="580769">
+    <text><![CDATA[print]]></text>
+  </DocumentChange>
+  <Command __id="543" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="580214" />
+  <Command __id="545" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="4" timestamp="580361" timestamp2="580771" />
+  <Command __id="552" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="START" timestamp="580963" />
+  <Command __id="553" _type="EclipseCommand" commandID="org.eclipse.ui.edit.text.contentAssist.proposals" timestamp="581007" />
+  <Command __id="554" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="584335" />
+  <DocumentChange __id="555" _type="Insert" docASTNodeCount="1811" docActiveCodeLength="10731" docExpressionCount="1068" docLength="19757" length="4" offset="3887" repeat="2" timestamp="584339" timestamp2="584904">
+    <text><![CDATA[out.]]></text>
+  </DocumentChange>
+  <Command __id="556" _type="InsertStringCommand" timestamp="584342">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="558" _type="InsertStringCommand" timestamp="584907">
+    <data><![CDATA[.]]></data>
+  </Command>
+  <Command __id="559" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="true" start_end="START" timestamp="584912" />
+  <Command __id="560" _type="EclipseCommand" commandID="org.eclipse.ui.edit.text.contentAssist.proposals" timestamp="585280" />
+  <DocumentChange __id="561" _type="Delete" docASTNodeCount="1811" docActiveCodeLength="10730" docExpressionCount="1068" docLength="19756" endLine="147" length="1" offset="3890" startLine="147" timestamp="585974">
+    <text><![CDATA[.]]></text>
+  </DocumentChange>
+  <Command __id="562" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="586547" />
+  <DocumentChange __id="563" _type="Insert" docASTNodeCount="1813" docActiveCodeLength="10735" docExpressionCount="1070" docLength="19761" length="5" offset="3890" repeat="5" timestamp="586550" timestamp2="587132">
+    <text><![CDATA[.prin]]></text>
+  </DocumentChange>
+  <Command __id="564" _type="InsertStringCommand" timestamp="586553">
+    <data><![CDATA[.]]></data>
+  </Command>
+  <Command __id="565" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="true" start_end="START" timestamp="586568" />
+  <DocumentChange __id="570" _type="Insert" docASTNodeCount="1813" docActiveCodeLength="10738" docExpressionCount="1070" docLength="19764" length="3" offset="3895" repeat="3" timestamp="589379" timestamp2="590174">
+    <text><![CDATA[tln]]></text>
+  </DocumentChange>
+  <Command __id="573" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="593718" />
+  <DocumentChange __id="574" _type="Insert" docASTNodeCount="1813" docActiveCodeLength="10738" docExpressionCount="1070" docLength="19764" length="4" offset="3898" timestamp="593738">
+    <text><![CDATA[(x);]]></text>
+  </DocumentChange>
+  <Command __id="575" _type="InsertStringCommand" timestamp="593774">
+    <data><![CDATA[]]></data>
+  </Command>
+  <DocumentChange __id="576" _type="Replace" docASTNodeCount="1814" docActiveCodeLength="10744" docExpressionCount="1071" docLength="19770" endLine="147" insertionLength="3" int_docASTNodeCount="1813" int_docActiveCodeLength="10741" int_docExpressionCount="1070" int_docLength="19767" length="1" offset="3899" repeat="3" startLine="147" timestamp="595608" timestamp2="595853">
+    <deletedText><![CDATA[x]]></deletedText>
+    <insertedText><![CDATA[cnt]]></insertedText>
+  </DocumentChange>
+  <Command __id="577" _type="InsertStringCommand" repeat="3" timestamp="595613" timestamp2="595854">
+    <data><![CDATA[cnt]]></data>
+  </Command>
+  <Command __id="582" _type="EclipseCommand" commandID="org.eclipse.ui.file.save" timestamp="596460" />
+  <Command __id="583" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="596492" />
+  <Command __id="584" _type="RunCommand" kind="Create" projectName="MineSweeper" timestamp="602909" type="Run" />
+  <Command __id="585" _type="RunCommand" exitValue="0" kind="Terminate" projectName="MineSweeper" timestamp="614934" type="Run" />
+  <Command __id="586" _type="SelectTextCommand" caretOffset="3523" docEnd="3904" docOffset="3750" docStart="3750" end="3677" start="3523" timestamp="617681" />
+  <Command __id="587" _type="MoveCaretCommand" caretOffset="3521" docOffset="3748" timestamp="618649" />
+  <Command __id="588" _type="SelectTextCommand" caretOffset="3523" docEnd="3904" docOffset="3750" docStart="3750" end="3677" start="3523" timestamp="624753" />
+  <DocumentChange __id="589" _type="Delete" docASTNodeCount="1769" docActiveCodeLength="10588" docExpressionCount="1040" docLength="19614" endLine="147" length="156" offset="3748" repeat="2" startLine="140" timestamp="625402" timestamp2="626286">
+    <text><![CDATA[
+		int cnt = 0;
+		for (int h=0; h < height; ++h) {
+			for (int w=0; w < width; ++w) {
+				if (mines[h][w]) ++cnt;
+			}
+		}
+		System.out.println(cnt);]]></text>
+  </DocumentChange>
+  <Command __id="590" _type="CutCommand" timestamp="625417" />
+  <Command __id="592" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="626290" />
+  <DocumentChange __id="593" _type="Insert" docASTNodeCount="1769" docActiveCodeLength="10590" docExpressionCount="1040" docLength="19616" length="2" offset="3748" timestamp="628447">
+    <text><![CDATA[
+]]></text>
+  </DocumentChange>
+  <Command __id="594" _type="UndoCommand" repeat="2" timestamp="628457" timestamp2="629010" />
+  <DocumentChange __id="595" _type="Insert" docASTNodeCount="1814" docActiveCodeLength="10744" docExpressionCount="1071" docLength="19770" length="154" offset="3750" timestamp="629007">
+    <text><![CDATA[		int cnt = 0;
+		for (int h=0; h < height; ++h) {
+			for (int w=0; w < width; ++w) {
+				if (mines[h][w]) ++cnt;
+			}
+		}
+		System.out.println(cnt);]]></text>
+  </DocumentChange>
+  <DocumentChange __id="597" _type="Insert" docASTNodeCount="1809" docActiveCodeLength="10730" docExpressionCount="1069" docLength="19772" length="2" offset="3750" timestamp="630584">
+    <text><![CDATA[//]]></text>
+  </DocumentChange>
+  <DocumentChange __id="598" _type="Insert" docASTNodeCount="1792" docActiveCodeLength="10696" docExpressionCount="1055" docLength="19774" length="2" offset="3768" timestamp="630588">
+    <text><![CDATA[//]]></text>
+  </DocumentChange>
+  <DocumentChange __id="599" _type="Insert" docASTNodeCount="1780" docActiveCodeLength="10662" docExpressionCount="1047" docLength="19776" length="2" offset="3806" timestamp="630592">
+    <text><![CDATA[//]]></text>
+  </DocumentChange>
+  <DocumentChange __id="600" _type="Insert" docASTNodeCount="1771" docActiveCodeLength="10635" docExpressionCount="1040" docLength="19778" length="2" offset="3844" timestamp="630595">
+    <text><![CDATA[//]]></text>
+  </DocumentChange>
+  <DocumentChange __id="601" _type="Insert" docASTNodeCount="1771" docActiveCodeLength="10631" docExpressionCount="1040" docLength="19780" length="2" offset="3875" timestamp="630597">
+    <text><![CDATA[//]]></text>
+  </DocumentChange>
+  <DocumentChange __id="602" _type="Insert" docASTNodeCount="1776" docActiveCodeLength="10628" docExpressionCount="1046" docLength="19782" length="2" offset="3883" timestamp="630599">
+    <text><![CDATA[//]]></text>
+  </DocumentChange>
+  <DocumentChange __id="603" _type="Insert" docASTNodeCount="1769" docActiveCodeLength="10602" docExpressionCount="1040" docLength="19784" length="2" offset="3890" timestamp="630601">
+    <text><![CDATA[//]]></text>
+  </DocumentChange>
+  <Command __id="604" _type="EclipseCommand" commandID="org.eclipse.jdt.ui.edit.text.java.toggle.comment" timestamp="630616" />
+  <Command __id="605" _type="MoveCaretCommand" caretOffset="3758" docOffset="3985" timestamp="631769" />
+  <Command __id="606" _type="EclipseCommand" commandID="org.eclipse.ui.file.save" timestamp="634054" />
+  <Command __id="607" _type="MoveCaretCommand" caretOffset="7011" docOffset="7238" timestamp="648489" />
+  <Command __id="608" _type="MoveCaretCommand" caretOffset="7009" docOffset="7236" timestamp="649121" />
+  <Command __id="609" _type="MoveCaretCommand" caretOffset="6885" docOffset="7112" timestamp="649874" />
+  <Command __id="610" _type="MoveCaretCommand" caretOffset="6832" docOffset="7059" timestamp="651057" />
+  <Command __id="611" _type="MoveCaretCommand" caretOffset="7070" docOffset="7297" timestamp="655962" />
+  <Command __id="612" _type="MoveCaretCommand" caretOffset="7041" docOffset="7268" timestamp="658995" />
+  <DocumentChange __id="613" _type="Insert" docASTNodeCount="1769" docActiveCodeLength="10606" docExpressionCount="1040" docLength="19788" length="4" offset="7268" timestamp="662679">
+    <text><![CDATA[
+		]]></text>
+  </DocumentChange>
+  <Command __id="614" _type="InsertStringCommand" timestamp="662689">
+    <data><![CDATA[]]></data>
+  </Command>
+  <DocumentChange __id="615" _type="Insert" docASTNodeCount="1774" docActiveCodeLength="10618" docExpressionCount="1042" docLength="19800" length="12" offset="7272" repeat="12" timestamp="663925" timestamp2="665853">
+    <text><![CDATA[int cnt = 0;]]></text>
+  </DocumentChange>
+  <Command __id="616" _type="InsertStringCommand" repeat="12" timestamp="663927" timestamp2="665856">
+    <data><![CDATA[int cnt = 0;]]></data>
+  </Command>
+  <Command __id="639" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.LINE_DOWN" repeat="2" timestamp="666445" timestamp2="666628" />
+  <Command __id="641" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.LINE_UP" timestamp="667037" />
+  <Command __id="642" _type="EclipseCommand" commandID="org.eclipse.ui.edit.text.goto.lineEnd" timestamp="667411" />
+  <DocumentChange __id="643" _type="Insert" docASTNodeCount="1774" docActiveCodeLength="10623" docExpressionCount="1042" docLength="19805" length="5" offset="7324" timestamp="668838">
+    <text><![CDATA[
+			]]></text>
+  </DocumentChange>
+  <Command __id="644" _type="InsertStringCommand" timestamp="668843">
+    <data><![CDATA[]]></data>
+  </Command>
+  <DocumentChange __id="645" _type="Insert" docASTNodeCount="1777" docActiveCodeLength="10629" docExpressionCount="1044" docLength="19811" length="6" offset="7329" repeat="6" timestamp="669407" timestamp2="670723">
+    <text><![CDATA[++cnt;]]></text>
+  </DocumentChange>
+  <Command __id="646" _type="InsertStringCommand" repeat="6" timestamp="669409" timestamp2="670725">
+    <data><![CDATA[++cnt;]]></data>
+  </Command>
+  <Command __id="657" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.LINE_DOWN" repeat="16" timestamp="671012" timestamp2="672486" />
+  <DocumentChange __id="673" _type="Insert" docASTNodeCount="1777" docActiveCodeLength="10633" docExpressionCount="1044" docLength="19815" length="4" offset="7727" timestamp="672925">
+    <text><![CDATA[
+		]]></text>
+  </DocumentChange>
+  <Command __id="674" _type="InsertStringCommand" timestamp="672929">
+    <data><![CDATA[]]></data>
+  </Command>
+  <DocumentChange __id="675" _type="Insert" docASTNodeCount="1779" docActiveCodeLength="10637" docExpressionCount="1045" docLength="19819" length="4" offset="7731" repeat="4" timestamp="674061" timestamp2="674332">
+    <text><![CDATA[Stys]]></text>
+  </DocumentChange>
+  <Command __id="676" _type="InsertStringCommand" repeat="4" timestamp="674063" timestamp2="674336">
+    <data><![CDATA[Stys]]></data>
+  </Command>
+  <DocumentChange __id="683" _type="Delete" docASTNodeCount="1779" docActiveCodeLength="10634" docExpressionCount="1045" docLength="19816" endLine="317" length="3" offset="7732" repeat="3" startLine="317" timestamp="674711" timestamp2="674964">
+    <text><![CDATA[tys]]></text>
+  </DocumentChange>
+  <Command __id="684" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="3" timestamp="674712" timestamp2="674966" />
+  <DocumentChange __id="689" _type="Insert" docASTNodeCount="1783" docActiveCodeLength="10646" docExpressionCount="1049" docLength="19828" length="12" offset="7732" repeat="12" timestamp="675092" timestamp2="676613">
+    <text><![CDATA[ystem.out/.p]]></text>
+  </DocumentChange>
+  <Command __id="690" _type="InsertStringCommand" repeat="6" timestamp="675094" timestamp2="675574">
+    <data><![CDATA[ystem.]]></data>
+  </Command>
+  <Command __id="701" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="true" start_end="START" timestamp="675575" />
+  <Command __id="706" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="676224" />
+  <Command __id="708" _type="InsertStringCommand" timestamp="676230">
+    <data><![CDATA[.]]></data>
+  </Command>
+  <Command __id="709" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="true" start_end="START" timestamp="676231" />
+  <DocumentChange __id="711" _type="Delete" docASTNodeCount="1781" docActiveCodeLength="10643" docExpressionCount="1047" docLength="19825" endLine="317" length="3" offset="7741" repeat="3" startLine="317" timestamp="676892" timestamp2="677141">
+    <text><![CDATA[/.p]]></text>
+  </DocumentChange>
+  <Command __id="714" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="677339" />
+  <DocumentChange __id="715" _type="Insert" docASTNodeCount="1783" docActiveCodeLength="10649" docExpressionCount="1049" docLength="19831" length="6" offset="7741" repeat="6" timestamp="677342" timestamp2="677807">
+    <text><![CDATA[.porin]]></text>
+  </DocumentChange>
+  <Command __id="716" _type="InsertStringCommand" timestamp="677346">
+    <data><![CDATA[.]]></data>
+  </Command>
+  <Command __id="717" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="true" start_end="START" timestamp="677348" />
+  <Command __id="720" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="677555" />
+  <Command __id="722" _type="InsertStringCommand" repeat="3" timestamp="677663" timestamp2="677810">
+    <data><![CDATA[rin]]></data>
+  </Command>
+  <DocumentChange __id="727" _type="Delete" docASTNodeCount="1783" docActiveCodeLength="10645" docExpressionCount="1049" docLength="19827" endLine="317" length="4" offset="7743" repeat="4" startLine="317" timestamp="678073" timestamp2="678435">
+    <text><![CDATA[orin]]></text>
+  </DocumentChange>
+  <Command __id="728" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="4" timestamp="678075" timestamp2="678437" />
+  <DocumentChange __id="735" _type="Insert" docASTNodeCount="1783" docActiveCodeLength="10653" docExpressionCount="1049" docLength="19835" length="8" offset="7743" repeat="7" timestamp="678590" timestamp2="679322">
+    <text><![CDATA[rintln()]]></text>
+  </DocumentChange>
+  <Command __id="736" _type="InsertStringCommand" repeat="7" timestamp="678592" timestamp2="679324">
+    <data><![CDATA[rintln(]]></data>
+  </Command>
+  <DocumentChange __id="749" _type="Delete" docASTNodeCount="1783" docActiveCodeLength="10651" docExpressionCount="1049" docLength="19833" endLine="317" length="2" offset="7749" repeat="2" startLine="317" timestamp="680008" timestamp2="680011">
+    <text><![CDATA[()]]></text>
+  </DocumentChange>
+  <Command __id="751" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="680012" />
+  <DocumentChange __id="752" _type="Insert" docASTNodeCount="1784" docActiveCodeLength="10657" docExpressionCount="1050" docLength="19839" length="6" offset="7749" repeat="5" timestamp="680654" timestamp2="682396">
+    <text><![CDATA[(cnt);]]></text>
+  </DocumentChange>
+  <Command __id="753" _type="InsertStringCommand" repeat="6" timestamp="680656" timestamp2="682399">
+    <data><![CDATA[(cnt);]]></data>
+  </Command>
+  <Command __id="763" _type="EclipseCommand" commandID="org.eclipse.ui.file.save" timestamp="682668" />
+  <Command __id="764" _type="RunCommand" kind="Create" projectName="MineSweeper" timestamp="686165" type="Run" />
+  <Command __id="765" _type="RunCommand" exitValue="0" kind="Terminate" projectName="MineSweeper" timestamp="695815" type="Run" />
+  <Command __id="766" _type="SelectTextCommand" caretOffset="7099" docEnd="7335" docOffset="7326" docStart="7326" end="7108" start="7099" timestamp="697601" />
+  <DocumentChange __id="767" _type="Delete" docASTNodeCount="1781" docActiveCodeLength="10646" docExpressionCount="1048" docLength="19828" endLine="300" length="11" offset="7324" repeat="2" startLine="299" timestamp="697748" timestamp2="699013">
+    <text><![CDATA[
+			++cnt;]]></text>
+  </DocumentChange>
+  <Command __id="768" _type="CutCommand" timestamp="697758" />
+  <Command __id="770" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="699022" />
+  <Command __id="771" _type="MoveCaretCommand" caretOffset="7145" docOffset="7372" timestamp="701442" />
+  <Command __id="772" _type="MoveCaretCommand" caretOffset="7186" docOffset="7413" timestamp="711049" />
+  <Command __id="773" _type="MoveCaretCommand" caretOffset="7170" docOffset="7397" timestamp="712122" />
+  <Command __id="774" _type="MoveCaretCommand" caretOffset="7184" docOffset="7411" timestamp="712898" />
+  <Command __id="775" _type="MoveCaretCommand" caretOffset="7073" docOffset="7300" timestamp="715274" />
+  <Command __id="776" _type="MoveCaretCommand" caretOffset="7140" docOffset="7367" timestamp="715945" />
+  <Command __id="777" _type="MoveCaretCommand" caretOffset="7211" docOffset="7438" timestamp="716929" />
+  <Command __id="778" _type="MoveCaretCommand" caretOffset="7157" docOffset="7384" timestamp="719977" />
+  <Command __id="779" _type="FileOpenCommand" docASTNodeCount="382" docActiveCodeLength="2750" docExpressionCount="243" docLength="5022" projectName="MineSweeper" timestamp="721404">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\util\Piece.java]]></filePath>
+    <snapshot><![CDATA[package util;
+import java.awt.Image;
+import java.util.Locale;
+import java.io.Serializable;
+import java.net.URL;
+
+import javax.swing.ImageIcon;
+
+/**
+ * Enum of all piece types
+ * 
+ * @author  KnightMiner
+ */
+
+public enum Piece implements Serializable {
+    // basic numbers
+    /** No mines around */
+    N0,
+    /** 1 mines around */
+    N1,
+    /** 2 mines around */
+    N2,
+    /** 3 mines around */
+    N3,
+    /** 4 mines around */
+    N4,
+    /** 5 mines around */
+    N5,
+    /** 6 mines around */
+    N6,
+    /** 7 mines around */
+    N7,
+    /** 8 mines around */
+    N8,
+
+    // flags
+    /** Space contains a flag */
+    FLAG(true, false, Type.FLAG),
+    /** Space contains a flag, but the game ended and there was no mine */
+    FLAG_NOT(true, false, Type.FLAG),
+
+    // mines
+    /** Space contains a mine, used at the end of the game */
+    MINE(true, true, Type.MINE),
+    /** Mine that was clicked when losing the game */
+    MINE_RED(true, true, Type.MINE),
+    /** Mines remaining after winning or revealed by a cheat */
+    MINE_GREEN(true, true, Type.MINE),
+
+    // marks
+    /** Generic mark */
+    MARK_RED(true, true, Type.MARK),
+    /** Alternate mark 1 */
+    MARK_GREEN(true, true, Type.MARK),
+    /** Alternate mark 2 */
+    MARK_BLUE(true, true, Type.MARK);
+
+    // storage
+    private int number;
+    private boolean enabled;
+    private boolean replaceable;
+    private Image icon;
+    private Type type;
+
+    /**
+     * Standard constructor for non-numbers
+     * @param enabled      Determines if the space appears "clicked"
+     * @param replaceable  Determines if the piece can be replaced by clicking it
+     */
+    
+    Piece(boolean enabled, boolean replaceable, Type type) {
+        this.number = -1;
+        this.enabled = enabled;
+        this.replaceable = replaceable;
+        this.type = type;
+
+        setIcon();
+    }
+
+    /**
+     * Constructor for number values, automatically sets clickable to false
+     * and the character to the diget
+     */
+    
+    Piece() {
+        // character is just the oridinal as a character
+        this.number = this.ordinal();
+        this.enabled = false;
+        this.replaceable = false;
+        this.type = Type.NUMBER;
+
+        setIcon();
+    }
+
+    /**
+     * Gets the icon for the button
+     * @return the icon
+     */
+    
+    public Image getIcon() {
+        return icon;
+    }
+
+    /**
+     * Determines if a space appeared "enabled", or pressed up
+     * @return true if a space appeared "enabled", or pressed up
+     */
+    
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    /**
+     * Determines if a space can be clicked despite containing something
+     * @return true if a space can be clicked despite containing something
+     */
+    
+    public boolean isReplaceable() {
+        return replaceable;
+    }
+
+    /**
+     * Determines the space's number
+     * @return space's number
+     */
+    
+    public boolean isNumber() {
+        return type == Type.NUMBER;
+    }
+
+    /**
+     * Determines if the space is a mark
+     * @return space's number
+     */
+    
+    public boolean isMark() {
+        return type == Type.MARK;
+    }
+
+    /**
+     * Determines if a space is a number
+     * @return true if a space is a number
+     */
+    
+    public int getNumber() {
+        return number;
+    }
+
+    /**
+     * Gets a constant from the specified integer
+     * Only goes up to 8 since EMPTY and FLAG shouldn't care about number
+     * @param num  Number cooresponding to the piece
+     * @return  Piece coorseponding to the number
+     */
+    
+    public static Piece fromNumber(int num) {
+        // if the number is too big or small, return null
+        if(num < 0 || num > 8) {
+            return null;
+        }
+
+        // loop through until we find the equal value
+        return values()[num];
+    }
+
+
+    /* Internal use */
+
+    /**
+     * Gets the name for a piece
+     * @return  The pieces name
+     */
+    
+    private String getName() {
+        if(number > -1) {
+            return number + "";
+        }
+
+        // US lowercasing just in case
+        return this.toString().toLowerCase(Locale.US);
+    }
+
+    /**
+     * Sets the pieces icon
+     */
+    
+    private void setIcon() {
+        // get the icon for this button
+        String pathString = "assets/" + getName() + ".png";
+        URL path = getClass().getClassLoader()
+                .getResource(pathString);
+
+        // should exist
+        if(path != null) {
+            // images are so annoying to pull from a path, so imageicon
+            icon = new ImageIcon(path).getImage();
+        }
+        else {
+            System.err.println("Error: cannot find icon at " + pathString);
+            icon = null;
+        }
+    }
+
+    private enum Type {
+        NUMBER,
+        MINE,
+        FLAG,
+        MARK;
+    }
+}
+]]></snapshot>
+  </Command>
+  <Command __id="780" _type="EclipseCommand" commandID="org.eclipse.jdt.ui.edit.text.java.open.editor" timestamp="721428" />
+  <Command __id="781" _type="SelectTextCommand" caretOffset="128" docEnd="239" docOffset="239" docStart="234" end="128" start="123" timestamp="721460" />
+  <Command __id="782" _type="FileOpenCommand" docASTNodeCount="1302" docActiveCodeLength="11201" docExpressionCount="866" docLength="14073" projectName="MineSweeper" timestamp="728926">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\presentation\MineSweeperGui.java]]></filePath>
+  </Command>
+  <Command __id="783" _type="SelectTextCommand" caretOffset="6238" docEnd="6879" docOffset="6879" docStart="6860" end="6238" start="6219" timestamp="728965" />
+  <Command __id="784" _type="FileOpenCommand" docASTNodeCount="1781" docActiveCodeLength="10646" docExpressionCount="1048" docLength="19828" projectName="MineSweeper" timestamp="730510">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeperBoard.java]]></filePath>
+  </Command>
+  <Command __id="785" _type="MoveCaretCommand" caretOffset="7157" docOffset="7384" timestamp="730547" />
+  <Command __id="786" _type="MoveCaretCommand" caretOffset="7471" docOffset="7698" timestamp="737049" />
+  <Command __id="787" _type="SelectTextCommand" caretOffset="7491" docEnd="7744" docOffset="7718" docStart="7718" end="7517" start="7491" timestamp="740625" />
+  <Command __id="788" _type="SelectTextCommand" caretOffset="7246" docEnd="7473" docOffset="7473" docStart="7446" end="7246" start="7219" timestamp="755817" />
+  <Command __id="789" _type="MoveCaretCommand" caretOffset="7211" docOffset="7438" timestamp="758042" />
+  <DocumentChange __id="790" _type="Insert" docASTNodeCount="1781" docActiveCodeLength="10652" docExpressionCount="1048" docLength="19834" length="6" offset="7438" timestamp="759445">
+    <text><![CDATA[
+				]]></text>
+  </DocumentChange>
+  <Command __id="791" _type="InsertStringCommand" timestamp="759451">
+    <data><![CDATA[]]></data>
+  </Command>
+  <DocumentChange __id="792" _type="Insert" docASTNodeCount="1781" docActiveCodeLength="10652" docExpressionCount="1048" docLength="19834" length="6" offset="7444" timestamp="759643">
+    <text><![CDATA[++cnt;]]></text>
+  </DocumentChange>
+  <Command __id="793" _type="PasteCommand" timestamp="759647" />
+  <Command __id="794" _type="EclipseCommand" commandID="org.eclipse.ui.file.save" timestamp="760557" />
+  <Command __id="795" _type="MoveCaretCommand" caretOffset="7196" docOffset="7423" timestamp="761161" />
+  <Command __id="796" _type="EclipseCommand" commandID="org.eclipse.jdt.ui.edit.text.java.open.editor" timestamp="762699" />
+  <Command __id="797" _type="FileOpenCommand" docASTNodeCount="43" docActiveCodeLength="235" docExpressionCount="27" docLength="235" projectName="MineSweeper" timestamp="772202">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineGenerator.java]]></filePath>
+  </Command>
+  <Command __id="798" _type="MoveCaretCommand" caretOffset="97" docOffset="195" timestamp="772238" />
+  <Command __id="799" _type="FileOpenCommand" docASTNodeCount="1784" docActiveCodeLength="10658" docExpressionCount="1050" docLength="19840" projectName="MineSweeper" timestamp="773564">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeperBoard.java]]></filePath>
+  </Command>
+  <Command __id="800" _type="SelectTextCommand" caretOffset="15858" docEnd="16085" docOffset="16085" docStart="16079" end="15858" start="15852" timestamp="773597" />
+  <Command __id="801" _type="MoveCaretCommand" caretOffset="15861" docOffset="16088" timestamp="781066" />
+  <Command __id="802" _type="FileOpenCommand" docASTNodeCount="96" docActiveCodeLength="619" docExpressionCount="53" docLength="1308" projectName="MineSweeper" timestamp="782308">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\util\Space.java]]></filePath>
+    <snapshot><![CDATA[package util;
+
+/**
+ * Primarily a wrapper for holding two integers, but also useful as it passes
+ * some methods from MineSweeperBoard
+ * 
+ * @author  KnightMiner
+ */
+
+public class Space {
+
+    private int x, y;
+
+    /**
+     * Creates a new space with the specified row and column
+     * @param x  X value of the space
+     * @param y  Y value of the space
+     */
+    
+    public Space(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    /**
+     * Gets the x value
+     * @return  The x value
+     */
+    
+    public int getX() {
+        return x;
+    }
+
+    /**
+     * Gets the y value
+     * @return  The y value
+     */
+    
+    public int getY() {
+        return y;
+    }
+
+    /**
+     * Determines if two spaces are equal
+     * @param other  Space to compare
+     * @return  true if the two spaces are equal
+     */
+    
+    public boolean equals(Space other) {
+        if(other == null) {
+            return false;
+        }
+
+        return this.x == other.x
+                && this.y == other.y;
+    }
+
+    /**
+     * Creates a string of the current space
+     * @return  a string of the current space
+     */
+    
+    @Override
+    public String toString() {
+        return String.format("(%d,%d)", x, y);
+    }
+}
+]]></snapshot>
+  </Command>
+  <Command __id="803" _type="EclipseCommand" commandID="org.eclipse.jdt.ui.edit.text.java.open.editor" timestamp="782333" />
+  <Command __id="804" _type="SelectTextCommand" caretOffset="195" docEnd="195" docOffset="195" docStart="190" end="195" start="190" timestamp="782369" />
+  <Command __id="805" _type="FileOpenCommand" docASTNodeCount="1784" docActiveCodeLength="10658" docExpressionCount="1050" docLength="19840" projectName="MineSweeper" timestamp="784787">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeperBoard.java]]></filePath>
+  </Command>
+  <Command __id="806" _type="EclipseCommand" commandID="org.eclipse.ui.navigate.backwardHistory" timestamp="784805" />
+  <Command __id="807" _type="MoveCaretCommand" caretOffset="15861" docOffset="16088" timestamp="784833" />
+  <Command __id="808" _type="MoveCaretCommand" caretOffset="15855" docOffset="16082" timestamp="786866" />
+  <Command __id="809" _type="MoveCaretCommand" caretOffset="15910" docOffset="16137" timestamp="792657" />
+  <Command __id="810" _type="EclipseCommand" commandID="org.eclipse.jdt.ui.edit.text.java.open.editor" timestamp="793922" />
+  <Command __id="811" _type="EclipseCommand" commandID="org.eclipse.ui.navigate.backwardHistory" repeat="3" timestamp="798745" timestamp2="799990" />
+  <Command __id="813" _type="FileOpenCommand" docASTNodeCount="43" docActiveCodeLength="235" docExpressionCount="27" docLength="235" projectName="MineSweeper" timestamp="799971">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineGenerator.java]]></filePath>
+  </Command>
+  <Command __id="815" _type="MoveCaretCommand" caretOffset="97" docOffset="195" timestamp="800014" />
+  <Command __id="816" _type="FileOpenCommand" docASTNodeCount="1784" docActiveCodeLength="10658" docExpressionCount="1050" docLength="19840" projectName="MineSweeper" timestamp="800559">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeperBoard.java]]></filePath>
+  </Command>
+  <Command __id="817" _type="EclipseCommand" commandID="org.eclipse.ui.navigate.backwardHistory" timestamp="800576" />
+  <Command __id="818" _type="SelectTextCommand" caretOffset="15858" docEnd="16085" docOffset="16085" docStart="16079" end="15858" start="15852" timestamp="800629" />
+  <Command __id="819" _type="MoveCaretCommand" caretOffset="15898" docOffset="16125" timestamp="802081" />
+  <Command __id="820" _type="MoveCaretCommand" caretOffset="16252" docOffset="16479" timestamp="804034" />
+  <Command __id="821" _type="EclipseCommand" commandID="org.eclipse.ui.navigate.backwardHistory" repeat="3" timestamp="804624" timestamp2="805918" />
+  <Command __id="823" _type="FileOpenCommand" docASTNodeCount="1302" docActiveCodeLength="11201" docExpressionCount="866" docLength="14073" projectName="MineSweeper" timestamp="805901">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\presentation\MineSweeperGui.java]]></filePath>
+  </Command>
+  <Command __id="825" _type="SelectTextCommand" caretOffset="6238" docEnd="6879" docOffset="6879" docStart="6860" end="6238" start="6219" timestamp="805951" />
+  <Command __id="826" _type="FileOpenCommand" docASTNodeCount="1784" docActiveCodeLength="10658" docExpressionCount="1050" docLength="19840" projectName="MineSweeper" timestamp="807610">
+    <filePath><![CDATA[C:\Users\Eye-tracking\git\MineSweeper-Experiment\src\logic\MineSweeperBoard.java]]></filePath>
+  </Command>
+  <Command __id="827" _type="EclipseCommand" commandID="org.eclipse.ui.navigate.forwardHistory" timestamp="807628" />
+  <Command __id="828" _type="MoveCaretCommand" caretOffset="7157" docOffset="7384" timestamp="807670" />
+  <Command __id="829" _type="RunCommand" kind="Create" projectName="MineSweeper" timestamp="810695" type="Run" />
+  <Command __id="830" _type="RunCommand" exitValue="0" kind="Terminate" projectName="MineSweeper" timestamp="828217" type="Run" />
+  <Command __id="831" _type="MoveCaretCommand" caretOffset="7327" docOffset="7554" timestamp="829194" />
+  <Command __id="832" _type="SelectTextCommand" caretOffset="7213" docEnd="7450" docOffset="7440" docStart="7440" end="7223" start="7213" timestamp="837769" />
+  <DocumentChange __id="833" _type="Delete" docASTNodeCount="1781" docActiveCodeLength="10646" docExpressionCount="1048" docLength="19828" endLine="305" length="12" offset="7438" repeat="2" startLine="304" timestamp="838660" timestamp2="838851">
+    <text><![CDATA[
+				++cnt;]]></text>
+  </DocumentChange>
+  <Command __id="834" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="2" timestamp="838663" timestamp2="838856" />
+  <Command __id="837" _type="EclipseCommand" commandID="org.eclipse.ui.file.save" timestamp="840146" />
+  <Command __id="838" _type="MoveCaretCommand" caretOffset="7303" docOffset="7530" timestamp="841066" />
+  <Command __id="839" _type="MoveCaretCommand" caretOffset="7199" docOffset="7426" timestamp="845562" />
+  <Command __id="840" _type="EclipseCommand" commandID="org.eclipse.jdt.ui.edit.text.java.open.editor" timestamp="846992" />
+  <Command __id="841" _type="MoveCaretCommand" caretOffset="15912" docOffset="16139" timestamp="848522" />
+  <Command __id="842" _type="MoveCaretCommand" caretOffset="15935" docOffset="16162" timestamp="849545" />
+  <Command __id="843" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.LINE_UP" repeat="3" timestamp="851301" timestamp2="851597" />
+  <Command __id="846" _type="EclipseCommand" commandID="org.eclipse.ui.edit.text.goto.lineEnd" timestamp="852106" />
+  <DocumentChange __id="847" _type="Insert" docASTNodeCount="1781" docActiveCodeLength="10650" docExpressionCount="1048" docLength="19832" length="4" offset="16113" timestamp="852320">
+    <text><![CDATA[
+		]]></text>
+  </DocumentChange>
+  <Command __id="848" _type="InsertStringCommand" timestamp="852331">
+    <data><![CDATA[]]></data>
+  </Command>
+  <DocumentChange __id="849" _type="Insert" docASTNodeCount="1781" docActiveCodeLength="10653" docExpressionCount="1048" docLength="19835" length="3" offset="16117" repeat="3" timestamp="853196" timestamp2="853364">
+    <text><![CDATA[if ]]></text>
+  </DocumentChange>
+  <Command __id="850" _type="InsertStringCommand" repeat="3" timestamp="853199" timestamp2="853370">
+    <data><![CDATA[if ]]></data>
+  </Command>
+  <DocumentChange __id="855" _type="Insert" docASTNodeCount="1787" docActiveCodeLength="10672" docExpressionCount="1053" docLength="19854" length="19" offset="16120" repeat="17" timestamp="857638" timestamp2="861975">
+    <text><![CDATA[(mines[space.getX])]]></text>
+  </DocumentChange>
+  <Command __id="856" _type="InsertStringCommand" repeat="13" timestamp="857640" timestamp2="859976">
+    <data><![CDATA[(mines[space.]]></data>
+  </Command>
+  <Command __id="881" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="true" start_end="START" timestamp="859978" />
+  <DocumentChange __id="886" _type="Delete" docASTNodeCount="1787" docActiveCodeLength="10671" docExpressionCount="1053" docLength="19853" endLine="684" length="1" offset="16136" startLine="684" timestamp="862374">
+    <text><![CDATA[X]]></text>
+  </DocumentChange>
+  <DocumentChange __id="887" _type="Insert" docASTNodeCount="1787" docActiveCodeLength="10674" docExpressionCount="1053" docLength="19856" length="3" offset="16136" repeat="2" timestamp="862830" timestamp2="863238">
+    <text><![CDATA[Y()]]></text>
+  </DocumentChange>
+  <Command __id="889" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="864051" />
+  <Command __id="890" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_NEXT" timestamp="864340" />
+  <Command __id="891" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_PREVIOUS" timestamp="864678" />
+  <Command __id="892" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_NEXT" timestamp="865549" />
+  <DocumentChange __id="893" _type="Insert" docASTNodeCount="1791" docActiveCodeLength="10686" docExpressionCount="1057" docLength="19868" length="12" offset="16140" repeat="11" timestamp="866503" timestamp2="868122">
+    <text><![CDATA[[space.getZ]]]></text>
+  </DocumentChange>
+  <Command __id="894" _type="InsertStringCommand" repeat="7" timestamp="866505" timestamp2="867438">
+    <data><![CDATA[[space.]]></data>
+  </Command>
+  <Command __id="907" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="true" start_end="START" timestamp="867439" />
+  <Command __id="912" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="868138" />
+  <DocumentChange __id="913" _type="Delete" docASTNodeCount="1791" docActiveCodeLength="10685" docExpressionCount="1057" docLength="19867" endLine="684" length="1" offset="16150" startLine="684" timestamp="868599">
+    <text><![CDATA[Z]]></text>
+  </DocumentChange>
+  <Command __id="914" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="868602" />
+  <DocumentChange __id="915" _type="Insert" docASTNodeCount="1791" docActiveCodeLength="10688" docExpressionCount="1057" docLength="19870" length="3" offset="16150" repeat="2" timestamp="868702" timestamp2="869026">
+    <text><![CDATA[X()]]></text>
+  </DocumentChange>
+  <Command __id="916" _type="InsertStringCommand" repeat="3" timestamp="868703" timestamp2="869075">
+    <data><![CDATA[X()]]></data>
+  </Command>
+  <Command __id="920" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_NEXT" repeat="2" timestamp="869995" timestamp2="870626" />
+  <DocumentChange __id="922" _type="Insert" docASTNodeCount="1791" docActiveCodeLength="10693" docExpressionCount="1057" docLength="19875" length="5" offset="16155" timestamp="871260">
+    <text><![CDATA[
+			]]></text>
+  </DocumentChange>
+  <Command __id="923" _type="InsertStringCommand" timestamp="871265">
+    <data><![CDATA[]]></data>
+  </Command>
+  <DocumentChange __id="924" _type="Insert" docASTNodeCount="1795" docActiveCodeLength="10708" docExpressionCount="1060" docLength="19890" length="15" offset="16160" repeat="14" timestamp="871865" timestamp2="873680">
+    <text><![CDATA[isValid(space0)]]></text>
+  </DocumentChange>
+  <Command __id="925" _type="InsertStringCommand" repeat="14" timestamp="871866" timestamp2="873680">
+    <data><![CDATA[isValid(space0]]></data>
+  </Command>
+  <DocumentChange __id="952" _type="Delete" docASTNodeCount="1795" docActiveCodeLength="10707" docExpressionCount="1060" docLength="19889" endLine="685" length="1" offset="16173" startLine="685" timestamp="874279">
+    <text><![CDATA[0]]></text>
+  </DocumentChange>
+  <Command __id="953" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="874280" />
+  <Command __id="954" _type="InsertStringCommand" timestamp="874572">
+    <data><![CDATA[)]]></data>
+  </Command>
+  <Command __id="955" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_PREVIOUS" repeat="14" timestamp="875492" timestamp2="876731" />
+  <DocumentChange __id="969" _type="Insert" docASTNodeCount="1798" docActiveCodeLength="10725" docExpressionCount="1063" docLength="19907" length="18" offset="16160" repeat="18" timestamp="878710" timestamp2="882637">
+    <text><![CDATA[System.out.println]]></text>
+  </DocumentChange>
+  <Command __id="970" _type="InsertStringCommand" repeat="7" timestamp="878713" timestamp2="880286">
+    <data><![CDATA[System.]]></data>
+  </Command>
+  <Command __id="983" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="true" start_end="START" timestamp="880287" />
+  <Command __id="987" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="881226" />
+  <Command __id="989" _type="InsertStringCommand" timestamp="881233">
+    <data><![CDATA[.]]></data>
+  </Command>
+  <Command __id="990" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="true" start_end="START" timestamp="881235" />
+  <DocumentChange __id="998" _type="Insert" docASTNodeCount="1763" docActiveCodeLength="10727" docExpressionCount="1034" docLength="19909" length="2" offset="16178" repeat="2" timestamp="885180" timestamp2="886432">
+    <text><![CDATA[("]]></text>
+  </DocumentChange>
+  <Command __id="1000" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="886453" />
+  <DocumentChange __id="1001" _type="Delete" docASTNodeCount="1800" docActiveCodeLength="10726" docExpressionCount="1065" docLength="19908" endLine="685" length="1" offset="16179" startLine="685" timestamp="889618">
+    <text><![CDATA["]]></text>
+  </DocumentChange>
+  <Command __id="1002" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="889620" />
+  <DocumentChange __id="1003" _type="Insert" docASTNodeCount="1763" docActiveCodeLength="10728" docExpressionCount="1034" docLength="19910" length="2" offset="16179" repeat="2" timestamp="891049" timestamp2="892194">
+    <text><![CDATA["x]]></text>
+  </DocumentChange>
+  <Command __id="1004" _type="InsertStringCommand" repeat="2" timestamp="891053" timestamp2="892196">
+    <data><![CDATA["x]]></data>
+  </Command>
+  <DocumentChange __id="1007" _type="Delete" docASTNodeCount="1763" docActiveCodeLength="10727" docExpressionCount="1034" docLength="19909" endLine="685" length="1" offset="16180" startLine="685" timestamp="893967">
+    <text><![CDATA[x]]></text>
+  </DocumentChange>
+  <Command __id="1008" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="893968" />
+  <DocumentChange __id="1009" _type="Insert" docASTNodeCount="1803" docActiveCodeLength="10741" docExpressionCount="1068" docLength="19923" length="14" offset="16180" repeat="14" timestamp="894476" timestamp2="897437">
+    <text><![CDATA[Y" + space.get]]></text>
+  </DocumentChange>
+  <Command __id="1010" _type="InsertStringCommand" repeat="11" timestamp="894478" timestamp2="897012">
+    <data><![CDATA[Y" + space.]]></data>
+  </Command>
+  <Command __id="1031" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="true" start_end="START" timestamp="897013" />
+  <DocumentChange __id="1035" _type="Delete" docASTNodeCount="1802" docActiveCodeLength="10732" docExpressionCount="1067" docLength="19914" endLine="685" length="9" offset="16185" repeat="9" startLine="685" timestamp="897763" timestamp2="898804">
+    <text><![CDATA[space.get]]></text>
+  </DocumentChange>
+  <DocumentChange __id="1044" _type="Insert" docASTNodeCount="1802" docActiveCodeLength="10735" docExpressionCount="1067" docLength="19917" length="3" offset="16185" repeat="3" timestamp="898949" timestamp2="899444">
+    <text><![CDATA[tos]]></text>
+  </DocumentChange>
+  <Command __id="1047" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="900095" />
+  <DocumentChange __id="1048" _type="Replace" docASTNodeCount="1805" docActiveCodeLength="10743" docExpressionCount="1069" docLength="19925" endLine="685" insertionLength="9" int_docASTNodeCount="1802" int_docActiveCodeLength="10734" int_docExpressionCount="1067" int_docLength="19916" length="1" offset="16187" repeat="2" startLine="685" timestamp="900100" timestamp2="901445">
+    <deletedText><![CDATA[s]]></deletedText>
+    <insertedText><![CDATA[String()s]]></insertedText>
+  </DocumentChange>
+  <Command __id="1049" _type="InsertStringCommand" timestamp="900105">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="1051" _type="InsertStringCommand" timestamp="901448">
+    <data><![CDATA[s]]></data>
+  </Command>
+  <DocumentChange __id="1052" _type="Delete" docASTNodeCount="1805" docActiveCodeLength="10742" docExpressionCount="1069" docLength="19924" endLine="685" length="1" offset="16195" startLine="685" timestamp="901749">
+    <text><![CDATA[s]]></text>
+  </DocumentChange>
+  <Command __id="1053" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="901752" />
+  <Command __id="1054" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_PREVIOUS" timestamp="902026" />
+  <DocumentChange __id="1055" _type="Insert" docASTNodeCount="1805" docActiveCodeLength="10748" docExpressionCount="1070" docLength="19930" length="6" offset="16194" repeat="6" timestamp="902233" timestamp2="902752">
+    <text><![CDATA[space,]]></text>
+  </DocumentChange>
+  <Command __id="1056" _type="InsertStringCommand" repeat="6" timestamp="902237" timestamp2="902755">
+    <data><![CDATA[space,]]></data>
+  </Command>
+  <DocumentChange __id="1067" _type="Delete" docASTNodeCount="1806" docActiveCodeLength="10747" docExpressionCount="1070" docLength="19929" endLine="685" length="1" offset="16199" startLine="685" timestamp="903500">
+    <text><![CDATA[,]]></text>
+  </DocumentChange>
+  <Command __id="1068" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="903502" />
+  <DocumentChange __id="1069" _type="Insert" docASTNodeCount="1808" docActiveCodeLength="10754" docExpressionCount="1072" docLength="19936" length="7" offset="16199" repeat="6" timestamp="904085" timestamp2="905634">
+    <text><![CDATA[.getY()]]></text>
+  </DocumentChange>
+  <Command __id="1070" _type="InsertStringCommand" timestamp="904088">
+    <data><![CDATA[.]]></data>
+  </Command>
+  <Command __id="1071" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="true" start_end="START" timestamp="904089" />
+  <DocumentChange __id="1077" _type="Insert" docASTNodeCount="1815" docActiveCodeLength="10782" docExpressionCount="1079" docLength="19964" length="28" offset="16206" repeat="26" timestamp="908133" timestamp2="916430">
+    <text><![CDATA[ + " X:" + toString(spae.ge)]]></text>
+  </DocumentChange>
+  <Command __id="1079" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="908858" />
+  <Command __id="1081" _type="InsertStringCommand" repeat="3" timestamp="909584" timestamp2="910483">
+    <data><![CDATA[ "X]]></data>
+  </Command>
+  <Command __id="1086" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_PREVIOUS" timestamp="911169" />
+  <Command __id="1088" _type="InsertStringCommand" timestamp="911319">
+    <data><![CDATA[ ]]></data>
+  </Command>
+  <Command __id="1089" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_NEXT" timestamp="911513" />
+  <Command __id="1091" _type="InsertStringCommand" timestamp="912411">
+    <data><![CDATA[:]]></data>
+  </Command>
+  <Command __id="1092" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_NEXT" timestamp="912821" />
+  <Command __id="1094" _type="InsertStringCommand" repeat="17" timestamp="913753" timestamp2="916208">
+    <data><![CDATA[ + toString(spae.]]></data>
+  </Command>
+  <Command __id="1127" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="true" start_end="START" timestamp="916209" />
+  <Command __id="1128" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="916213" />
+  <Command __id="1130" _type="InsertStringCommand" repeat="2" timestamp="916311" timestamp2="916431">
+    <data><![CDATA[ge]]></data>
+  </Command>
+  <DocumentChange __id="1133" _type="Delete" docASTNodeCount="1813" docActiveCodeLength="10778" docExpressionCount="1077" docLength="19960" endLine="685" length="4" offset="16229" repeat="4" startLine="685" timestamp="916853" timestamp2="917263">
+    <text><![CDATA[e.ge]]></text>
+  </DocumentChange>
+  <Command __id="1134" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="4" timestamp="916854" timestamp2="917264" />
+  <DocumentChange __id="1141" _type="Insert" docASTNodeCount="1815" docActiveCodeLength="10787" docExpressionCount="1079" docLength="19969" length="9" offset="16229" repeat="8" timestamp="917368" timestamp2="918798">
+    <text><![CDATA[ce.getX()]]></text>
+  </DocumentChange>
+  <Command __id="1142" _type="InsertStringCommand" repeat="3" timestamp="917369" timestamp2="917628">
+    <data><![CDATA[ce.]]></data>
+  </Command>
+  <Command __id="1147" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="true" start_end="START" timestamp="917629" />
+  <Command __id="1153" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="920380" />
+  <Command __id="1154" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_NEXT" timestamp="920826" />
+  <DocumentChange __id="1155" _type="Delete" docASTNodeCount="1815" docActiveCodeLength="10785" docExpressionCount="1079" docLength="19967" endLine="685" length="2" offset="16238" repeat="2" startLine="685" timestamp="921031" timestamp2="921197">
+    <text><![CDATA[))]]></text>
+  </DocumentChange>
+  <Command __id="1156" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="2" timestamp="921035" timestamp2="921200" />
+  <DocumentChange __id="1159" _type="Insert" docASTNodeCount="1815" docActiveCodeLength="10788" docExpressionCount="1080" docLength="19970" length="3" offset="16238" repeat="3" timestamp="921518" timestamp2="921798">
+    <text><![CDATA[ + ]]></text>
+  </DocumentChange>
+  <Command __id="1160" _type="InsertStringCommand" repeat="3" timestamp="921522" timestamp2="921801">
+    <data><![CDATA[ + ]]></data>
+  </Command>
+  <DocumentChange __id="1165" _type="Delete" docASTNodeCount="1815" docActiveCodeLength="10785" docExpressionCount="1079" docLength="19967" endLine="685" length="3" offset="16238" repeat="3" startLine="685" timestamp="922349" timestamp2="922631">
+    <text><![CDATA[ + ]]></text>
+  </DocumentChange>
+  <Command __id="1166" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="3" timestamp="922351" timestamp2="922633" />
+  <DocumentChange __id="1171" _type="Insert" docASTNodeCount="1816" docActiveCodeLength="10798" docExpressionCount="1081" docLength="19980" length="13" offset="16238" repeat="13" timestamp="923196" timestamp2="925477">
+    <text><![CDATA[) + toString(]]></text>
+  </DocumentChange>
+  <Command __id="1172" _type="InsertStringCommand" repeat="13" timestamp="923201" timestamp2="925481">
+    <data><![CDATA[) + toString(]]></data>
+  </Command>
+  <Command __id="1197" _type="EclipseCommand" commandID="org.eclipse.ui.edit.text.goto.lineEnd" timestamp="926012" />
+  <DocumentChange __id="1198" _type="Insert" docASTNodeCount="1816" docActiveCodeLength="10801" docExpressionCount="1081" docLength="19983" length="3" offset="16265" repeat="3" timestamp="926582" timestamp2="926933">
+    <text><![CDATA[));]]></text>
+  </DocumentChange>
+  <Command __id="1199" _type="InsertStringCommand" repeat="3" timestamp="926588" timestamp2="926937">
+    <data><![CDATA[));]]></data>
+  </Command>
+  <Command __id="1204" _type="MoveCaretCommand" caretOffset="16143" docOffset="16370" timestamp="928289" />
+  <Command __id="1205" _type="SelectTextCommand" caretOffset="16015" docEnd="16249" docOffset="16242" docStart="16242" end="16022" start="16015" timestamp="934057" />
+  <DocumentChange __id="1206" _type="Delete" docASTNodeCount="1815" docActiveCodeLength="10793" docExpressionCount="1080" docLength="19975" endLine="685" length="8" offset="16242" repeat="2" startLine="685" timestamp="934657" timestamp2="935263">
+    <text><![CDATA[toString]]></text>
+  </DocumentChange>
+  <Command __id="1207" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="934659" />
+  <Command __id="1208" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_NEXT" timestamp="935004" />
+  <Command __id="1210" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="935265" />
+  <DocumentChange __id="1211" _type="Insert" docASTNodeCount="1816" docActiveCodeLength="10795" docExpressionCount="1081" docLength="19977" length="2" offset="16242" repeat="2" timestamp="936580" timestamp2="936839">
+    <text><![CDATA[st]]></text>
+  </DocumentChange>
+  <Command __id="1212" _type="InsertStringCommand" repeat="2" timestamp="936585" timestamp2="936844">
+    <data><![CDATA[st]]></data>
+  </Command>
+  <DocumentChange __id="1215" _type="Delete" docASTNodeCount="1815" docActiveCodeLength="10793" docExpressionCount="1080" docLength="19975" endLine="685" length="2" offset="16242" repeat="2" startLine="685" timestamp="937125" timestamp2="937262">
+    <text><![CDATA[st]]></text>
+  </DocumentChange>
+  <Command __id="1216" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="2" timestamp="937127" timestamp2="937263" />
+  <DocumentChange __id="1219" _type="Insert" docASTNodeCount="1816" docActiveCodeLength="10796" docExpressionCount="1081" docLength="19978" length="3" offset="16242" repeat="3" timestamp="937388" timestamp2="937692">
+    <text><![CDATA[Str]]></text>
+  </DocumentChange>
+  <Command __id="1220" _type="InsertStringCommand" repeat="3" timestamp="937393" timestamp2="937696">
+    <data><![CDATA[Str]]></data>
+  </Command>
+  <DocumentChange __id="1225" _type="Delete" docASTNodeCount="1815" docActiveCodeLength="10793" docExpressionCount="1080" docLength="19975" endLine="685" length="3" offset="16242" repeat="3" startLine="685" timestamp="938276" timestamp2="938560">
+    <text><![CDATA[Str]]></text>
+  </DocumentChange>
+  <Command __id="1226" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="3" timestamp="938277" timestamp2="938562" />
+  <DocumentChange __id="1231" _type="Insert" docASTNodeCount="1816" docActiveCodeLength="10799" docExpressionCount="1081" docLength="19981" length="6" offset="16242" repeat="6" timestamp="938756" timestamp2="939628">
+    <text><![CDATA[Strin ]]></text>
+  </DocumentChange>
+  <Command __id="1232" _type="InsertStringCommand" timestamp="938761">
+    <data><![CDATA[ ]]></data>
+  </Command>
+  <Command __id="1233" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_PREVIOUS" timestamp="938899" />
+  <Command __id="1235" _type="InsertStringCommand" repeat="5" timestamp="939136" timestamp2="939632">
+    <data><![CDATA[Strin]]></data>
+  </Command>
+  <Command __id="1244" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="START" timestamp="939955" />
+  <Command __id="1245" _type="EclipseCommand" commandID="org.eclipse.ui.edit.text.contentAssist.proposals" timestamp="940001" />
+  <DocumentChange __id="1246" _type="Delete" docASTNodeCount="1815" docActiveCodeLength="10793" docExpressionCount="1080" docLength="19975" endLine="685" length="6" offset="16242" repeat="6" startLine="685" timestamp="941967" timestamp2="943006">
+    <text><![CDATA[Strin ]]></text>
+  </DocumentChange>
+  <Command __id="1252" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="943407" />
+  <DocumentChange __id="1253" _type="Delete" docASTNodeCount="1814" docActiveCodeLength="10791" docExpressionCount="1079" docLength="19973" endLine="685" length="2" offset="16242" repeat="2" startLine="685" timestamp="943590" timestamp2="943981">
+    <text><![CDATA[(i]]></text>
+  </DocumentChange>
+  <Command __id="1254" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="2" timestamp="943592" timestamp2="943982" />
+  <DocumentChange __id="1257" _type="Insert" docASTNodeCount="1814" docActiveCodeLength="10792" docExpressionCount="1079" docLength="19974" length="1" offset="16242" timestamp="944540">
+    <text><![CDATA[i]]></text>
+  </DocumentChange>
+  <Command __id="1258" _type="InsertStringCommand" timestamp="944543">
+    <data><![CDATA[i]]></data>
+  </Command>
+  <Command __id="1259" _type="EclipseCommand" commandID="org.eclipse.ui.edit.text.goto.lineEnd" timestamp="945419" />
+  <Command __id="1260" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_PREVIOUS" repeat="3" timestamp="945668" timestamp2="946289" />
+  <DocumentChange __id="1263" _type="Delete" docASTNodeCount="1814" docActiveCodeLength="10791" docExpressionCount="1079" docLength="19973" endLine="685" length="1" offset="16255" startLine="685" timestamp="946518">
+    <text><![CDATA[)]]></text>
+  </DocumentChange>
+  <Command __id="1264" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="946520" />
+  <Command __id="1265" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_NEXT" timestamp="947085" />
+  <DocumentChange __id="1266" _type="Insert" docASTNodeCount="1816" docActiveCodeLength="10802" docExpressionCount="1081" docLength="19984" length="11" offset="16256" repeat="10" timestamp="947706" timestamp2="949031">
+    <text><![CDATA[.toString()]]></text>
+  </DocumentChange>
+  <Command __id="1267" _type="InsertStringCommand" timestamp="947709">
+    <data><![CDATA[.]]></data>
+  </Command>
+  <Command __id="1268" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="true" start_end="START" timestamp="947710" />
+  <Command __id="1269" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="947715" />
+  <Command __id="1271" _type="InsertStringCommand" repeat="10" timestamp="947854" timestamp2="949093">
+    <data><![CDATA[toString()]]></data>
+  </Command>
+  <Command __id="1289" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_PREVIOUS" repeat="28" timestamp="949646" timestamp2="951286" />
+  <DocumentChange __id="1317" _type="Delete" docASTNodeCount="1817" docActiveCodeLength="10801" docExpressionCount="1082" docLength="19983" endLine="685" length="1" offset="16238" startLine="685" timestamp="951557">
+    <text><![CDATA[)]]></text>
+  </DocumentChange>
+  <Command __id="1318" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="951561" />
+  <Command __id="1319" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_PREVIOUS" repeat="13" timestamp="951874" timestamp2="952932" />
+  <Command __id="1332" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_NEXT" timestamp="953178" />
+  <DocumentChange __id="1333" _type="Delete" docASTNodeCount="1814" docActiveCodeLength="10792" docExpressionCount="1079" docLength="19974" endLine="685" length="9" offset="16217" repeat="9" startLine="685" timestamp="953420" timestamp2="954545">
+    <text><![CDATA[toString(]]></text>
+  </DocumentChange>
+  <Command __id="1334" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="9" timestamp="953422" timestamp2="954546" />
+  <Command __id="1351" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_NEXT" repeat="12" timestamp="954730" timestamp2="956066" />
+  <DocumentChange __id="1363" _type="Insert" docASTNodeCount="1816" docActiveCodeLength="10803" docExpressionCount="1081" docLength="19985" length="11" offset="16229" repeat="10" timestamp="956728" timestamp2="957887">
+    <text><![CDATA[.toString()]]></text>
+  </DocumentChange>
+  <Command __id="1364" _type="InsertStringCommand" timestamp="956733">
+    <data><![CDATA[.]]></data>
+  </Command>
+  <Command __id="1365" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="true" start_end="START" timestamp="956734" />
+  <Command __id="1366" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="956737" />
+  <Command __id="1368" _type="InsertStringCommand" repeat="10" timestamp="956947" timestamp2="957955">
+    <data><![CDATA[toString()]]></data>
+  </Command>
+  <Command __id="1386" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_PREVIOUS" repeat="30" timestamp="958458" timestamp2="959881" />
+  <Command __id="1416" _type="MoveCaretCommand" caretOffset="15979" docOffset="16206" timestamp="962057" />
+  <DocumentChange __id="1417" _type="Insert" docASTNodeCount="1818" docActiveCodeLength="10814" docExpressionCount="1083" docLength="19996" length="11" offset="16206" repeat="10" timestamp="962872" timestamp2="964838">
+    <text><![CDATA[.toString()]]></text>
+  </DocumentChange>
+  <Command __id="1418" _type="InsertStringCommand" timestamp="962877">
+    <data><![CDATA[.]]></data>
+  </Command>
+  <Command __id="1419" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="true" start_end="START" timestamp="962878" />
+  <Command __id="1420" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="962882" />
+  <Command __id="1422" _type="InsertStringCommand" repeat="10" timestamp="963164" timestamp2="964899">
+    <data><![CDATA[toString()]]></data>
+  </Command>
+  <Command __id="1440" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_PREVIOUS" repeat="24" timestamp="965339" timestamp2="966565" />
+  <Command __id="1464" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_NEXT" timestamp="966795" />
+  <Command __id="1465" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.SELECT_COLUMN_PREVIOUS" repeat="9" timestamp="967059" timestamp2="967790" />
+  <DocumentChange __id="1474" _type="Delete" docASTNodeCount="1815" docActiveCodeLength="10805" docExpressionCount="1080" docLength="19987" endLine="685" length="9" offset="16185" startLine="685" timestamp="968324">
+    <text><![CDATA[toString(]]></text>
+  </DocumentChange>
+  <Command __id="1475" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="968326" />
+  <Command __id="1476" _type="MoveCaretCommand" caretOffset="16089" docOffset="16316" timestamp="969674" />
+  <Command __id="1477" _type="SelectTextCommand" caretOffset="15981" docEnd="16208" docOffset="16208" docStart="16197" end="15981" start="15970" timestamp="975218" />
+  <DocumentChange __id="1478" _type="Delete" docASTNodeCount="1813" docActiveCodeLength="10794" docExpressionCount="1078" docLength="19976" endLine="685" length="11" offset="16197" startLine="685" timestamp="975341">
+    <text><![CDATA[.toString()]]></text>
+  </DocumentChange>
+  <Command __id="1479" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="975344" />
+  <Command __id="1480" _type="SelectTextCommand" caretOffset="16004" docEnd="16231" docOffset="16231" docStart="16220" end="16004" start="15993" timestamp="977506" />
+  <DocumentChange __id="1481" _type="Delete" docASTNodeCount="1811" docActiveCodeLength="10783" docExpressionCount="1076" docLength="19965" endLine="685" length="11" offset="16220" startLine="685" timestamp="977612">
+    <text><![CDATA[.toString()]]></text>
+  </DocumentChange>
+  <Command __id="1482" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="977615" />
+  <Command __id="1483" _type="SelectTextCommand" caretOffset="16021" docEnd="16248" docOffset="16248" docStart="16237" end="16021" start="16010" timestamp="979450" />
+  <DocumentChange __id="1484" _type="Delete" docASTNodeCount="1809" docActiveCodeLength="10772" docExpressionCount="1074" docLength="19954" endLine="685" length="11" offset="16237" startLine="685" timestamp="979524">
+    <text><![CDATA[.toString()]]></text>
+  </DocumentChange>
+  <Command __id="1485" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="979527" />
+  <Command __id="1486" _type="MoveCaretCommand" caretOffset="16061" docOffset="16288" timestamp="980179" />
+  <Command __id="1487" _type="EclipseCommand" commandID="org.eclipse.ui.file.save" timestamp="981146" />
+  <Command __id="1488" _type="RunCommand" kind="Create" projectName="MineSweeper" timestamp="982448" type="Run" />
+  <Command __id="1489" _type="RunCommand" exitValue="0" kind="Terminate" projectName="MineSweeper" timestamp="1004084" type="Run" />
+  <Command __id="1490" _type="MoveCaretCommand" caretOffset="16038" docOffset="16265" timestamp="1004762" />
+  <Command __id="1491" _type="MoveCaretCommand" caretOffset="16061" docOffset="16288" timestamp="1005834" />
+  <Command __id="1492" _type="SelectTextCommand" caretOffset="16012" docEnd="16239" docOffset="16239" docStart="16117" end="16012" start="15890" timestamp="1020913" />
+  <DocumentChange __id="1493" _type="Delete" docASTNodeCount="1781" docActiveCodeLength="10650" docExpressionCount="1048" docLength="19832" endLine="685" length="122" offset="16117" startLine="684" timestamp="1024124">
+    <text><![CDATA[if (mines[space.getY()][space.getX()])
+			System.out.println("Y" + space.getY() + " X:" + space.getX() + isValid(space));]]></text>
+  </DocumentChange>
+  <Command __id="1494" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="1024130" />
+  <DocumentChange __id="1495" _type="Delete" docASTNodeCount="1781" docActiveCodeLength="10646" docExpressionCount="1048" docLength="19828" endLine="684" length="4" offset="16113" repeat="3" startLine="683" timestamp="1026956" timestamp2="1027475">
+    <text><![CDATA[
+		]]></text>
+  </DocumentChange>
+  <Command __id="1496" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="3" timestamp="1026956" timestamp2="1027481" />
+  <Command __id="1501" _type="MoveCaretCommand" caretOffset="15937" docOffset="16164" timestamp="1028138" />
+  <DocumentChange __id="1502" _type="Insert" docASTNodeCount="1781" docActiveCodeLength="10649" docExpressionCount="1048" docLength="19831" length="3" offset="16164" repeat="2" timestamp="1029691" timestamp2="1029861">
+    <text><![CDATA[			]]></text>
+  </DocumentChange>
+  <Command __id="1503" _type="InsertStringCommand" repeat="2" timestamp="1029692" timestamp2="1029862">
+    <data><![CDATA[		]]></data>
+  </Command>
+  <DocumentChange __id="1506" _type="Delete" docASTNodeCount="1781" docActiveCodeLength="10648" docExpressionCount="1048" docLength="19830" endLine="687" length="1" offset="16166" startLine="687" timestamp="1030274">
+    <text><![CDATA[	]]></text>
+  </DocumentChange>
+  <Command __id="1507" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="1030275" />
+  <DocumentChange __id="1508" _type="Insert" docASTNodeCount="1783" docActiveCodeLength="10653" docExpressionCount="1049" docLength="19835" length="5" offset="16166" repeat="5" timestamp="1030733" timestamp2="1031781">
+    <text><![CDATA[Syste]]></text>
+  </DocumentChange>
+  <Command __id="1509" _type="InsertStringCommand" repeat="5" timestamp="1030740" timestamp2="1031784">
+    <data><![CDATA[Syste]]></data>
+  </Command>
+  <DocumentChange __id="1518" _type="Delete" docASTNodeCount="1781" docActiveCodeLength="10644" docExpressionCount="1048" docLength="19826" endLine="687" length="9" offset="16162" repeat="8" startLine="686" timestamp="1034664" timestamp2="1037436">
+    <text><![CDATA[
+		Syste]]></text>
+  </DocumentChange>
+  <Command __id="1519" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="8" timestamp="1034666" timestamp2="1037440" />
+  <Command __id="1534" _type="MoveCaretCommand" caretOffset="15843" docOffset="16070" timestamp="1044354" />
+  <Command __id="1535" _type="EclipseCommand" commandID="org.eclipse.jdt.ui.edit.text.java.open.editor" timestamp="1045620" />
+  <Command __id="1536" _type="EclipseCommand" commandID="org.eclipse.jdt.ui.edit.text.java.search.references.in.project" timestamp="1050033" />
+  <Command __id="1537" _type="MoveCaretCommand" caretOffset="7173" docOffset="7400" timestamp="1056585" />
+  <Command __id="1538" _type="MoveCaretCommand" caretOffset="7181" docOffset="7408" timestamp="1058170" />
+  <Command __id="1539" _type="SelectTextCommand" caretOffset="7489" docEnd="7744" docOffset="7716" docStart="7716" end="7517" start="7489" timestamp="1073409" />
+  <DocumentChange __id="1540" _type="Delete" docASTNodeCount="1774" docActiveCodeLength="10615" docExpressionCount="1042" docLength="19797" endLine="316" length="29" offset="7715" repeat="2" startLine="315" timestamp="1076076" timestamp2="1076333">
+    <text><![CDATA[}
+		System.out.println(cnt);]]></text>
+  </DocumentChange>
+  <Command __id="1541" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="2" timestamp="1076080" timestamp2="1076335" />
+  <DocumentChange __id="1544" _type="Insert" docASTNodeCount="1774" docActiveCodeLength="10616" docExpressionCount="1042" docLength="19798" length="1" offset="7715" timestamp="1077435">
+    <text><![CDATA[}]]></text>
+  </DocumentChange>
+  <Command __id="1545" _type="UndoCommand" timestamp="1077439" />
+  <Command __id="1546" _type="SelectTextCommand" caretOffset="7041" docEnd="7284" docOffset="7268" docStart="7268" end="7057" start="7041" timestamp="1079354" />
+  <DocumentChange __id="1547" _type="Delete" docASTNodeCount="1769" docActiveCodeLength="10600" docExpressionCount="1040" docLength="19782" endLine="298" length="16" offset="7268" startLine="297" timestamp="1079559">
+    <text><![CDATA[
+		int cnt = 0;]]></text>
+  </DocumentChange>
+  <Command __id="1548" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="1079564" />
+  <Command __id="1549" _type="EclipseCommand" commandID="org.eclipse.ui.file.save" timestamp="1080759" />
+  <Command __id="1550" _type="MoveCaretCommand" caretOffset="7250" docOffset="7477" timestamp="1081850" />
+  <Command __id="1551" _type="MoveCaretCommand" caretOffset="7244" docOffset="7471" timestamp="1082538" />
+  <Command __id="1552" _type="MoveCaretCommand" caretOffset="7310" docOffset="7537" timestamp="1082841" />
+  <Command __id="1553" _type="MoveCaretCommand" caretOffset="7285" docOffset="7512" timestamp="1083385" />
+  <Command __id="1554" _type="MoveCaretCommand" caretOffset="7226" docOffset="7453" timestamp="1084433" />
+  <Command __id="1555" _type="MoveCaretCommand" caretOffset="7247" docOffset="7474" timestamp="1091601" />
+  <DocumentChange __id="1556" _type="Delete" docASTNodeCount="1769" docActiveCodeLength="10599" docExpressionCount="1040" docLength="19781" endLine="305" length="1" offset="7473" startLine="305" timestamp="1092499">
+    <text><![CDATA[=]]></text>
+  </DocumentChange>
+  <Command __id="1557" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="1092502" />
+  <DocumentChange __id="1558" _type="Insert" docASTNodeCount="1769" docActiveCodeLength="10600" docExpressionCount="1040" docLength="19782" length="1" offset="7473" timestamp="1092841">
+    <text><![CDATA[!]]></text>
+  </DocumentChange>
+  <Command __id="1559" _type="InsertStringCommand" timestamp="1092843">
+    <data><![CDATA[!]]></data>
+  </Command>
+  <Command __id="1560" _type="EclipseCommand" commandID="org.eclipse.ui.file.save" timestamp="1093549" />
+  <Command __id="1561" _type="RunCommand" kind="Create" projectName="MineSweeper" timestamp="1094746" type="Run" />
+  <Command __id="1562" _type="RunCommand" exitValue="0" kind="Terminate" projectName="MineSweeper" timestamp="1104343" type="Run" />
+  <Command __id="1563" _type="MoveCaretCommand" caretOffset="7256" docOffset="7483" timestamp="1105641" />
+  <Command __id="1564" _type="MoveCaretCommand" caretOffset="7244" docOffset="7471" timestamp="1106322" />
+  <DocumentChange __id="1565" _type="Delete" docASTNodeCount="1769" docActiveCodeLength="10599" docExpressionCount="1040" docLength="19781" endLine="305" length="1" offset="7473" startLine="305" timestamp="1106578">
+    <text><![CDATA[!]]></text>
+  </DocumentChange>
+  <Command __id="1566" _type="UndoCommand" repeat="2" timestamp="1106585" timestamp2="1107278" />
+  <DocumentChange __id="1567" _type="Insert" docASTNodeCount="1769" docActiveCodeLength="10600" docExpressionCount="1040" docLength="19782" length="1" offset="7473" timestamp="1107275">
+    <text><![CDATA[=]]></text>
+  </DocumentChange>
+  <Command __id="1569" _type="MoveCaretCommand" caretOffset="7253" docOffset="7480" timestamp="1108010" />
+  <Command __id="1570" _type="EclipseCommand" commandID="org.eclipse.ui.file.save" timestamp="1108529" />
+  <Command __id="1571" _type="SelectTextCommand" caretOffset="7192" docEnd="7419" docOffset="7419" docStart="7406" end="7192" start="7179" timestamp="1112378" />
+  <Command __id="1572" _type="MoveCaretCommand" caretOffset="7287" docOffset="7514" timestamp="1113033" />
+  <Command __id="1573" _type="EclipseCommand" commandID="org.eclipse.jdt.ui.edit.text.java.open.editor" timestamp="1115591" />
+  <Command __id="1574" _type="MoveCaretCommand" caretOffset="15537" docOffset="15764" timestamp="1130089" />
+  <Command __id="1575" _type="EclipseCommand" commandID="org.eclipse.jdt.ui.edit.text.java.open.editor" timestamp="1131407" />
+  <Command __id="1576" _type="EclipseCommand" commandID="org.eclipse.ui.navigate.backwardHistory" repeat="3" timestamp="1135655" timestamp2="1136615" />
+  <Command __id="1579" _type="MoveCaretCommand" caretOffset="7404" docOffset="7631" timestamp="1140043" />
+  <Command __id="1580" _type="MoveCaretCommand" caretOffset="7287" docOffset="7514" timestamp="1140721" />
+  <Command __id="1581" _type="MoveCaretCommand" caretOffset="7187" docOffset="7414" timestamp="1141529" />
+  <Command __id="1582" _type="MoveCaretCommand" caretOffset="7158" docOffset="7385" timestamp="1142689" />
+  <Command __id="1583" _type="MoveCaretCommand" caretOffset="7164" docOffset="7391" timestamp="1143745" />
+  <Command __id="1584" _type="MoveCaretCommand" caretOffset="7071" docOffset="7298" timestamp="1144473" />
+  <Command __id="1585" _type="EclipseCommand" commandID="org.eclipse.jdt.ui.edit.text.java.open.editor" timestamp="1147858" />
+  <Command __id="1586" _type="MoveCaretCommand" caretOffset="13119" docOffset="13346" timestamp="1160043" />
+  <Command __id="1587" _type="EclipseCommand" commandID="org.eclipse.ui.navigate.backwardHistory" timestamp="1160940" />
+  <Command __id="1588" _type="SelectTextCommand" caretOffset="7270" docEnd="7497" docOffset="7497" docStart="7466" end="7270" start="7239" timestamp="1165905" />
+  <Command __id="1589" _type="MoveCaretCommand" caretOffset="7274" docOffset="7501" timestamp="1166225" />
+  <Command __id="1590" _type="MoveCaretCommand" caretOffset="7255" docOffset="7482" timestamp="1168762" />
+  <Command __id="1591" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_NEXT" timestamp="1170322" />
+  <Command __id="1592" _type="MoveCaretCommand" caretOffset="7243" docOffset="7470" timestamp="1185121" />
+  <Command __id="1593" _type="MoveCaretCommand" caretOffset="6388" docOffset="6615" timestamp="1202074" />
+  <Command __id="1594" _type="MoveCaretCommand" caretOffset="6508" docOffset="6735" timestamp="1203386" />
+  <Command __id="1595" _type="MoveCaretCommand" caretOffset="6527" docOffset="6754" timestamp="1204066" />
+  <Command __id="1596" _type="MoveCaretCommand" caretOffset="6541" docOffset="6768" timestamp="1205346" />
+  <Command __id="1597" _type="MoveCaretCommand" caretOffset="6760" docOffset="6987" timestamp="1207490" />
+  <Command __id="1598" _type="MoveCaretCommand" caretOffset="6065" docOffset="6292" timestamp="1221682" />
+  <Command __id="1599" _type="EclipseCommand" commandID="org.eclipse.jdt.ui.edit.text.java.search.references.in.project" timestamp="1229915" />
+  <Command __id="1600" _type="EclipseCommand" commandID="org.eclipse.ui.navigate.backwardHistory" timestamp="1237436" />
+  <Command __id="1601" _type="EclipseCommand" commandID="org.eclipse.ui.navigate.forwardHistory" timestamp="1237915" />
+  <Command __id="1602" _type="MoveCaretCommand" caretOffset="9946" docOffset="10173" timestamp="1241065" />
+  <Command __id="1603" _type="MoveCaretCommand" caretOffset="9604" docOffset="9831" timestamp="1258013" />
+  <Command __id="1604" _type="ShellBoundsCommand" bounds="[-8, -8, 1936, 1056]" timestamp="1278317" />
+</Events>

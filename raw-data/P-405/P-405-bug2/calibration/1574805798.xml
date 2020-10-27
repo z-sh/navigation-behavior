@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<calibration status="1">
+    <point x="0" y="0">
+        <sample left_x="0" left_y="0" left_validity="-1" right_x="0" right_y="0" right_validity="-1"/>
+        <sample left_x="0" left_y="0" left_validity="-1" right_x="0" right_y="0" right_validity="-1"/>
+        <sample left_x="0" left_y="0" left_validity="-1" right_x="0" right_y="0" right_validity="-1"/>
+        <sample left_x="0" left_y="0" left_validity="-1" right_x="0" right_y="0" right_validity="-1"/>
+        <sample left_x="0" left_y="0" left_validity="-1" right_x="0" right_y="0" right_validity="-1"/>
+        <sample left_x="0" left_y="0" left_validity="-1" right_x="0" right_y="0" right_validity="-1"/>
+        <sample left_x="0" left_y="0" left_validity="-1" right_x="0" right_y="0" right_validity="-1"/>
+        <sample left_x="0" left_y="0" left_validity="-1" right_x="0" right_y="0" right_validity="-1"/>
+    </point>
+    <point x="0.5" y="0.5">
+        <sample left_x="0.500159" left_y="0.496283" left_validity="1" right_x="0.487496" right_y="0.431604" right_validity="1"/>
+        <sample left_x="0.511356" left_y="0.470774" left_validity="1" right_x="0.506114" right_y="0.49579" right_validity="1"/>
+    </point>
+    <point x="0.5" y="0.9">
+        <sample left_x="0.523169" left_y="0.884862" left_validity="1" right_x="0.516053" right_y="0.902488" right_validity="1"/>
+        <sample left_x="0.50205" left_y="0.917593" left_validity="1" right_x="0.508767" right_y="0.920225" right_validity="1"/>
+        <sample left_x="0.492772" left_y="0.897771" left_validity="1" right_x="0.491466" right_y="0.898026" right_validity="1"/>
+    </point>
+    <point x="0.5" y="0.1">
+        <sample left_x="0.496231" left_y="0.215246" left_validity="1" right_x="0.555173" right_y="0.207034" right_validity="1"/>
+        <sample left_x="0.508474" left_y="0.13355" left_validity="1" right_x="0.496159" right_y="0.0483446" right_validity="1"/>
+    </point>
+    <point x="0.9" y="0.5">
+        <sample left_x="0.896175" left_y="0.512889" left_validity="1" right_x="0.88893" right_y="0.549678" right_validity="1"/>
+        <sample left_x="0.880502" left_y="0.531644" left_validity="1" right_x="0.898639" right_y="0.47801" right_validity="1"/>
+    </point>
+    <point x="0.9" y="0.9">
+        <sample left_x="0.907205" left_y="0.898064" left_validity="1" right_x="0.880275" right_y="0.91593" right_validity="1"/>
+        <sample left_x="0.921688" left_y="0.902021" left_validity="1" right_x="0.881299" right_y="0.908258" right_validity="1"/>
+    </point>
+    <point x="0.9" y="0.1">
+        <sample left_x="0.89042" left_y="-0.0465021" left_validity="1" right_x="0.912553" right_y="0.13149" right_validity="1"/>
+        <sample left_x="0.880058" left_y="0.00422316" left_validity="1" right_x="0.880587" right_y="0.0576582" right_validity="1"/>
+        <sample left_x="0.871524" left_y="0.205988" left_validity="1" right_x="0.903411" right_y="0.0882304" right_validity="1"/>
+    </point>
+    <point x="0.1" y="0.5">
+        <sample left_x="0.117042" left_y="0.508558" left_validity="1" right_x="0.10219" right_y="0.514796" right_validity="1"/>
+        <sample left_x="0" left_y="0" left_validity="-1" right_x="0.0921794" right_y="0.479826" right_validity="1"/>
+        <sample left_x="0.104507" left_y="0.463454" left_validity="1" right_x="0.106552" right_y="0.535879" right_validity="1"/>
+    </point>
+    <point x="0.1" y="0.9">
+        <sample left_x="0.100286" left_y="0.90091" left_validity="1" right_x="0.0870359" right_y="0.891944" right_validity="1"/>
+        <sample left_x="0.101561" left_y="0.894211" left_validity="1" right_x="0.101707" right_y="0.912386" right_validity="1"/>
+    </point>
+    <point x="0.1" y="0.1">
+        <sample left_x="0.10006" left_y="0.124697" left_validity="1" right_x="0.108244" right_y="0.065373" right_validity="1"/>
+        <sample left_x="0.0816895" left_y="0.0250393" left_validity="1" right_x="0.106774" right_y="0.0861737" right_validity="1"/>
+        <sample left_x="0.102355" left_y="0.192332" left_validity="1" right_x="0.0993865" right_y="0.092007" right_validity="1"/>
+    </point>
+</calibration>

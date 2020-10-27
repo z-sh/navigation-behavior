@@ -14,6 +14,12 @@ Using this framework, we conduct an eye-tracking study (n=36) of realistic bug-f
 DOI: 10.1109/TSE.2020.3032064
 
 ## Replication Package
+
+### Our code
+A pair of modules and sample script for processing output from the iTrace plugin, particularly when used in tandem with the FLUORITE plugin. The motivation for this repository is thus: In iTrace v0.0.1 (Alpha), editing is not supported. If you used a later version of iTrace that explicitly supports editing, this issue does not apply to your experiment, and you do not need to run FLUORITE in addition to iTrace. The work-around presented here is very time-consuming and should be avoided if at all possible.
+As an additional useful tidbit, this code also performs automatic detection of Areas of Interest (AOIs) based on fixation data and code location.
+https://github.com/ianbtr/iTrace-post 
+
 ### Stimuli Description and Task Information
 We use an open-source implementation of the game, [MineSweeper](https://github.com/KnightMiner/MineSweeper/), available on GitHub.
 It is written in Java and it has 1.2 KLOC across 10 files.
